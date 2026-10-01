@@ -41,7 +41,7 @@ export default function Home() {
       desc: 'Experience world-class education with historic prestige. We provide complete guidance on course suitability, CAS requirements, and the Student visa route.'
     },
     {
-      src: '/images/hero_nz.jpg',
+      src: '/images/auck.png',
       alt: 'Study in New Zealand - Majestic mountains and crystal clear lakes',
       eyebrow: 'YOUR FUTURE IN NEW ZEALAND',
       title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Auckland.</span>',
@@ -55,7 +55,7 @@ export default function Home() {
       desc: 'Access diverse cultures and top-tier universities across the continent. We help you navigate admission, tuition, and residence rules across European countries.'
     },
     {
-      src: '/images/hero_jp.jpg',
+      src: '/images/japan.png',
       alt: 'Study in Japan - Mount Fuji with beautiful pink cherry blossoms',
       eyebrow: 'YOUR FUTURE IN JAPAN',
       title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Tokyo.</span>',
