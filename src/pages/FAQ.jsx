@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Phone, Plus, Minus } from 'lucide-react';
 
 export default function FAQ() {
+  const containerRef = useRef();
   const [openFaq, setOpenFaq] = useState(0);
-  
   const faqs = [
     ['How do I begin my study abroad journey?', 'Start with a conversation about your education, interests and preferred destination. Call ASTRA or prepare an email enquiry using the form below. Our office is in Bagbazar–28, Kathmandu.'],
     ['What should I prepare for counselling?', 'Have an overview of your academic qualifications, preferred course or subject, destination interests and budget ready. The team can explain which documents are relevant to your individual plans. Do not send passports or financial records in an initial email enquiry.'],
@@ -17,7 +17,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="section wrap faq-grid" style={{minHeight: '70vh'}}>
+    <section className="section wrap faq-grid scroll-reveal" style={{minHeight: '70vh'}} ref={containerRef}>
       <div>
         <div className="eyebrow">A LITTLE MORE CLARITY</div>
         <h2>Good questions.<br />Honest answers.</h2>

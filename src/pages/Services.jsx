@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowUpRight, BookOpen, MapPin, Phone, Mail, FileText, CheckCircle2, 
+import {
+  ArrowUpRight, BookOpen, MapPin, Phone, Mail, FileText, CheckCircle2,
   MessageCircle, ExternalLink, ShieldCheck, GraduationCap, Clock, Banknote
 } from 'lucide-react';
 
@@ -34,19 +34,19 @@ export default function Services() {
               <span>/</span>
               <span className="text-white">Services</span>
             </div>
-            
+
             <div className="inline-block bg-[#e50924] text-white text-xs font-bold tracking-wider px-4 py-2 rounded-full mb-6">
               Support for your next academic decision
             </div>
-            
+
             <h1 className="text-3xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
               Guidance that makes the process clearer.
             </h1>
-            
+
             <p className="text-[#becee3] text-base leading-relaxed mb-8 max-w-lg">
               From choosing a study direction to understanding documentation and language preparation, ASTRA helps students explore the next step with practical, responsible guidance.
             </p>
-            
+
             <div className="flex flex-wrap gap-4">
               <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-[#0b2f6b] hover:bg-gray-100 px-6 py-3 font-semibold rounded-md transition-all text-sm shadow-sm">
                 Book a Counselling Session <ArrowUpRight size={16} />
@@ -56,7 +56,7 @@ export default function Services() {
               </a>
             </div>
           </div>
-          
+
           <div className="relative h-[300px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
             <img src="/images/services_hero.jpg" alt="Professional student counselling and planning" className="w-full h-full object-cover" />
           </div>
@@ -76,7 +76,7 @@ export default function Services() {
               Every student has different academic qualifications, interests, financial circumstances, destination preferences and language needs.
             </p>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-6 mb-12">
             {[
               { icon: <MessageCircle size={18} />, text: 'Clear explanations' },
@@ -89,7 +89,7 @@ export default function Services() {
               </div>
             ))}
           </div>
-          
+
           {/* Visual Process Line */}
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between relative z-10">
@@ -110,7 +110,7 @@ export default function Services() {
       {/* SECTION 3: Main service cards */}
       <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
         <div className="space-y-12">
-          
+
           {/* Service 1: Study Abroad */}
           <div className="flex flex-col lg:flex-row bg-[#fafcfd] border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
             <div className="w-full lg:w-2/5 h-64 lg:h-auto">
@@ -122,7 +122,7 @@ export default function Services() {
               <p className="text-gray-600 text-sm mb-6">
                 Discuss your subject interests, education history, preferred study level and destination goals before selecting a course or institution.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 mb-8 flex-1">
                 {[
                   'Academic profile discussion', 'Course and subject exploration',
@@ -135,7 +135,7 @@ export default function Services() {
                   </div>
                 ))}
               </div>
-              
+
               <Link to="/services/study-abroad" className="inline-flex items-center gap-2 text-[#e50924] font-bold hover:text-[#c7051e] self-start uppercase tracking-wider text-sm">
                 Explore Study Abroad <ArrowUpRight size={16} />
               </Link>
@@ -153,7 +153,7 @@ export default function Services() {
               <p className="text-gray-600 text-sm mb-6">
                 Understand the visa route connected with your proposed study and identify the official information and evidence relevant to your circumstances.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 mb-6 flex-1">
                 {[
                   'Visa-route identification', 'Official checklist review',
@@ -172,7 +172,7 @@ export default function Services() {
                   <strong>Notice:</strong> Visa approval is decided by the relevant immigration authority. ASTRA cannot guarantee an outcome.
                 </p>
               </div>
-              
+
               <Link to="/services/visa-guidance" className="inline-flex items-center gap-2 text-[#0b2f6b] font-bold hover:text-[#07204b] self-start uppercase tracking-wider text-sm">
                 Explore Visa Guidance <ArrowUpRight size={16} />
               </Link>
@@ -190,7 +190,7 @@ export default function Services() {
               <p className="text-gray-600 text-sm mb-6">
                 Language preparation should begin with the course and institution’s accepted test, score and teaching language.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 mb-8 flex-1">
                 {[
                   'IELTS Academic overview', 'PTE Academic overview',
@@ -203,7 +203,7 @@ export default function Services() {
                   </div>
                 ))}
               </div>
-              
+
               <Link to="/services/language-preparation" className="inline-flex items-center gap-2 text-[#e50924] font-bold hover:text-[#c7051e] self-start uppercase tracking-wider text-sm">
                 Explore Language Preparation <ArrowUpRight size={16} />
               </Link>
@@ -223,11 +223,11 @@ export default function Services() {
               ASTRA provides counselling and preparation guidance. Institutions decide admission and authorities decide visa and immigration outcomes.
             </div>
           </div>
-          
+
           <div className="relative max-w-4xl mx-auto pb-4">
             {/* Vertical Line */}
             <div className="absolute left-[23px] top-4 bottom-4 w-0.5 bg-[#164580] hidden md:block"></div>
-            
+
             <div className="space-y-8">
               {[
                 { title: 'Initial enquiry', student: 'Provide basic background and interest.', astra: 'Explain the available services.', verify: 'Confirm if ASTRA can support your goal.' },
@@ -261,14 +261,14 @@ export default function Services() {
         <div className="text-center mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#0b2f6b] mb-2">Bring the information that makes counselling useful.</h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {[
-            { icon: <GraduationCap size={20}/>, title: 'Academic background', desc: 'Highest qualification, subjects, grades, education gaps and previous study.' },
-            { icon: <BookOpen size={20}/>, title: 'Study direction', desc: 'Preferred courses, subjects, career interests and intended study level.' },
-            { icon: <MapPin size={20}/>, title: 'Destination preference', desc: 'Countries or regions being considered and the reasons behind them.' },
-            { icon: <MessageCircle size={20}/>, title: 'Language readiness', desc: 'Existing test scores, planned test dates and the language used in the intended course.' },
-            { icon: <Banknote size={20}/>, title: 'Funding outline', desc: 'Approximate budget, tuition expectations, living costs and funding questions.' }
+            { icon: <GraduationCap size={20} />, title: 'Academic background', desc: 'Highest qualification, subjects, grades, education gaps and previous study.' },
+            { icon: <BookOpen size={20} />, title: 'Study direction', desc: 'Preferred courses, subjects, career interests and intended study level.' },
+            { icon: <MapPin size={20} />, title: 'Destination preference', desc: 'Countries or regions being considered and the reasons behind them.' },
+            { icon: <MessageCircle size={20} />, title: 'Language readiness', desc: 'Existing test scores, planned test dates and the language used in the intended course.' },
+            { icon: <Banknote size={20} />, title: 'Funding outline', desc: 'Approximate budget, tuition expectations, living costs and funding questions.' }
           ].map((item, idx) => (
             <div key={idx} className="p-6 border border-gray-100 rounded-xl bg-gray-50 flex items-start gap-4">
               <div className="text-[#0b2f6b] bg-white p-2 rounded-lg shadow-sm shrink-0">{item.icon}</div>
@@ -297,7 +297,7 @@ export default function Services() {
               Fees, deadlines, requirements and immigration policies may change. Always verify current information through the linked official source.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Study Abroad */}
             <div>
@@ -314,7 +314,7 @@ export default function Services() {
                     <h4 className="text-sm font-semibold text-[#0b2f6b] mb-2 leading-tight">{res.name}</h4>
                     <div className="flex justify-between items-center text-xs mt-3">
                       <span className="text-gray-400">Sept 2026</span>
-                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12}/></a>
+                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12} /></a>
                     </div>
                   </div>
                 ))}
@@ -336,7 +336,7 @@ export default function Services() {
                     <h4 className="text-sm font-semibold text-[#0b2f6b] mb-2 leading-tight">{res.name}</h4>
                     <div className="flex justify-between items-center text-xs mt-3">
                       <span className="text-gray-400">Sept 2026</span>
-                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12}/></a>
+                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12} /></a>
                     </div>
                   </div>
                 ))}
@@ -357,7 +357,7 @@ export default function Services() {
                     <h4 className="text-sm font-semibold text-[#0b2f6b] mb-2 leading-tight">{res.name}</h4>
                     <div className="flex justify-between items-center text-xs mt-3">
                       <span className="text-gray-400">Sept 2026</span>
-                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12}/></a>
+                      <a href="#" className="flex items-center gap-1 text-[#e50924] hover:underline font-medium">Read official guidance <ExternalLink size={12} /></a>
                     </div>
                   </div>
                 ))}
@@ -385,7 +385,7 @@ export default function Services() {
               </a>
             </div>
           </div>
-          
+
           <div className="bg-white text-gray-800 rounded-2xl shadow-xl overflow-hidden p-6 lg:p-8">
             <div className="bg-blue-50 text-blue-800 text-xs p-3 rounded-lg border border-blue-100 mb-6 flex items-start gap-2">
               <Mail size={16} className="shrink-0 mt-0.5" />
@@ -402,7 +402,7 @@ export default function Services() {
                   <input type="tel" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" placeholder="Your phone" />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Preferred Service</label>

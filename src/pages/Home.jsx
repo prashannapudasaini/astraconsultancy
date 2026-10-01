@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2 } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2, ShieldCheck } from 'lucide-react';
 import { countries } from '../data';
+import { usePageEntrance, useHeroAnimation, useHomeAnimations, useJourneyAnimation } from '../motion';
+import GlobeComponent from '../components/GlobeComponent';
 
 const email = 'info@astraglobaleducationservices.com';
 
@@ -21,6 +23,59 @@ export default function Home() {
   const navigate = useNavigate();
   const [selectedDestination, setSelectedDestination] = useState('');
   const [notice, setNotice] = useState('');
+  const containerRef = useRef();
+
+  const heroSlides = [
+    {
+      src: '/images/hero_sk.jpg',
+      alt: 'Study in South Korea - Traditional architecture and modern Seoul skyline',
+      eyebrow: 'YOUR FUTURE IN SOUTH KOREA',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Seoul.</span>',
+      desc: 'Explore cutting-edge degree programmes and comprehensive Korean-language pathways. Immerse yourself in a dynamic culture while advancing your global education.'
+    },
+    {
+      src: '/images/hero_uk.jpg',
+      alt: 'Study in the United Kingdom - Historic university campus in Oxford',
+      eyebrow: 'YOUR FUTURE IN THE UK',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">London.</span>',
+      desc: 'Experience world-class education with historic prestige. We provide complete guidance on course suitability, CAS requirements, and the Student visa route.'
+    },
+    {
+      src: '/images/hero_nz.jpg',
+      alt: 'Study in New Zealand - Majestic mountains and crystal clear lakes',
+      eyebrow: 'YOUR FUTURE IN NEW ZEALAND',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Auckland.</span>',
+      desc: 'Discover a world-class education surrounded by breathtaking nature. Get expert support for approved providers, tuition, and student visa preparation.'
+    },
+    {
+      src: '/images/hero_eu.jpg',
+      alt: 'Study in Europe - Classic European architecture in a bustling city square',
+      eyebrow: 'YOUR FUTURE IN EUROPE',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Europe.</span>',
+      desc: 'Access diverse cultures and top-tier universities across the continent. We help you navigate admission, tuition, and residence rules across European countries.'
+    },
+    {
+      src: '/images/hero_jp.jpg',
+      alt: 'Study in Japan - Mount Fuji with beautiful pink cherry blossoms',
+      eyebrow: 'YOUR FUTURE IN JAPAN',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Tokyo.</span>',
+      desc: 'Blend high-tech innovation with rich traditions. Understand school-specific admissions, Japanese-language expectations, and EJU requirements with our experts.'
+    }
+  ];
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  const nextSlide = () => setHeroIndex(prev => (prev + 1) % heroSlides.length);
+  const prevSlide = () => setHeroIndex(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 4000);
+    return () => clearInterval(interval);
+  }, [heroIndex]);
+
+  usePageEntrance(containerRef);
+  useHeroAnimation(containerRef);
+  useHomeAnimations(containerRef);
+  useJourneyAnimation(containerRef);
 
   const destinationCopy = {
     'south-korea': 'Explore degree programmes and Korean-language pathways. Understand the difference between D-2 degree study and D-4 training routes.',
@@ -40,36 +95,82 @@ export default function Home() {
   };
 
   return (
-    <>
-      {/* SECTION 1: Original Hero */}
-      <section className="hero">
-        <div className="hero-copy">
-          <div className="eyebrow light"><span /> YOUR FUTURE, BEYOND BORDERS</div>
-          <h1>From dream<br />to <em>destination.</em></h1>
-          <p>Study abroad, visa guidance and language preparation from Bagbazar, Kathmandu. Explore South Korea, the UK, New Zealand, Europe and Japan with a clearer understanding of your next step.</p>
-          <div className="flex gap-3 flex-wrap">
-            <Link className="button red" to="/contact">Book a counselling conversation <ArrowUpRight size={18} /></Link>
-            <Link className="hero-link" to="/destinations">Explore destinations <ArrowRight size={17} /></Link>
-          </div>
-          <div className="hero-support">Start with your academic background, study interests and budget. We'll help you identify the questions to explore.</div>
-          <div className="hero-meta">
-            <span><MapPin size={16} /> Kathmandu, Nepal</span>
-            <span>Guidance for your global education</span>
-          </div>
+    <div ref={containerRef}>
+      {/* SECTION 1: Cinematic Slider Hero */}
+      <section className="relative w-full h-[90vh] min-h-[600px] flex items-center overflow-hidden">
+        {/* Background Images & Text Content Layered for Smooth Crossfading */}
+        {heroSlides.map((slide, idx) => {
+          const isActive = idx === heroIndex;
+          return (
+            <div 
+              key={slide.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out flex items-center ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+            >
+              {/* Background */}
+              <div className="absolute inset-0">
+                <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover transform scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0b2f6b]/90 via-[#0b2f6b]/50 to-transparent"></div>
+              </div>
+
+              {/* Slide Content */}
+              <div className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
+                <div className="max-w-2xl mt-16 lg:mt-0">
+                  <div className="eyebrow w-fit !inline-flex items-center px-4 py-1.5 !bg-white/10 backdrop-blur-md border border-white/20 !text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] before:!hidden">
+                     {slide.eyebrow}
+                  </div>
+                  <h1 
+                    className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight"
+                    dangerouslySetInnerHTML={{ __html: slide.title }}
+                  />
+                  <p className="text-xl text-blue-50/90 leading-relaxed mb-10 max-w-xl font-light">
+                    {slide.desc}
+                  </p>
+                  
+                  <div className="flex gap-4 flex-wrap mb-12">
+                    <Link to="/contact" className="button red inline-flex items-center gap-4 !rounded-full !py-2 !pl-6 !pr-2 group">
+                      <span className="font-bold text-sm tracking-wider uppercase">Book a counselling conversation</span>
+                      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white transform group-hover:scale-110 transition-transform">
+                        <ArrowUpRight size={18} />
+                      </div>
+                    </Link>
+                    <Link to="/destinations" className="button red inline-flex items-center gap-4 !rounded-full !py-2 !pl-6 !pr-2 shadow-lg shadow-red-500/20 group">
+                      <span className="font-bold text-sm tracking-wider uppercase">Explore destinations</span>
+                      <div className="w-10 h-10 bg-white/20 group-hover:bg-white/30 rounded-full flex items-center justify-center transform group-hover:translate-x-1 transition-transform">
+                        <ArrowRight size={18} />
+                      </div>
+                    </Link>
+                  </div>
+                  
+                  <div className="hero-meta flex flex-col sm:flex-row gap-6 sm:gap-12 text-sm text-blue-100/70 border-t border-white/20 pt-6">
+                    <div className="flex items-center gap-2">
+                      <MapPin size={16} className="text-[#e50924]" />
+                      <span className="font-medium tracking-wide">Bagbazar, Kathmandu, Nepal</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Globe2 size={16} className="text-[#e50924]" />
+                      <span className="font-medium tracking-wide">Guidance for your global education</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Next / Prev Controls */}
+        <div className="absolute bottom-12 right-6 lg:right-12 z-40 flex gap-4">
+           <button onClick={prevSlide} aria-label="Previous Slide" className="!w-12 !h-12 !min-w-[48px] !min-h-[48px] !rounded-full !border !border-white/30 !p-0 !bg-white/10 !flex !items-center !justify-center !text-white hover:!bg-white hover:!text-[#0b2f6b] transition-colors backdrop-blur-md cursor-pointer group shadow-lg">
+             <ArrowRight className="rotate-180 transition-transform group-hover:-translate-x-1" size={20} />
+           </button>
+           <button onClick={nextSlide} aria-label="Next Slide" className="!w-12 !h-12 !min-w-[48px] !min-h-[48px] !rounded-full !border !border-white/30 !p-0 !bg-white/10 !flex !items-center !justify-center !text-white hover:!bg-white hover:!text-[#0b2f6b] transition-colors backdrop-blur-md cursor-pointer group shadow-lg">
+             <ArrowRight className="transition-transform group-hover:translate-x-1" size={20} />
+           </button>
         </div>
-        <div className="hero-visual">
-          <img src="/campus.jpg" alt="Radcliffe Camera and university buildings in Oxford, United Kingdom" />
-          <div className="image-shade" />
-          <div className="image-label">
-            <span>YOUR NEXT CHAPTER</span>
-            <h2>A new place.<br />A bigger perspective.</h2>
-          </div>
-          <div className="hero-seal">
-            <Globe2 size={29} />
-            <span>GLOBAL POSSIBILITIES<br /><b>Personal guidance.</b></span>
-          </div>
-        </div>
-        <svg className="hero-wave" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true"><path d="M0 64V40C360 80 850 -35 1440 22V64Z" fill="white" /></svg>
+
+        {/* Decorative Wave */}
+        <svg className="absolute bottom-0 left-0 w-full z-20 text-white pointer-events-none" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true">
+           <path d="M0 64V40C360 80 850 -35 1440 22V64Z" fill="currentColor" />
+        </svg>
       </section>
 
       <div className="destination-strip">
@@ -82,102 +183,198 @@ export default function Home() {
       </div>
 
       {/* SECTION 2: ASTRA Introduction & Trust */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-0.5 bg-[#e50924]"></span>
-              <span className="text-[11px] font-bold tracking-widest text-[#526982] uppercase">ASTRA INTRODUCTION</span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-semibold leading-tight text-[#0b2f6b] tracking-tight">
-              Your ambition deserves a considered plan.
-            </h2>
-          </div>
+      {/* SECTION 2: ASTRA Introduction & Trust */}
+      <section id="home-intro" className="py-20 lg:py-32 px-6 lg:px-12 max-w-[1440px] mx-auto scroll-reveal">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          <div className="space-y-6">
-            <p className="text-xl text-[#334155] leading-relaxed">
-              ASTRA helps you ask the right questions before choosing a course, institution or destination. We explain the process clearly and guide you towards the official information that applies to your circumstances.
-            </p>
-            <p className="text-[#64748b] leading-relaxed">
-              Based in Bagbazar, Kathmandu, our counselling begins with your academic background, subject interests, language readiness, destination preferences and budget. The process is designed for students and families who want understandable, responsible guidance.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 mt-8 border-t border-gray-100">
-              <div>
-                <strong className="block text-[#0b2f6b] text-sm mb-2">Clear academic direction</strong>
-                <span className="text-sm text-gray-500">Helping you find the right course fit.</span>
-              </div>
-              <div>
-                <strong className="block text-[#0b2f6b] text-sm mb-2">Responsible document guidance</strong>
-                <span className="text-sm text-gray-500">Accurate preparation according to rules.</span>
-              </div>
-              <div>
-                <strong className="block text-[#0b2f6b] text-sm mb-2">Practical destination planning</strong>
-                <span className="text-sm text-gray-500">Understanding costs and environments.</span>
-              </div>
-            </div>
+          {/* Left Column (Images & Visuals) */}
+          <div className="lg:col-span-6 relative pb-20 pr-10 lg:pr-20">
+             {/* Decorative light pink shape */}
+             <div className="absolute -left-10 top-10 w-64 h-64 bg-[#ffe1e4] rounded-full blur-3xl opacity-60 -z-10"></div>
+             
+             {/* Background Map Watermark */}
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c3/World_map_blank_without_borders.svg')] bg-no-repeat bg-center bg-contain opacity-[0.03] pointer-events-none -z-10 mix-blend-multiply"></div>
+
+             {/* Image 1 (Top Left / Behind) */}
+             <div className="w-3/4 aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl relative">
+                <img src="/images/services_hero.jpg" alt="Student Counselling" className="w-full h-full object-cover" />
+                {/* Dot pattern overlay */}
+                <div className="absolute bottom-10 left-10 w-32 h-32 bg-[radial-gradient(circle,_#ffffff_2.5px,_transparent_2.5px)] bg-[size:12px_12px] opacity-80"></div>
+             </div>
+
+             {/* Image 2 (Bottom Right / Front) */}
+             <div className="absolute -bottom-10 -right-0 lg:right-10 w-2/3 aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border-[10px] border-white z-10 bg-gray-100">
+                <img src="/campus.jpg" alt="Campus and Global Education" className="w-full h-full object-cover" />
+             </div>
+             
+             {/* Airplane Silhouette Icon (Bottom Left) */}
+             <div className="absolute bottom-0 -left-6 z-20 w-32 h-32 text-gray-300 rotate-12 opacity-60">
+                 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+             </div>
+             
+             {/* Passports/Tickets Icon (Top Right) */}
+             <div className="absolute top-10 -right-2 lg:right-4 z-20 rotate-12 bg-white rounded-2xl shadow-xl p-4 flex gap-2 transform -translate-y-1/2">
+                 <div className="w-12 h-16 bg-[#0b2f6b] rounded-lg border-2 border-white shadow-md flex items-center justify-center transform -rotate-12">
+                     <Globe2 className="w-6 h-6 text-white opacity-50" />
+                 </div>
+                 <div className="w-12 h-16 bg-[#e50924] rounded-lg border-2 border-white shadow-md flex items-center justify-center transform rotate-6 -ml-4">
+                     <Globe2 className="w-6 h-6 text-white opacity-50" />
+                 </div>
+             </div>
           </div>
+
+          {/* Right Column (Content) */}
+          <div className="lg:col-span-6 lg:pl-10 relative z-10 mt-10 lg:mt-0">
+             
+             {/* Pill Label */}
+             <div className="inline-block px-5 py-2 bg-[#eff4fb] text-[#0b2f6b] rounded-full text-sm font-bold tracking-wide mb-6">
+                About Our Consultancy
+             </div>
+             
+             {/* Heading */}
+             <h2 className="text-4xl lg:text-[44px] font-extrabold text-[#0b2f6b] leading-[1.1] uppercase tracking-tight mb-8">
+                YOUR AMBITION DESERVES A <span className="text-[#e50924]">CONSIDERED PLAN</span>
+             </h2>
+             
+             {/* Vertical Line Paragraph */}
+             <div className="border-l-2 border-gray-300 pl-6 mb-8">
+                <p className="text-gray-500 text-lg leading-relaxed">
+                   ASTRA helps you ask the right questions before choosing a course, institution or destination. We explain the process clearly and guide you towards the official information.
+                </p>
+             </div>
+             
+             <hr className="border-gray-200 mb-8" />
+             
+             {/* Mini Grid */}
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+                <div className="flex gap-4">
+                   <div className="w-10 h-10 rounded-full bg-[#eff4fb] flex items-center justify-center text-[#0b2f6b] shrink-0 mt-1">
+                      <Globe2 size={18} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-[#0b2f6b] text-lg mb-1">Clear Direction<span className="text-[#e50924]">-</span></h4>
+                      <p className="text-sm text-gray-500 leading-relaxed">Helping you find the right course fit and university.</p>
+                   </div>
+                </div>
+                <div className="flex gap-4">
+                   <div className="w-10 h-10 rounded-full bg-[#eff4fb] flex items-center justify-center text-[#0b2f6b] shrink-0 mt-1">
+                      <FileCheck size={18} />
+                   </div>
+                   <div>
+                      <h4 className="font-bold text-[#0b2f6b] text-lg mb-1">Document Guidance<span className="text-[#e50924]">-</span></h4>
+                      <p className="text-sm text-gray-500 leading-relaxed">Accurate preparation according to official rules.</p>
+                   </div>
+                </div>
+             </div>
+             
+             {/* Bullet Points */}
+             <div className="space-y-3 mb-10">
+                <div className="flex items-center gap-3 text-gray-600">
+                   <div className="text-[#0b2f6b] font-black tracking-tighter text-lg leading-none">»</div>
+                   <span className="text-sm font-medium">Based in Bagbazar, Kathmandu</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                   <div className="text-[#0b2f6b] font-black tracking-tighter text-lg leading-none">»</div>
+                   <span className="text-sm font-medium">Assessing academic background and subject interests</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-600">
+                   <div className="text-[#0b2f6b] font-black tracking-tighter text-lg leading-none">»</div>
+                   <span className="text-sm font-medium">Language readiness and budget planning</span>
+                </div>
+             </div>
+             
+             {/* Red Dot Divider */}
+             <div className="relative border-b border-gray-200 mb-10 w-[95%]">
+                <span className="absolute -right-2 -top-2 w-4 h-4 bg-[#e50924] rounded-full shadow-[0_0_0_5px_rgba(229,9,36,0.15)]"></span>
+             </div>
+             
+             {/* Pill Button */}
+             <Link to="/contact" className="inline-flex items-center gap-4 border border-gray-200 rounded-full pl-6 pr-2 py-2 hover:border-[#0b2f6b] transition-colors group">
+                <span className="font-bold text-[#0b2f6b] text-sm tracking-wider">GET STARTED</span>
+                <div className="w-10 h-10 bg-[#e50924] rounded-full flex items-center justify-center text-white transform group-hover:scale-110 transition-transform">
+                   <ArrowRight size={18} />
+                </div>
+             </Link>
+          </div>
+
         </div>
       </section>
 
-      {/* SECTION 3: Study Destinations */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#f4f7fb] relative overflow-hidden rounded-tr-[80px]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-8">
-            <div>
+      {/* SECTION 3: Study Destinations Interactive Globe */}
+      <section id="home-destinations" className="py-20 lg:py-32 px-6 lg:px-12 bg-[#0b2f6b] relative overflow-hidden scroll-reveal">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#e50924]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
+
+        <div className="max-w-[1440px] mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-16">
+            <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-8 h-0.5 bg-[#e50924]"></span>
-                <span className="text-[11px] font-bold tracking-widest text-[#526982] uppercase">WHERE WILL YOUR AMBITION TAKE YOU?</span>
+                <span className="w-8 h-[2px] bg-[#e50924]"></span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-[#d1dced] uppercase">WHERE WILL YOUR AMBITION TAKE YOU?</span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-semibold leading-tight text-[#0b2f6b] tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white tracking-tight leading-[1.1]">
                 Different destinations.<br />One exciting future.
               </h2>
             </div>
-            <p className="text-gray-500 max-w-md">
-              Explore the places on your shortlist. Find a direction that fits your goals and circumstances.
-            </p>
+            <div className="group inline-flex items-center gap-3 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-bold backdrop-blur-md cursor-default">
+              Interact with the Map
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {countries.map((c) => (
-              <div key={c.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 flex flex-col">
-                <div className="h-56 overflow-hidden relative">
-                  <img src={c.image} alt={c.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center text-2xl shadow-lg border border-white/20">
-                    {c.flag}
+          {/* Globe Split Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
+            
+            {/* Left Column: Location Cards */}
+            <div className="lg:col-span-5 flex flex-col gap-4 destination-list relative z-20 pointer-events-auto">
+               {countries.map(c => (
+                  <div key={c.id} 
+                       onClick={() => setSelectedDestination(selectedDestination === c.id ? '' : c.id)}
+                       className={`group p-5 md:p-6 rounded-2xl border transition-all flex flex-col gap-4 cursor-pointer backdrop-blur-sm ${selectedDestination === c.id ? 'bg-white/10 border-white/30 shadow-lg scale-[1.02]' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'}`}>
+                     <div className="flex items-center justify-between">
+                        <div>
+                           <h3 className={`text-xl md:text-2xl font-bold transition-colors ${selectedDestination === c.id ? 'text-[#ff4d4d]' : 'text-white group-hover:text-[#ff4d4d]'}`}>{c.name}</h3>
+                           <p className="text-sm text-blue-200/70 mt-1 line-clamp-1">{destinationCopy[c.id]}</p>
+                        </div>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${selectedDestination === c.id ? 'bg-[#e50924]' : 'bg-white/10 group-hover:bg-[#e50924]'}`}>
+                           <ArrowRight size={18} className={`text-white transition-transform ${selectedDestination === c.id ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                        </div>
+                     </div>
+                     
+                     {/* Expanded Details */}
+                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${selectedDestination === c.id ? 'max-h-[200px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                        <Link to={`/destinations/${c.id}`} onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center gap-3 bg-white text-[#0b2f6b] px-6 py-3 rounded-xl font-bold w-full hover:bg-gray-100 transition-colors shadow-md">
+                           Explore Requirements <ArrowRight size={16} />
+                        </Link>
+                     </div>
                   </div>
-                </div>
-                <div className="p-8 flex flex-col flex-1">
-                  <h3 className="text-2xl font-bold text-[#0b2f6b] mb-3">{c.name}</h3>
-                  <p className="text-gray-600 mb-6 text-sm leading-relaxed flex-1">
-                    {destinationCopy[c.id] || c.text}
+               ))}
+               <div className="mt-4 inline-block px-6 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 text-center">
+                  <p className="text-xs text-white/60">
+                    Europe is a region with different national systems. Confirm the individual country before applying.
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">
-                      {c.popularStudyAreas[0]}
-                    </span>
-                    <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">
-                      {c.studyLevels[0]}
-                    </span>
-                  </div>
-                  <Link to={`/destinations/${c.id}`} className="inline-flex items-center justify-between w-full pt-6 border-t border-gray-100 text-[#0b2f6b] font-semibold group-hover:text-[#e50924] transition-colors">
-                    Read full guide <ArrowUpRight size={18} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-12 p-5 bg-blue-50/50 rounded-lg border border-blue-100/50">
-            <p className="text-sm text-slate-500 text-center">
-              Europe is a region with different national systems. Confirm the individual country and institution before applying.
-            </p>
+               </div>
+            </div>
+
+            {/* Right Column: 3D Interactive Globe */}
+            <div className="lg:col-span-7 relative h-[500px] md:h-[700px] flex items-center justify-center globe-container z-10 pointer-events-auto">
+               <GlobeComponent 
+                  selectedDestination={selectedDestination} 
+                  onSelectDestination={setSelectedDestination} 
+               />
+               <div className="absolute bottom-4 text-center text-white/40 text-[10px] tracking-widest font-bold uppercase animate-pulse pointer-events-none">
+                  Drag & Zoom to explore
+               </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* SECTION 4: Services Overview */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
+      <section id="home-services" className="py-8 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto scroll-reveal relative z-10">
+        {/* Subtle Watermark Map */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-[url('https://upload.wikimedia.org/wikipedia/commons/c/c3/World_map_blank_without_borders.svg')] bg-no-repeat bg-center bg-contain opacity-[0.03] pointer-events-none -z-10 mix-blend-multiply"></div>
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="w-8 h-0.5 bg-[#e50924]"></span>
@@ -247,7 +444,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: Student Journey & Process */}
-      <section className="relative py-10 bg-[#0b2f6b] text-white">
+      <section id="home-process" className="relative py-10 bg-[#0b2f6b] text-white scroll-reveal">
         <CurvedDividerTop color="text-white" />
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20 mt-10">
           <div className="text-center mb-10">
@@ -270,7 +467,7 @@ export default function Home() {
               { title: 'Prepare applications and documents', desc: 'You complete forms truthfully. We guide you on document formats and submission deadlines.' },
               { title: 'Plan visa, NOC and departure requirements', desc: 'You gather evidence. We provide guidance on consistency. You arrange travel and insurance.' }
             ].map((step, i) => (
-              <div key={i} className="relative pl-16">
+              <div key={i} className="relative pl-16 step">
                 <div className="absolute left-0 top-0 w-10 h-10 rounded-full border-2 border-[#e50924] flex items-center justify-center font-bold text-[#e50924] bg-[#0b2f6b]">
                   {i + 1}
                 </div>
@@ -294,7 +491,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: Useful Resources */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section id="home-resources" className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-6">
             <span className="w-8 h-0.5 bg-[#e50924]"></span>
@@ -332,8 +529,121 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 7: Premium Contact CTA & Enquiry */}
-      <section className="relative py-10 bg-[#f4f7fb]">
+      {/* SECTION 7: Animated Global Network Services */}
+      <section id="home-network" className="relative py-24 bg-[#0b2f6b] overflow-hidden scroll-reveal">
+         <style>{`
+            @keyframes orbit-spin { 
+               from { transform: rotate(0deg); } 
+               to { transform: rotate(360deg); } 
+            }
+            @keyframes orbit-counter-spin { 
+               from { transform: rotate(360deg); } 
+               to { transform: rotate(0deg); } 
+            }
+            .animate-orbit { animation: orbit-spin linear infinite; }
+            .animate-counter-orbit { animation: orbit-counter-spin linear infinite; }
+         `}</style>
+
+         {/* Dark overlay for depth */}
+         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#041a42_150%)]"></div>
+         
+         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+               
+               {/* Left Content */}
+               <div className="lg:col-span-6 lg:pr-10">
+                  <div className="inline-block px-4 py-1.5 bg-white/10 text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm border border-white/20">
+                     Global Reach
+                  </div>
+                  <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 uppercase tracking-tight">
+                     VISA & STUDY SERVICES <br/>TO YOUR DREAM DESTINATION
+                  </h2>
+                  <p className="text-blue-100/80 text-lg mb-10 leading-relaxed max-w-xl">
+                     We provide end-to-end guidance for students who wish to study abroad. Our expert consultants ensure a smooth transition from application to visa approval.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 mb-10 border-t border-white/10 pt-8">
+                     {[
+                        'Study Abroad Counselling',
+                        'Visa Guidance & Support',
+                        'Language Test Preparation',
+                        'University & Course Selection',
+                        'Application & Document Review',
+                        'Pre-Departure Briefings'
+                     ].map((service, idx) => (
+                        <div key={idx} className="flex items-center gap-3 group cursor-pointer">
+                           <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-[#0b2f6b] group-hover:bg-[#e50924] group-hover:text-white transition-colors">
+                              <ArrowUpRight size={14} />
+                           </div>
+                           <span className="text-white font-semibold text-sm group-hover:text-blue-200 transition-colors">{service}</span>
+                        </div>
+                     ))}
+                  </div>
+                  
+                  <Link to="/contact" className="inline-flex items-center gap-4 border border-white/20 rounded-full pl-6 pr-2 py-2 hover:border-white transition-colors group">
+                     <span className="font-bold text-white text-sm tracking-wider">GET STARTED</span>
+                     <div className="w-10 h-10 bg-[#e50924] rounded-full flex items-center justify-center text-white transform group-hover:scale-110 transition-transform shadow-lg shadow-red-500/20">
+                        <ArrowRight size={18} />
+                     </div>
+                  </Link>
+               </div>
+
+               {/* Right Orbit Animations */}
+               <div className="lg:col-span-6 relative flex justify-center items-center h-[500px]">
+                  <div className="relative w-[350px] h-[350px] sm:w-[500px] sm:h-[500px]">
+                     
+                     {/* Center Pill */}
+                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/10 px-6 py-2.5 rounded-full z-10 whitespace-nowrap backdrop-blur-sm">
+                        <span className="text-white font-medium text-sm tracking-wide">ASTRA Network</span>
+                     </div>
+
+                     {/* Outer Ring */}
+                     <div className="absolute inset-0 rounded-full border border-white/20">
+                        <div className="absolute inset-0 animate-orbit" style={{ animationDuration: '40s' }}>
+                           {/* UK */}
+                           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                              <img src="https://flagcdn.com/w320/gb.png" className="w-full h-full object-cover" alt="UK" />
+                           </div>
+                           {/* NZ */}
+                           <div className="absolute bottom-10 left-0 -translate-x-1/2 translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                              <img src="https://flagcdn.com/w320/nz.png" className="w-full h-full object-cover" alt="New Zealand" />
+                           </div>
+                           {/* Japan */}
+                           <div className="absolute top-1/2 -right-10 sm:-right-12 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                              <img src="https://flagcdn.com/w320/jp.png" className="w-full h-full object-cover" alt="Japan" />
+                           </div>
+                           {/* Decorative generic flag / abstract color */}
+                           <div className="absolute bottom-0 right-10 translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full bg-[#ffcc00] animate-counter-orbit shadow-xl" style={{ animationDuration: '40s' }}></div>
+                        </div>
+                     </div>
+
+                     {/* Inner Ring */}
+                     <div className="absolute inset-20 sm:inset-28 rounded-full border border-white/20">
+                        <div className="absolute inset-0 animate-orbit" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                           {/* US (Large) */}
+                           <div className="absolute bottom-4 left-0 -translate-x-1/2 translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                              <img src="https://flagcdn.com/w320/us.png" className="w-full h-full object-cover" alt="USA" />
+                           </div>
+                           {/* South Korea */}
+                           <div className="absolute top-0 right-4 translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                              <img src="https://flagcdn.com/w320/kr.png" className="w-full h-full object-cover" alt="South Korea" />
+                           </div>
+                           {/* Europe (EU Flag) */}
+                           <div className="absolute top-1/2 -left-6 sm:-left-8 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden animate-counter-orbit shadow-xl bg-[#03399e]" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                              <img src="https://flagcdn.com/w320/eu.png" className="w-full h-full object-cover p-2" alt="Europe" />
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </section>
+
+      {/* SECTION 8: Premium Contact CTA & Enquiry */}
+      <section id="home-contact" className="relative py-10 bg-[#f4f7fb] scroll-reveal">
         <CurvedDividerTop color="text-[#f4f7fb]" />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20 mt-10">
@@ -462,6 +772,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

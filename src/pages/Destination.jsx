@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { countries } from '../data';
 import { SourceLinks, destinationInfo, reviewed } from '../content';
 
 export default function Destination() {
+  const containerRef = useRef();
   const { id } = useParams();
   const country = countries.find(c => c.id === id);
 
   if (!country) {
     return <Navigate to="/destinations" />;
-  }
-
-  const legacyInfo = destinationInfo[country.code];
+  }  const legacyInfo = destinationInfo[country.code];
 
   return (
-    <>
+    <div ref={containerRef}>
       <section className="hero" style={{minHeight: '50vh', gridTemplateColumns: '1fr', paddingBottom: 0}}>
         <div className="hero-visual" style={{minHeight: '40vh', borderBottomLeftRadius: '0'}}>
           <img src={country.image} alt={`Study in ${country.name}`} />
@@ -37,7 +36,7 @@ export default function Destination() {
         </div>
       </section>
 
-      <section className="section wrap" style={{paddingTop: '60px'}}>
+      <section className="section wrap scroll-reveal" style={{paddingTop: '60px'}}>
         <div style={{display: 'grid', gridTemplateColumns: '1fr 350px', gap: '60px'}} className="about-grid">
           <div>
             <p className="lead" style={{fontSize: '22px', color: '#17375e', marginBottom: '30px'}}>{country.overview}</p>
@@ -104,6 +103,6 @@ export default function Destination() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

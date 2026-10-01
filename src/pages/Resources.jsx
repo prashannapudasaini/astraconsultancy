@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ArrowUpRight, FileCheck } from 'lucide-react';
 import { SourceLinks, reviewed } from '../content';
 
 export default function Resources() {
+  const containerRef = useRef();
   const resources = [
     { category: 'NEPAL · NOC', title: 'Nepal NOC guidance', desc: 'Nepal\'s official NOC portal is the starting point for the government\'s certificate for Nepali students studying abroad. Review the instructions for your course and circumstances.', ids: ['noc'] },
     { category: 'TEST FORMAT', title: 'IELTS official format', desc: 'Assesses listening, reading, writing and speaking. Academic and General Training share listening and speaking formats; reading and writing differ.', ids: ['ielts'] },
@@ -18,7 +19,7 @@ export default function Resources() {
   ];
 
   return (
-    <section className="section resource-section" style={{minHeight: '80vh', borderRadius: 0}}>
+    <section className="section resource-section scroll-reveal" style={{minHeight: '80vh', borderRadius: 0}} ref={containerRef}>
       <div className="wrap">
         <div className="section-heading">
           <div>

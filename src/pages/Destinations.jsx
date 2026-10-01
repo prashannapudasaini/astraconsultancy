@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Search, Filter, ChevronDown, MapPin, ExternalLink, MessageCircle, 
@@ -6,6 +6,7 @@ import {
   Phone, Mail
 } from 'lucide-react';
 import { countries } from '../data';
+import { usePageEntrance, useScrollReveal } from '../motion';
 
 // Curved Dividers
 const CurvedDividerBottom = () => (
@@ -21,11 +22,15 @@ const CurvedDividerTop = ({ color = "text-[#f4f7fb]" }) => (
 );
 
 export default function Destinations() {
+  const containerRef = useRef();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState('');
   const [formDestination, setFormDestination] = useState('');
+  
+  usePageEntrance(containerRef);
+  useScrollReveal(containerRef);
 
   // Destination Data strictly matching user request
   const destinationDetails = [
@@ -128,7 +133,7 @@ export default function Destinations() {
   }, []);
 
   return (
-    <main className="bg-white">
+    <main className="bg-white" ref={containerRef}>
       {/* SECTION 1: Premium destinations hero */}
       <section className="relative py-8 lg:py-10 bg-[#0b2f6b] text-white overflow-hidden pb-20">
         {/* Abstract World Map Graphic (SVG) */}
@@ -180,7 +185,7 @@ export default function Destinations() {
       </section>
 
       {/* SECTION 2: Destination discovery controls */}
-      <section className="bg-[#f4f7fb] py-8 border-b border-gray-200">
+      <section className="bg-[#f4f7fb] py-8 border-b border-gray-200 scroll-reveal">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 items-center">
             
@@ -240,7 +245,7 @@ export default function Destinations() {
       </section>
 
       {/* SECTION 3: Featured destination cards */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#0b2f6b]">Explore Destinations</h2>
           <p className="text-sm text-gray-500 mt-1">Found {filteredDestinations.length} destination{filteredDestinations.length !== 1 && 's'}</p>
@@ -248,7 +253,7 @@ export default function Destinations() {
 
         <div className="space-y-12">
           {filteredDestinations.map(dest => (
-            <div key={dest.id} className="group flex flex-col lg:flex-row bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+            <div key={dest.id} className="group flex flex-col lg:flex-row bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 reveal-item">
               
               {/* Image Section */}
               <div className="w-full lg:w-2/5 h-64 lg:h-auto relative overflow-hidden">
@@ -311,7 +316,7 @@ export default function Destinations() {
       </section>
 
       {/* SECTION 4: Destination comparison area */}
-      <section id="compare" className="py-8 lg:py-10 px-6 lg:px-12 bg-[#092650] text-white">
+      <section id="compare" className="py-8 lg:py-10 px-6 lg:px-12 bg-[#092650] text-white scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tight">Compare the questions that matter.</h2>
@@ -358,7 +363,7 @@ export default function Destinations() {
       </section>
 
       {/* SECTION 5: Country guide preview and student planning */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="text-center mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#0b2f6b] mb-4 tracking-tight">Before choosing a country, ask better questions.</h2>
         </div>
@@ -391,7 +396,7 @@ export default function Destinations() {
       </div>
 
       {/* SECTION 6: Official destination resources */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#0b2f6b] mb-2">Check the original guidance before you apply.</h2>
           <p className="text-sm text-gray-500">
@@ -423,7 +428,7 @@ export default function Destinations() {
       </section>
 
       {/* SECTION 7: Destination counselling CTA */}
-      <section id="enquiry" className="relative py-8 lg:py-10 bg-[#f4f7fb]">
+      <section id="enquiry" className="relative py-8 lg:py-10 bg-[#f4f7fb] scroll-reveal">
         <CurvedDividerTop color="text-[#0b2f6b]" />
         <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-20 pt-8">
           <div className="text-center mb-10">

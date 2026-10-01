@@ -1,15 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { countries } from '../data';
+import { usePageEntrance, useScrollReveal } from '../motion';
 
 const email = 'info@astraglobaleducationservices.com';
 
 export default function Contact() {
+  const containerRef = useRef();
+  const formRef = useRef();
   const location = useLocation();
   const [selectedDestination, setSelectedDestination] = useState('');
   const [selectedService, setSelectedService] = useState('');
   const [notice, setNotice] = useState('');
+
+  usePageEntrance(containerRef);
+  useScrollReveal(containerRef);
+
+  useGSAP(() => {
+    if (!formRef.current) return;
+    const inputs = formRef.current.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        gsap.to(input, { 
+          scale: 1.01, 
+          boxShadow: '0 0 0 2px rgba(229,9,36,0.2)', 
+          duration: 0.3, 
+          ease: 'power2.out' 
+        });
+      });
+      
+      input.addEventListener('blur', () => {
+        gsap.to(input, { 
+          scale: 1, 
+          boxShadow: 'none', 
+          duration: 0.3, 
+          ease: 'power2.out' 
+        });
+      });
+    });
+  }, { scope: formRef });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -38,7 +71,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact-section">
+    <section className="contact-section" ref={containerRef}>
       <div className="wrap contact-grid">
         <div>
           <div className="eyebrow">LET’S BEGIN WITH A CONVERSATION</div>
@@ -67,7 +100,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <form onSubmit={enquiry}>
+        <form ref={formRef} onSubmit={enquiry} className="scroll-reveal">
           <h3>Enquire about counselling</h3>
           <p>Prepare an email to our team. Your email app opens so you can review and send it. Do not request or attach sensitive documents.</p>
           

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ShieldCheck, ExternalLink, CheckCircle2 } from 'lucide-react';
 
@@ -9,12 +9,12 @@ const CurvedDividerBottom = () => (
 );
 
 export default function ServiceVisaGuidance() {
+  const containerRef = useRef();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <main className="bg-white">
+  }, []);  return (
+    <main className="bg-white" ref={containerRef}>
       {/* Hero Section */}
       <section className="relative py-8 lg:py-10 bg-[#0b2f6b] text-white overflow-hidden pb-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20">
@@ -44,7 +44,7 @@ export default function ServiceVisaGuidance() {
         <CurvedDividerBottom />
       </section>
 
-      <section className="py-8 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto scroll-reveal">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
             {/* Detailed Explanation */}

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Ear, BookOpen, ShieldCheck, UserCheck, ArrowUpRight, Phone, Mail, MapPin, CheckCircle2 } from 'lucide-react';
 import { countries } from '../data';
+import { usePageEntrance, useScrollReveal } from '../motion';
 
 const CurvedDividerBottom = () => (
   <svg className="absolute bottom-0 left-0 w-full overflow-hidden text-white" viewBox="0 0 1440 120" preserveAspectRatio="none" style={{ fill: 'currentColor', height: '80px', zIndex: 10 }}>
@@ -16,12 +17,17 @@ const CurvedDividerTop = ({ color = "text-white" }) => (
 );
 
 export default function About() {
+  const containerRef = useRef(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  usePageEntrance(containerRef);
+  useScrollReveal(containerRef);
+
   return (
-    <main>
+    <main ref={containerRef}>
       {/* SECTION 1: About Hero */}
       <section className="relative py-8 lg:py-10 bg-[#0b2f6b] text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -63,7 +69,7 @@ export default function About() {
       </section>
 
       {/* SECTION 2: Who ASTRA is */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
             <img src="/images/counselling.jpg" alt="ASTRA Counselling office environment" className="w-full h-full object-cover" />
@@ -94,7 +100,7 @@ export default function About() {
       </section>
 
       {/* SECTION 3: Our approach */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#f4f7fb]">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#f4f7fb] scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 max-w-3xl mx-auto">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0b2f6b] mb-6 tracking-tight">Clear information. Considered guidance.</h2>
@@ -141,7 +147,7 @@ export default function About() {
       </section>
 
       {/* SECTION 4: What ASTRA helps students explore */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="text-center mb-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0b2f6b] mb-6 tracking-tight">Support for the decisions that matter.</h2>
         </div>
@@ -201,7 +207,7 @@ export default function About() {
       </section>
 
       {/* SECTION 5: ASTRA destination focus */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#092650] text-white relative">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#092650] text-white relative scroll-reveal">
         <CurvedDividerTop color="text-white" />
         <div className="max-w-7xl mx-auto relative z-10 pt-8">
           <div className="text-center mb-8">
@@ -244,7 +250,7 @@ export default function About() {
       </section>
 
       {/* SECTION 6: What students can expect */}
-      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#0b2f6b] text-white relative">
+      <section className="py-8 lg:py-10 px-6 lg:px-12 bg-[#0b2f6b] text-white relative scroll-reveal">
         <CurvedDividerTop color="text-[#092650]" />
         <div className="max-w-7xl mx-auto relative z-10 pt-8">
           <div className="text-center mb-8">
@@ -292,7 +298,7 @@ export default function About() {
       </section>
 
       {/* SECTION 7: Contact and responsible guidance */}
-      <section className="relative py-8 lg:py-10 bg-[#f4f7fb]">
+      <section className="relative py-8 lg:py-10 bg-[#f4f7fb] scroll-reveal">
         <CurvedDividerTop color="text-[#0b2f6b]" />
         <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-20 pt-12 text-center">
           <h2 className="text-3xl lg:text-5xl font-bold text-[#0b2f6b] mb-6 tracking-tight">Have questions about your next step?</h2>

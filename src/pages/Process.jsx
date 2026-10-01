@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { usePageEntrance, useScrollReveal, useJourneyAnimation } from '../motion';
 
 export default function Process() {
+  const containerRef = useRef();
+  usePageEntrance(containerRef);
+  useScrollReveal(containerRef);
+  useJourneyAnimation(containerRef);
+
   const steps = [
     {
       title: 'Initial counselling enquiry',
@@ -39,7 +45,7 @@ export default function Process() {
   ];
 
   return (
-    <section className="journey" style={{borderRadius: 0, minHeight: '80vh'}}>
+    <section className="journey scroll-reveal" style={{borderRadius: 0, minHeight: '80vh'}} ref={containerRef}>
       <div className="wrap">
         <div className="journey-intro">
           <div className="eyebrow light">A THOUGHTFUL PROCESS</div>

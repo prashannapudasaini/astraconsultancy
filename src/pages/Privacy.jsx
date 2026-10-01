@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 export default function Privacy() {
+  const containerRef = useRef();
   return (
-    <section className="section wrap" style={{maxWidth: '800px', minHeight: '70vh'}}>
+    <section className="section wrap scroll-reveal" style={{maxWidth: '800px', minHeight: '70vh'}} ref={containerRef}>
       <div className="eyebrow">LEGAL</div>
       <h1 style={{fontSize: '40px', margin: '20px 0 40px', letterSpacing: '-1px'}}>Privacy Notice</h1>
       
