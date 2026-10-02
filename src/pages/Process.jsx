@@ -54,156 +54,160 @@ export default function Process() {
   ];
 
   useGSAP(() => {
-    // Hero Animation
-    gsap.from(".hero-elem", {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out",
-      clearProps: "all"
+    // Hero Entrance Animation
+    gsap.from(".hero-badge", { y: -20, opacity: 0, duration: 0.8, ease: "back.out(1.5)" });
+    gsap.from(".hero-title .line", { 
+      y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out", delay: 0.2 
     });
+    gsap.from(".hero-desc", { y: 20, opacity: 0, duration: 1, ease: "power3.out", delay: 0.6 });
+    gsap.from(".hero-btn", { scale: 0.9, opacity: 0, duration: 0.8, ease: "back.out(1.5)", delay: 0.8 });
 
-    // Timeline line animation
-    gsap.fromTo(".timeline-line", 
-      { height: 0 },
-      { 
-        height: "100%", 
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".timeline-container",
-          start: "top center",
-          end: "bottom center",
-          scrub: 1
-        }
-      }
-    );
-
-    // Cards animation
-    gsap.utils.toArray('.process-card').forEach((card, i) => {
+    // Sticky Stacking Cards Animation
+    const cards = gsap.utils.toArray('.stacked-card');
+    
+    cards.forEach((card, i) => {
+      // Entrance for each card
       gsap.from(card, {
-        x: i % 2 === 0 ? -50 : 50,
+        y: 100,
         opacity: 0,
-        duration: 0.8,
+        duration: 1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: card,
-          start: "top 80%",
-          once: true
-        },
-        clearProps: "all"
+          start: "top 90%",
+        }
       });
+
+      // The scale-down effect as the next card covers it
+      if (i < cards.length - 1) {
+        const nextCard = cards[i + 1];
+        const cardInner = card.querySelector('.card-inner');
+        
+        // Dynamic top offset calculation based on index
+        const topOffset = 100 + (i + 1) * 20;
+
+        gsap.to(cardInner, {
+          scale: 0.92,
+          opacity: 0.4,
+          y: -20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: nextCard,
+            start: `top ${topOffset + 100}px`, // Start scaling when next card is approaching
+            end: `top ${topOffset}px`,         // Finish scaling when next card docks
+            scrub: true,
+          }
+        });
+      }
     });
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="bg-[#f4f7fb] min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 bg-[#0b2f6b] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-           <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#e50924] rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
-           <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#4375b8] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+    <div ref={containerRef} className="bg-[#040d1a] min-h-screen text-white overflow-hidden font-sans selection:bg-[#e50924] selection:text-white">
+      
+      {/* --- HERO SECTION --- */}
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-32 pb-20">
+        {/* Background Gradients & Grid */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Subtle Grid */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CgkJPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSJub25lIi8+CgkJPHBhdGggZD0iTTAgNDBoNDBWMEgweiIgZmlsbD0ibm9uZSIvPgoJCTxwYXRoIGQ9Ik0wIDAuNWg0MCIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+CgkJPHBhdGggZD0iTTAuNSAwdjQwIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz4KPC9zdmc+')] z-0"></div>
+          
+          {/* Glowing Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-[#0b2f6b] rounded-full blur-[150px] opacity-40 animate-pulse mix-blend-screen pointer-events-none"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-[#e50924] rounded-full blur-[150px] opacity-20 mix-blend-screen pointer-events-none" style={{ animation: "pulse 8s infinite alternate" }}></div>
         </div>
-        
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="hero-elem inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#e50924]"></span>
-            A THOUGHTFUL PROCESS
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <div className="hero-badge inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#e50924] animate-ping"></span>
+            <span className="w-2 h-2 rounded-full bg-[#e50924] absolute"></span>
+            A Thoughtful Process
           </div>
-          <h1 className="hero-elem text-4xl lg:text-6xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-            Big plans begin with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] to-[#e50924]">small steps.</span>
+          
+          <h1 className="hero-title text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-[1.05] mb-8">
+            <div className="line overflow-hidden"><span className="block">Big plans begin</span></div>
+            <div className="line overflow-hidden">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#ffb3b3] to-[#e50924]">
+                with small steps.
+              </span>
+            </div>
           </h1>
-          <p className="hero-elem text-lg lg:text-xl text-[#becee3] mb-10 max-w-2xl mx-auto leading-relaxed">
+          
+          <p className="hero-desc text-lg md:text-2xl text-blue-100/70 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
             You don't need every answer today. Start with the questions that matter. We provide structured guidance at every stage of your journey.
           </p>
-          <div className="hero-elem flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-4 font-bold rounded-xl transition-all shadow-[0_10px_30px_-10px_rgba(229,9,36,0.5)] hover:shadow-[0_15px_40px_-10px_rgba(229,9,36,0.6)] hover:-translate-y-1">
-              Start a conversation <ArrowUpRight size={20} />
+          
+          <div className="hero-btn">
+            <Link to="/contact" className="group relative inline-flex items-center justify-center gap-3 bg-white text-[#040d1a] px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+              Start a conversation 
+              <ArrowUpRight size={22} className="group-hover:rotate-45 group-hover:text-[#e50924] transition-all duration-300" />
             </Link>
           </div>
         </div>
-        
-        {/* Custom SVG Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-          <svg className="relative block w-full h-[60px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-              <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#f4f7fb"></path>
-          </svg>
-        </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-20 lg:py-32 px-6">
-        <div className="max-w-6xl mx-auto">
+      {/* --- STICKY STACKING CARDS SECTION --- */}
+      <section className="relative px-4 sm:px-6 pb-[20vh] z-20">
+        <div className="max-w-4xl mx-auto cards-container relative">
           
-          <div className="timeline-container relative">
-            {/* The central line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2 rounded-full hidden md:block">
-               {/* Animated fill line */}
-               <div className="timeline-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#e50924] to-[#0b2f6b] rounded-full"></div>
-            </div>
-            {/* Mobile line */}
-            <div className="absolute left-[30px] top-0 bottom-0 w-1 bg-gray-200 rounded-full md:hidden">
-               <div className="timeline-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#e50924] to-[#0b2f6b] rounded-full"></div>
-            </div>
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            // Calculate a top offset so they stack slightly below each other like a deck of cards
+            const stickyTop = 100 + (i * 20); 
 
-            <div className="flex flex-col gap-12 md:gap-24 relative z-10">
-              {steps.map((step, i) => {
-                const Icon = step.icon;
-                const isEven = i % 2 === 0;
-                
-                return (
-                  <div key={step.title} className={`process-card relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    
-                    {/* Number Bubble */}
-                    <div className="absolute left-[30px] md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-4 border-[#f4f7fb] shadow-[0_5px_15px_-5px_rgba(0,0,0,0.15)] flex items-center justify-center text-xl font-extrabold text-[#0b2f6b] z-20 overflow-hidden group hover:scale-110 transition-transform duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0b2f6b] to-[#14438f] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 group-hover:text-white transition-colors duration-300">{i + 1}</span>
-                    </div>
-
-                    {/* Empty space for alternating layout on desktop */}
-                    <div className="hidden md:block w-1/2"></div>
-                    
-                    {/* Content Card */}
-                    <div className={`w-full md:w-1/2 pl-[70px] md:pl-0 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                      <div className="bg-white p-6 md:p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 border border-gray-100 relative group overflow-hidden">
-                        
-                        {/* Decorative subtle background icon */}
-                        <div className={`absolute text-gray-50 opacity-50 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700 pointer-events-none ${isEven ? 'md:left-4 md:-bottom-4 -bottom-4 -right-4' : '-bottom-4 -right-4'}`}>
-                          <Icon size={140} strokeWidth={1} />
-                        </div>
-
-                        <div className={`flex items-center gap-4 mb-5 ${isEven ? 'md:flex-row-reverse' : ''}`}>
-                          <div className="w-12 h-12 rounded-xl bg-[#eff4fb] text-[#e50924] flex items-center justify-center shrink-0 shadow-inner group-hover:bg-[#e50924] group-hover:text-white transition-colors duration-300">
-                            <Icon size={24} />
-                          </div>
-                          <h3 className="text-xl md:text-2xl font-bold text-[#0b2f6b] relative z-10 tracking-tight leading-tight">
-                            {step.title}
-                          </h3>
-                        </div>
-                        
-                        <p className="text-gray-600 leading-relaxed relative z-10">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                    
+            return (
+              <div 
+                key={step.title}
+                className="stacked-card sticky w-full mb-[15vh] lg:mb-[30vh]"
+                style={{ top: `${stickyTop}px`, zIndex: i }}
+              >
+                {/* The card inner wrapper is what we scale down when the next card covers it */}
+                <div className="card-inner w-full bg-white text-[#040d1a] rounded-[2.5rem] p-8 md:p-12 lg:p-16 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/50 flex flex-col md:flex-row gap-8 md:gap-16 items-start relative overflow-hidden origin-top transform-gpu">
+                  
+                  {/* Watermark Number */}
+                  <div className="absolute -top-10 -right-10 text-[250px] font-black text-gray-100 leading-none select-none pointer-events-none -z-0">
+                    {i + 1}
                   </div>
-                );
-              })}
-            </div>
-            
-          </div>
-          
-          <div className="mt-20 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-start gap-3 p-6 bg-white shadow-sm border border-gray-200 rounded-xl">
-              <div className="text-[#e50924] mt-1 shrink-0"><CheckCircle2 size={20} /></div>
-              <p className="text-sm text-gray-500 font-medium text-left leading-relaxed">
-                Note: Final decisions remain the responsibility of the student, institution, or authority. ASTRA provides guidance to ensure your applications are as strong and accurate as possible.
-              </p>
-            </div>
-          </div>
-          
+
+                  {/* Icon & Number Column */}
+                  <div className="relative z-10 flex flex-row md:flex-col items-center md:items-start gap-6 shrink-0 w-full md:w-auto">
+                    <div className="w-20 h-20 md:w-32 md:h-32 rounded-3xl bg-[#f4f7fb] flex items-center justify-center shadow-inner relative group">
+                       <div className="absolute inset-0 bg-[#e50924] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                       <Icon size={48} className="text-[#0b2f6b] group-hover:text-white group-hover:scale-110 transition-all duration-500 relative z-10 stroke-1" />
+                    </div>
+                    <div className="md:mt-4 text-left">
+                       <p className="text-sm font-bold tracking-widest text-[#e50924] uppercase mb-1">Step 0{i+1}</p>
+                       <div className="w-12 h-1 bg-gray-200 rounded-full"></div>
+                    </div>
+                  </div>
+
+                  {/* Content Column */}
+                  <div className="relative z-10 flex-1 pt-2 md:pt-4">
+                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0b2f6b] mb-6 tracking-tight leading-[1.1]">
+                      {step.title}
+                    </h3>
+                    <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-medium">
+                      {step.description}
+                    </p>
+                  </div>
+                  
+                </div>
+              </div>
+            );
+          })}
+
         </div>
+
+        {/* Disclaimer Note */}
+        <div className="max-w-4xl mx-auto mt-[10vh]">
+           <div className="flex items-start gap-4 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-lg">
+             <CheckCircle2 className="text-[#e50924] shrink-0 mt-1" size={24} />
+             <p className="text-blue-100/60 leading-relaxed font-light">
+               <strong className="text-white font-semibold">Note:</strong> Final decisions remain the responsibility of the student, institution, or authority. ASTRA provides guidance to ensure your applications are as strong and accurate as possible.
+             </p>
+           </div>
+        </div>
+
       </section>
     </div>
   );
