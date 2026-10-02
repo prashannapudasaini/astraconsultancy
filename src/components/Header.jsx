@@ -5,6 +5,8 @@ import { Menu, X, ArrowUpRight, ChevronDown, GraduationCap, MapPin, Globe } from
 export default function Header() {
   const [menu, setMenu] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const dropdownRef = useRef(null);
 
@@ -12,6 +14,24 @@ export default function Header() {
     setMenu(false);
     setServicesOpen(false);
   }, [location]);
+
+  // Handle scroll to hide/show navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide if scrolling down and scrolled past 100px. Show if scrolling up.
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -36,7 +56,7 @@ export default function Header() {
   const isServicesActive = location.pathname.startsWith('/services');
 
   return (
-    <header>
+    <header className={`transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="wrap nav">
         <Link to="/" aria-label="ASTRA home" className="brand">
           <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
