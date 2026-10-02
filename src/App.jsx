@@ -15,10 +15,14 @@ import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="destinations" element={<Destinations />} />
@@ -34,6 +38,7 @@ function App() {
         <Route path="privacy" element={<Privacy />} />
       </Route>
     </Routes>
+    </>
   );
 }
 
