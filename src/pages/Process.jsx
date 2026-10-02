@@ -1,218 +1,485 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, CheckCircle2, UserCircle, GraduationCap, Globe2, BookOpen, FileSearch, Building2, FileCheck, Plane } from 'lucide-react';
+import { ArrowUpRight, Phone, Mail, MapPin, ChevronDown, FileText, Globe2, GraduationCap, User } from 'lucide-react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Process() {
-  const containerRef = useRef();
+  const containerRef = useRef(null);
+  const journeySectionRef = useRef(null);
+  const journeyScrollRef = useRef(null);
   
-  const steps = [
+  const [activeDoc, setActiveDoc] = useState('academic');
+  const [openFaq, setOpenFaq] = useState(0);
+
+  const journeyStages = [
     {
-      title: 'Initial counselling enquiry',
-      description: 'You provide a brief overview of your background. We discuss how we can help and schedule a full counselling session.',
-      icon: UserCircle
+      title: "Start with your goals",
+      desc: "Discuss your academic background, interests, preferred destinations, budget, and language readiness. A useful study plan begins with understanding your circumstances.",
+      prep: "Academic history, interests, and questions.",
+      support: "An initial discussion to clarify priorities and possible next steps.",
+      cta: null
     },
     {
-      title: 'Academic and goal discussion',
-      description: 'You share your academic history, interests, and budget. We discuss which options are viable and identify any missing information.',
-      icon: GraduationCap
+      title: "Explore suitable study options",
+      desc: "Compare courses, institutions, destinations, entry requirements, and costs. Consider how each option fits your academic interests and longer-term plans.",
+      prep: "Preferred subjects, destinations, and budget considerations.",
+      support: "Guidance in comparing options and checking official information.",
+      cta: "Explore Destinations",
+      ctaLink: "/destinations"
     },
     {
-      title: 'Destination and course research',
-      description: 'We guide you through comparing specific courses, teaching languages, and entry criteria. You decide on your preferred destination and institution.',
-      icon: Globe2
+      title: "Organise your documents and readiness",
+      desc: "Prepare the documents required for your chosen institution and programme. Check academic records, identification, language evidence, and any additional requirements before submission.",
+      prep: "Relevant documents and accurate personal information.",
+      support: "Checklist guidance and identification of missing items.",
+      cta: null
     },
     {
-      title: 'Institution and entry-criteria review',
-      description: 'We review your documents against the institution\'s requirements. You prepare necessary language test scores and academic transcripts.',
-      icon: BookOpen
+      title: "Prepare and submit your application",
+      desc: "Review the application requirements, complete the necessary information, and submit through the appropriate institutional channel. Monitor requests for additional information and decisions.",
+      prep: "Review your details and respond to requests.",
+      support: "Application organisation and guidance on the next steps.",
+      cta: null
     },
     {
-      title: 'Application preparation',
-      description: 'You complete the application forms and provide truthful written statements. We guide you on document formats and submission deadlines.',
-      icon: FileSearch
+      title: "Review your offer and official next steps",
+      desc: "If you receive an offer, review its conditions and the requirements that follow. Prepare for the relevant visa process using current official guidance.",
+      prep: "Understand conditions, deadlines, and requested evidence.",
+      support: "Visa-document preparation guidance and organisation.",
+      note: "Admission and visa decisions are made by the relevant institutions and authorities.",
+      cta: null
     },
     {
-      title: 'Offer review',
-      description: 'The institution makes a decision. We help you review the conditions of your offer, deposit requirements, and refund terms.',
-      icon: Building2
-    },
-    {
-      title: 'Visa and NOC planning',
-      description: 'You gather financial and personal evidence based on official checklists. We provide guidance on consistency and timing. ASTRA cannot guarantee visa approval.',
-      icon: FileCheck
-    },
-    {
-      title: 'Pre-departure preparation',
-      description: 'After visa approval, you arrange travel, accommodation, and insurance. We help ensure you have the right documents ready for arrival.',
-      icon: Plane
+      title: "Prepare for your next chapter",
+      desc: "Once the necessary approvals are in place, organise practical arrangements such as accommodation, travel, enrolment, and arrival requirements.",
+      prep: "Confirm arrangements and keep important documents accessible.",
+      support: "Guidance on preparation questions and official sources.",
+      cta: "Discuss Your Next Steps",
+      ctaLink: "/contact"
     }
   ];
 
-  useGSAP(() => {
-    // Hero Animation
-    gsap.from(".hero-elem", {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out",
-      clearProps: "all"
-    });
+  const docCategories = [
+    { id: 'academic', label: 'Academic records', desc: 'Transcripts, degree certificates, grading scales, and evidence of previous study.', details: 'Your complete academic history is strictly required by all major institutions. Ensure all submitted transcripts are officially translated, stamped, and verified for authenticity.', icon: GraduationCap },
+    { id: 'id', label: 'Identification', desc: 'Valid passport copies, national ID, and any relevant previous visas or travel history.', details: 'A valid national passport and detailed travel history form the foundation of your application. Ensure that identification documents remain valid throughout your studies.', icon: User },
+    { id: 'language', label: 'Language evidence', desc: 'Official IELTS, PTE, or other accepted language test score reports.', details: 'Official test scores must meet the specific minimum threshold of your chosen program. Test reports must be recent, valid, and directly verifiable online.', icon: Globe2 },
+    { id: 'supporting', label: 'Supporting documents', desc: 'Statements of purpose, CVs, and academic references depending on the chosen program.', details: 'Strong references and a clear statement of purpose outline your true academic potential. These documents provide essential context to your overall application profile.', icon: FileText }
+  ];
 
-    // Timeline line animation
-    gsap.fromTo(".timeline-line", 
-      { height: 0 },
-      { 
-        height: "100%", 
+  const faqs = [
+    { q: "Where should I begin?", a: "Start with a conversation about your education, interests and preferred destination. You do not need to have everything figured out before reaching out to us." },
+    { q: "What should I bring to my first consultation?", a: "Bring your academic history (transcripts if available), an idea of your budget, and any English language test scores you might already have." },
+    { q: "Do requirements differ between destinations?", a: "Yes, significantly. Education systems, visa rules, financial evidence requirements, and timelines vary by country and institution. We help you navigate these specific differences." },
+    { q: "What if I am still preparing my language skills?", a: "That is perfectly fine. We can discuss your study options based on your target scores and help you plan your timeline around your language preparation." },
+    { q: "How long can the application process take?", a: "Timelines vary depending on the country, institution, and time of year. It can take anywhere from a few weeks to several months. We recommend starting the process well in advance of your intended intake." },
+    { q: "Can admission or a visa be guaranteed?", a: "No. Admission and visa decisions are made exclusively by the relevant institutions and government immigration authorities. We provide guidance to ensure your application is accurate and meets published requirements, but we cannot guarantee outcomes." }
+  ];
+
+  useGSAP(() => {
+    // 1. Hero Animations
+    const heroTl = gsap.timeline();
+    heroTl.from(".hero-title-line span", {
+      yPercent: 120,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power4.out"
+    })
+    .from(".hero-content", {
+      autoAlpha: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.6")
+    .from(".hero-image-wrap", {
+      autoAlpha: 0,
+      x: 50,
+      duration: 1.2,
+      ease: "power3.out"
+    }, "-=0.8")
+    .from(".hero-paper-panel", {
+      autoAlpha: 0,
+      y: 20,
+      rotation: -5,
+      duration: 0.8,
+      ease: "back.out(1.5)"
+    }, "-=1.5");
+
+    // 2. Horizontal Journey Animation
+    if (journeyScrollRef.current && journeySectionRef.current) {
+      gsap.to(journeyScrollRef.current, {
+        x: () => -(journeyScrollRef.current.scrollWidth - window.innerWidth),
         ease: "none",
         scrollTrigger: {
-          trigger: ".timeline-container",
-          start: "top center",
-          end: "bottom center",
-          scrub: 1
+          trigger: journeySectionRef.current,
+          start: "center center",
+          end: () => `+=${journeyScrollRef.current.scrollWidth - window.innerWidth}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    }
+
+    // 3. Guidance Columns Animation
+    gsap.from(".guidance-col", {
+      scrollTrigger: {
+        trigger: ".guidance-section",
+        start: "top 70%"
+      },
+      y: 40,
+      autoAlpha: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
+    
+    gsap.fromTo(".guidance-connector", 
+      { scaleX: 0, transformOrigin: "left center" },
+      {
+        scaleX: 1,
+        duration: 1.5,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: ".guidance-section",
+          start: "top 60%"
         }
       }
     );
 
-    // Cards animation
-    gsap.utils.toArray('.process-card').forEach((card, i) => {
-      gsap.from(card, {
-        x: i % 2 === 0 ? -50 : 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
+    // 4. Closing Line Animation
+    gsap.fromTo(".closing-route-line", 
+      { strokeDasharray: 500, strokeDashoffset: 500 },
+      { 
+        strokeDashoffset: 0, 
+        duration: 1.5, 
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: card,
-          start: "top 80%",
-          once: true
-        },
-        clearProps: "all"
-      });
-    });
+          trigger: ".closing-section",
+          start: "top 70%"
+        }
+      }
+    );
+
+    setTimeout(() => ScrollTrigger.refresh(), 500);
+
   }, { scope: containerRef });
 
+  useEffect(() => {
+    gsap.fromTo(".doc-visual-layer", 
+      { y: 20, opacity: 0, rotation: 3, scale: 0.98 },
+      { y: 0, opacity: 1, rotation: 0, scale: 1, duration: 0.6, ease: "back.out(1.2)", overwrite: "auto" }
+    );
+  }, [activeDoc]);
+
+  const scrollToJourney = (e) => {
+    e.preventDefault();
+    if (journeySectionRef.current) {
+      window.scrollTo({ top: journeySectionRef.current.offsetTop, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div ref={containerRef} className="bg-[#f4f7fb] min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-6 bg-[#0b2f6b] overflow-hidden">
-        {/* Background Image & Overlays */}
-        <div className="absolute inset-0 z-0">
-           <img src="/images/process_hero_bg.jpg" alt="Application Process" className="w-full h-full object-cover opacity-60" />
-           <div className="absolute inset-0 bg-[#0b2f6b]/70 mix-blend-multiply"></div>
-           <div className="absolute inset-0 bg-gradient-to-b from-[#0b2f6b]/90 via-[#0b2f6b]/50 to-[#0b2f6b]/90"></div>
+    <div ref={containerRef} className="bg-white text-[#142a47] min-h-screen overflow-x-hidden process-page">
+      
+      {/* 1. OPENING SCENE (Clean 2-Column Layout) */}
+      <section className="relative w-full min-h-[85svh] lg:h-[95svh] flex flex-col lg:flex-row bg-[#f4f7fb] process-hero-bg overflow-hidden pt-24 lg:pt-0">
+        
+        {/* Left Side: Text */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-end px-6 lg:px-16 xl:px-24 z-20">
+          <div className="w-full max-w-2xl pt-10 pb-16 lg:py-32">
+            <div className="hero-content">
+              <span className="inline-block text-xs font-bold tracking-widest text-[#e50924] uppercase mb-6 bg-white/80 process-hero-tag backdrop-blur px-5 py-2.5 rounded-full border border-gray-200">
+                Application Process
+              </span>
+            </div>
+            
+            <h1 className="text-5xl lg:text-[76px] font-extrabold text-[#0b2f6b] leading-[1.05] tracking-tight mb-8">
+              <div className="overflow-hidden hero-title-line pb-2"><span className="inline-block">Your next chapter,</span></div>
+              <div className="overflow-hidden hero-title-line pb-2"><span className="inline-block text-[#e50924]">step by step.</span></div>
+            </h1>
+            
+            <p className="hero-content text-xl lg:text-2xl text-gray-600 mb-10 max-w-lg leading-relaxed process-hero-desc">
+              Understand the stages of planning your studies abroad—from discussing your goals to preparing for your next steps.
+            </p>
+            
+            <div className="hero-content flex flex-col sm:flex-row gap-4">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-3 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-4 font-semibold rounded-md transition-all">
+                Book a Consultation <ArrowUpRight size={18} />
+              </Link>
+              <button onClick={scrollToJourney} className="inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-[#0b2f6b] border border-gray-200 px-8 py-4 font-semibold rounded-md transition-all process-btn-secondary">
+                Explore the Process
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Decorative Glowing Orbs */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-           <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#e50924] rounded-full blur-[120px] opacity-30 mix-blend-screen"></div>
-           <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#4375b8] rounded-full blur-[100px] opacity-30 mix-blend-screen"></div>
-        </div>
-        
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <div className="hero-elem inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#e50924]"></span>
-            A THOUGHTFUL PROCESS
-          </div>
-          <h1 className="hero-elem text-4xl lg:text-6xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-            Big plans begin with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] to-[#e50924]">small steps.</span>
-          </h1>
-          <p className="hero-elem text-lg lg:text-xl text-[#becee3] mb-8 max-w-2xl mx-auto leading-relaxed">
-            You don't need every answer today. Start with the questions that matter. We provide structured guidance at every stage of your journey.
-          </p>
-          <div className="hero-elem flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-4 font-bold rounded-xl transition-all shadow-[0_10px_30px_-10px_rgba(229,9,36,0.5)] hover:shadow-[0_15px_40px_-10px_rgba(229,9,36,0.6)] hover:-translate-y-1">
-              Start a conversation <ArrowUpRight size={20} />
-            </Link>
-          </div>
-        </div>
-        
-        {/* Custom SVG Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-          <svg className="relative block w-full h-[60px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-              <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#f4f7fb"></path>
-          </svg>
+        {/* Right Side: Image */}
+        <div className="w-full lg:w-1/2 h-[50vh] lg:h-full relative z-10 hero-image-wrap">
+           <div className="absolute inset-0 bg-[#0b2f6b]/20 z-10 mix-blend-multiply"></div>
+           <img src="/images/process_hero_bg.jpg" alt="Campus and students" className="w-full h-full object-cover" />
+           
+           <div className="hero-paper-panel absolute bottom-12 left-12 xl:bottom-24 xl:left-24 bg-white p-6 rounded-2xl shadow-2xl border border-gray-100 z-30 transform -rotate-3 max-w-[220px] hidden md:block process-floating-card">
+              <div className="w-10 h-10 bg-[#eef4fc] rounded-full flex items-center justify-center text-[#e50924] mb-4 process-floating-icon-bg"><MapPin size={18} /></div>
+              <p className="text-base font-bold text-[#0b2f6b] leading-tight process-floating-text">Your study plan starts here</p>
+           </div>
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-16 lg:py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          
-          <div className="timeline-container relative">
-            {/* The central line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2 rounded-full hidden md:block">
-               {/* Animated fill line */}
-               <div className="timeline-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#e50924] to-[#0b2f6b] rounded-full"></div>
-            </div>
-            {/* Mobile line */}
-            <div className="absolute left-[30px] top-0 bottom-0 w-1 bg-gray-200 rounded-full md:hidden">
-               <div className="timeline-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#e50924] to-[#0b2f6b] rounded-full"></div>
-            </div>
-
-            <div className="flex flex-col gap-8 md:gap-12 relative z-10">
-              {steps.map((step, i) => {
-                const Icon = step.icon;
-                const isEven = i % 2 === 0;
-                
-                return (
-                  <div key={step.title} className={`process-card relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    
-                    {/* Number Bubble */}
-                    <div className="absolute left-[30px] md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-4 border-[#f4f7fb] shadow-[0_5px_15px_-5px_rgba(0,0,0,0.15)] flex items-center justify-center text-xl font-extrabold text-[#0b2f6b] z-20 overflow-hidden group hover:scale-110 transition-transform duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0b2f6b] to-[#14438f] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative z-10 group-hover:text-white transition-colors duration-300">{i + 1}</span>
-                    </div>
-
-                    {/* Empty space for alternating layout on desktop */}
-                    <div className="hidden md:block w-1/2"></div>
-                    
-                    {/* Content Card */}
-                    <div className={`w-full md:w-1/2 pl-[70px] md:pl-0 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                      <div className="bg-white p-6 md:p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 border border-gray-100 relative group overflow-hidden">
-                        
-                        {/* Decorative subtle background icon */}
-                        <div className={`absolute text-gray-50 opacity-50 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700 pointer-events-none ${isEven ? 'md:left-4 md:-bottom-4 -bottom-4 -right-4' : '-bottom-4 -right-4'}`}>
-                          <Icon size={140} strokeWidth={1} />
-                        </div>
-
-                        <div className={`flex items-center gap-4 mb-5 ${isEven ? 'md:flex-row-reverse' : ''}`}>
-                          <div className="w-12 h-12 rounded-xl bg-[#eff4fb] text-[#e50924] flex items-center justify-center shrink-0 shadow-inner group-hover:bg-[#e50924] group-hover:text-white transition-colors duration-300">
-                            <Icon size={24} />
-                          </div>
-                          <h3 className="text-xl md:text-2xl font-bold text-[#0b2f6b] relative z-10 tracking-tight leading-tight">
-                            {step.title}
-                          </h3>
-                        </div>
-                        
-                        <p className="text-gray-600 leading-relaxed relative z-10">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                    
-                  </div>
-                );
-              })}
+      {/* 2. THE SIX-STAGE JOURNEY */}
+      <section ref={journeySectionRef} id="journey" className="bg-white process-journey-section py-6 lg:py-8 flex items-center overflow-hidden">
+        <div className="w-full">
+          <div ref={journeyScrollRef} className="flex px-6 md:px-12 lg:px-16 items-center gap-6 md:gap-16 w-max">
+            
+            <div className="min-w-[80vw] md:min-w-[40vw] flex-shrink-0">
+              <h2 className="text-5xl md:text-7xl font-bold mb-6 text-[#0b2f6b] leading-tight process-journey-title">
+                Your <br/> Journey
+              </h2>
+              <p className="text-xl font-light text-gray-600 max-w-lg leading-relaxed process-journey-desc">
+                From your first consultation to preparing for your next chapter. Explore the milestones of your application process.
+              </p>
             </div>
             
+            {journeyStages.map((stage, idx) => (
+              <div key={idx} className="min-w-[85vw] sm:min-w-[380px] md:min-w-[450px] flex-shrink-0 relative group">
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-[#0b2f6b]/20 mb-8 process-timeline-line" />
+                <div className="w-4 h-4 rounded-full bg-[#e50924] absolute -top-[7.5px] left-0 group-hover:scale-150 transition-transform duration-300" />
+                <div className="pt-12">
+                  <span className="font-mono text-[#e50924] text-xl mb-4 block tracking-widest font-semibold uppercase">Stage 0{idx + 1}</span>
+                  <h3 className="text-3xl font-bold mb-4 text-[#0b2f6b] leading-tight process-stage-title">{stage.title}</h3>
+                  <p className="font-light text-gray-600 leading-relaxed text-lg mb-8 process-stage-desc">{stage.desc}</p>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <span className="font-bold text-sm text-[#0b2f6b] block mb-1 uppercase tracking-wider process-stage-subtitle">Your Preparation</span>
+                      <p className="font-light text-gray-600 text-sm leading-relaxed process-stage-subdesc">{stage.prep}</p>
+                    </div>
+                    <div>
+                      <span className="font-bold text-sm text-[#0b2f6b] block mb-1 uppercase tracking-wider process-stage-subtitle">ASTRA's Support</span>
+                      <p className="font-light text-gray-600 text-sm leading-relaxed process-stage-subdesc">{stage.support}</p>
+                    </div>
+                  </div>
+
+                  {stage.note && (
+                    <div className="mt-6 flex items-start gap-2 p-3 bg-yellow-50 rounded-lg border border-yellow-100 text-yellow-800 text-xs font-medium process-note-box">
+                       <span className="shrink-0 mt-0.5">ℹ️</span> {stage.note}
+                    </div>
+                  )}
+
+                  {stage.cta && (
+                    <Link to={stage.ctaLink} className="mt-8 font-bold text-[#e50924] hover:text-[#c7051e] flex items-center gap-2 uppercase tracking-wider text-sm w-fit transition-all hover:gap-3">
+                      {stage.cta} <ArrowUpRight size={16}/>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ))}
+            
+            <div className="min-w-[5vw] flex-shrink-0"></div>
           </div>
-          
-          <div className="mt-20 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-start gap-3 p-6 bg-white shadow-sm border border-gray-200 rounded-xl">
-              <div className="text-[#e50924] mt-1 shrink-0"><CheckCircle2 size={20} /></div>
-              <p className="text-sm text-gray-500 font-medium text-left leading-relaxed">
-                Note: Final decisions remain the responsibility of the student, institution, or authority. ASTRA provides guidance to ensure your applications are as strong and accurate as possible.
+        </div>
+      </section>
+
+      {/* 3. PREPARATION DESK */}
+      <section className="pt-6 lg:pt-8 pb-12 lg:pb-16 bg-[#f9fafb] border-y border-gray-100 scroll-reveal process-desk-section">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-16">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#0b2f6b] mb-6 tracking-tight process-desk-title">A clearer checklist. A more organised start.</h2>
+            <p className="text-gray-600 text-lg lg:text-xl leading-relaxed process-desk-desc">
+              Requirements vary by institution, programme, destination, and applicant. Review these common examples to help organise your documentation early.
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-stretch">
+            <div className="w-full lg:w-[50%] relative flex items-center justify-center bg-white rounded-[40px] shadow-sm border border-gray-200 p-8 lg:p-12 process-visual-container">
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 rounded-[40px]"></div>
+              
+              <div className="relative w-full max-w-[340px] aspect-[3/4] bg-gray-50 rounded-2xl shadow-2xl border border-gray-200 p-6 flex flex-col doc-visual-layer process-document">
+                 <div className="w-full h-8 border-b border-gray-200 mb-6 flex items-center justify-between process-doc-header">
+                    <div className="w-1/3 h-2 bg-gray-300 rounded process-skeleton-solid"></div>
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center border border-gray-100 process-doc-icon">
+                      {docCategories.find(d => d.id === activeDoc)?.icon && React.createElement(docCategories.find(d => d.id === activeDoc).icon, { size: 16, className: "text-[#0b2f6b] process-icon-color" })}
+                    </div>
+                 </div>
+                 <div className="flex-1 mt-2">
+                   <h4 className="text-lg font-bold text-[#0b2f6b] mb-3 process-doc-title">Document Details</h4>
+                   <p className="text-gray-600 text-sm leading-relaxed process-doc-desc">
+                     {docCategories.find(c => c.id === activeDoc)?.details}
+                   </p>
+                   
+                   <div className="mt-8 pt-6 border-t border-gray-200 process-doc-header">
+                     <div className="w-full p-4 bg-white rounded-lg border border-[#e50924]/20 flex flex-col justify-center shadow-sm process-req-box">
+                        <span className="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-1 process-req-label">Required Component</span>
+                        <span className="text-sm font-bold text-[#e50924]">{docCategories.find(c => c.id === activeDoc)?.label}</span>
+                     </div>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-[50%] flex flex-col justify-center gap-2">
+              {docCategories.map(cat => {
+                const isActive = activeDoc === cat.id;
+                const Icon = cat.icon;
+                return (
+                  <button 
+                    key={cat.id}
+                    onClick={() => setActiveDoc(cat.id)}
+                    className={`w-full text-left p-5 rounded-[20px] transition-all duration-300 border ${isActive ? 'bg-white border-[#0b2f6b] shadow-lg scale-[1.01] process-tab-active' : 'bg-transparent border-transparent hover:bg-white/50 process-tab-inactive'}`}
+                  >
+                    <div className="flex items-center gap-4 mb-1">
+                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors shrink-0 ${isActive ? 'bg-[#0b2f6b] text-white process-tab-icon-active' : 'bg-white shadow-sm border border-gray-100 text-gray-500 process-tab-icon-inactive'}`}>
+                         <Icon size={18} />
+                       </div>
+                       <h3 className={`text-xl font-bold transition-colors ${isActive ? 'text-[#0b2f6b] process-tab-text-active' : 'text-gray-600 process-tab-text-inactive'}`}>{cat.label}</h3>
+                    </div>
+                    {isActive && (
+                      <p className="text-gray-600 text-sm lg:text-base ml-14 mt-2 animate-in fade-in slide-in-from-top-1 duration-300 process-tab-desc-active">
+                        {cat.desc}
+                      </p>
+                    )}
+                  </button>
+                )
+              })}
+              
+              <div className="pt-6 ml-4 lg:ml-14">
+                <Link to="/contact" className="inline-flex items-center justify-center gap-3 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-4 font-semibold rounded-md transition-all w-fit shadow-md hover:shadow-lg">
+                  Ask About Your Checklist <ArrowUpRight size={18} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. GUIDANCE AND RESPONSIBILITIES */}
+      <section className="py-12 lg:py-16 bg-[#0b2f6b] text-white px-6 lg:px-12 guidance-section relative overflow-hidden">
+        <svg className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice">
+          <path d="M0 1000 Q 500 0 1000 1000" fill="none" stroke="white" strokeWidth="2" />
+        </svg>
+
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-8 tracking-tight">You make the decisions. We help you understand the steps.</h2>
+            <div className="w-full h-[1px] bg-white/20 mt-10 relative guidance-connector">
+               <div className="absolute top-1/2 left-0 w-3 h-3 bg-[#e50924] rounded-full -translate-y-1/2 -ml-1"></div>
+               <div className="absolute top-1/2 right-0 w-3 h-3 bg-[#e50924] rounded-full -translate-y-1/2 -mr-1"></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24 px-8">
+            <div className="guidance-col flex flex-col">
+              <span className="text-[#93c5fd] font-bold tracking-widest text-sm mb-4 uppercase">Role 01</span>
+              <h3 className="text-3xl font-bold mb-6">You</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Provide accurate information, review your choices carefully, and meet relevant requirements. Your commitment drives the process forward.
+              </p>
+            </div>
+            <div className="guidance-col flex flex-col relative">
+              <div className="hidden md:block absolute -left-12 lg:-left-16 top-0 bottom-0 w-[1px] bg-white/10"></div>
+              <span className="text-[#93c5fd] font-bold tracking-widest text-sm mb-4 uppercase">Role 02</span>
+              <h3 className="text-3xl font-bold mb-6">ASTRA</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Help explain the process, organise preparation, and identify next steps within our services. We provide structural support to your decisions.
+              </p>
+            </div>
+            <div className="guidance-col flex flex-col relative">
+              <div className="hidden md:block absolute -left-12 lg:-left-16 top-0 bottom-0 w-[1px] bg-white/10"></div>
+              <span className="text-[#93c5fd] font-bold tracking-widest text-sm mb-4 uppercase">Role 03</span>
+              <h3 className="text-3xl font-bold mb-6">Institutions & Authorities</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Set exact requirements, review applications independently, and make final admission or visa decisions based on their policies.
               </p>
             </div>
           </div>
-          
         </div>
       </section>
+
+      {/* 5. QUESTIONS BEFORE YOU BEGIN */}
+      <section className="py-12 lg:py-16 px-6 lg:px-12 bg-white max-w-[1400px] mx-auto scroll-reveal process-faq-section">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
+          <div className="w-full lg:w-[40%]">
+            <div className="sticky top-32 flex flex-col gap-10">
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-[#0b2f6b] tracking-tight leading-[1.1] process-faq-title">
+                Questions before you begin.
+              </h2>
+              <div className="w-full max-w-[420px] aspect-square rounded-[32px] overflow-hidden shadow-2xl group border border-gray-100 hidden md:block process-faq-img-container">
+                <img src="/images/faq_question.jpg" alt="FAQ Question Mark Graphic" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="w-full lg:w-[60%] space-y-2 mt-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div key={index} className="border-b border-gray-200 overflow-hidden bg-transparent process-faq-item">
+                  <button 
+                    className="w-full py-5 flex items-center justify-between text-left focus:outline-none group"
+                    onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-bold text-[#0b2f6b] text-lg lg:text-xl pr-8 group-hover:text-[#e50924] transition-colors process-faq-q">{faq.q}</span>
+                    <div className={`shrink-0 w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#e50924] border-[#e50924] rotate-180' : 'bg-transparent group-hover:border-[#e50924]'} process-faq-icon-box`}>
+                      <ChevronDown className={`transition-colors ${isOpen ? 'text-white' : 'text-[#e50924]'}`} size={20} />
+                    </div>
+                  </button>
+                  <div 
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100 pb-5' : 'max-h-0 opacity-0'}`}
+                  >
+                    <div className="text-gray-600 text-base leading-relaxed pr-12 process-faq-a">
+                      {faq.a}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CLOSING SCENE */}
+      <section className="relative py-16 lg:py-20 bg-[#051324] overflow-hidden closing-section">
+        <div className="absolute inset-0 z-0">
+          <img src="/images/process_hero_bg.jpg" alt="Campus environment" className="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
+          <div className="absolute inset-0 bg-[#0b2f6b]/80 mix-blend-multiply"></div>
+        </div>
+
+        {/* Pushed SVG to far right so it doesn't cross the text */}
+        <svg className="absolute top-0 right-0 lg:right-[-5%] xl:right-0 w-[15%] h-[100%] z-10 pointer-events-none hidden md:block" viewBox="0 0 200 500" preserveAspectRatio="none">
+           <path className="closing-route-line" d="M150 0 C 200 200, 100 300, 150 500" fill="none" stroke="#e50924" strokeWidth="3" strokeDasharray="500" strokeDashoffset="500" />
+           <circle cx="150" cy="500" r="10" fill="#e50924" />
+        </svg>
+
+        <div className="max-w-5xl mx-auto px-6 relative z-20 text-center">
+          <h2 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-[1.1]">
+            You don’t need every answer to take the first step.
+          </h2>
+          <p className="text-2xl text-[#93c5fd] mb-16 max-w-3xl mx-auto font-light">
+            Start with a conversation about your goals and the questions that matter to you.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <Link to="/contact" className="inline-flex items-center justify-center gap-3 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-4 font-semibold rounded-md transition-all w-full sm:w-auto">
+              Book a Consultation <ArrowUpRight size={18} />
+            </Link>
+            <a href="tel:+9779768567647" className="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-8 py-4 font-semibold rounded-md transition-all backdrop-blur-md w-full sm:w-auto">
+              Call ASTRA
+            </a>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-base font-medium text-gray-300 bg-black/20 w-fit mx-auto px-8 py-4 rounded-full backdrop-blur-md">
+            <span className="flex items-center gap-2"><Phone size={18} className="text-[#e50924]" /> +977 9768567647</span>
+            <span className="hidden sm:inline text-white/20">•</span>
+            <span className="flex items-center gap-2"><Mail size={18} className="text-[#e50924]" /> info@astraglobaleducationservices.com</span>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

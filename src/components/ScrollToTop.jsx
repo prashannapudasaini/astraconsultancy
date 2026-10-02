@@ -5,11 +5,10 @@ export default function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant', // instant scroll to avoid weird visual jumping during navigation
-    });
+    // Ensure the scroll happens after the new route component is rendered
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
   }, [pathname]);
 
   return null;

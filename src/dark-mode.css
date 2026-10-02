@@ -1,0 +1,270 @@
+/* Dark Mode Overrides */
+
+html.dark {
+  background-color: #030b14;
+  color: #e2e8f0;
+}
+
+html.dark body {
+  background-color: #030b14 !important;
+  color: #e2e8f0 !important;
+}
+
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
+  color: #f1f5f9 !important;
+}
+
+html.dark p, html.dark span, html.dark li {
+  color: #cbd5e1;
+}
+
+html.dark .brand span {
+  color: #e2e8f0 !important;
+  border-left-color: #1e324f !important;
+}
+
+html.dark .section, html.dark .destination-section, html.dark .contact-section {
+  background-color: #030b14 !important;
+}
+
+html.dark .country-card, html.dark .service, html.dark .resource-card, html.dark .planning-card, html.dark .test-explainers {
+  background-color: #0b1a2e !important;
+  border-color: #1e324f !important;
+}
+
+html.dark .country-card:hover {
+  border-color: #3b5a82 !important;
+  background-color: #0f2440 !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.4) !important;
+}
+
+html.dark header {
+  background-color: #051324 !important;
+  border-color: #1a2a40 !important;
+}
+
+html.dark .links {
+  background-color: #051324 !important;
+}
+
+html.dark .links a {
+  color: #e2e8f0 !important;
+}
+
+html.dark .links a:hover, html.dark .active-link {
+  color: #e50924 !important;
+}
+
+html.dark .bg-white, html.dark .lg\:bg-white {
+  background-color: #0b1a2e !important;
+}
+
+html.dark .bg-\[\#f8fafc\], html.dark .bg-\[\#f4f7fb\], html.dark .bg-\[\#f3f6fb\], html.dark .bg-\[\#eef3fa\] {
+  background-color: #06111f !important;
+}
+
+html.dark .text-\[\#142a47\], html.dark .text-\[\#0b2f6b\], html.dark .text-\[\#223c5f\] {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-gray-500, html.dark .text-\[\#637185\], html.dark .text-\[\#647184\], html.dark .text-\[\#65758a\] {
+  color: #94a3b8 !important;
+}
+
+html.dark .border-gray-100, html.dark .border-\[\#e5eaf1\], html.dark .border-\[\#e0e7f0\], html.dark .border-\[\#e3e8ef\], html.dark .border-\[\#dce3ec\] {
+  border-color: #1e324f !important;
+}
+html.dark .border-t {
+  border-color: #1e324f !important;
+}
+html.dark .border-b {
+  border-color: #1e324f !important;
+}
+
+html.dark form {
+  background-color: #0b1a2e !important;
+  border-color: #1e324f !important;
+}
+html.dark input, html.dark textarea, html.dark select {
+  background-color: #051324 !important;
+  border-color: #1e324f !important;
+  color: #e2e8f0 !important;
+}
+html.dark input:focus, html.dark textarea:focus, html.dark select:focus {
+  border-color: #366dc1 !important;
+  box-shadow: 0 0 0 2px rgba(54,109,193,0.3) !important;
+}
+
+html.dark dialog {
+  background-color: #0b1a2e !important;
+  color: #e2e8f0 !important;
+}
+html.dark .dialog-inner {
+  background-color: #0b1a2e !important;
+}
+
+html.dark .group-hover\:bg-\[\#ffced3\]:hover {
+  background-color: #7a1220 !important;
+}
+html.dark .bg-\[\#eff4fb\], html.dark .bg-\[\#eef4fc\], html.dark .bg-\[\#edf3fc\] {
+  background-color: #132742 !important;
+}
+
+html.dark .footer-brand {
+  background-color: #0f2440 !important;
+}
+html.dark .hero-seal {
+  background-color: rgba(11, 26, 46, 0.9) !important;
+  color: #e2e8f0 !important;
+}
+html.dark .hero-seal b {
+  color: #e2e8f0 !important;
+}
+html.dark .topbar {
+  background: #02070f !important;
+}
+
+html.dark .destination-strip {
+  border-color: #1e324f !important;
+}
+html.dark .step span {
+  background-color: #132742 !important;
+}
+html.dark .service-details, html.dark .preparation, html.dark .source-links, html.dark .checklist-items small {
+  border-color: #1e324f !important;
+}
+html.dark .faq {
+  border-color: #1e324f !important;
+}
+html.dark .faq button {
+  color: #f1f5f9 !important;
+}
+html.dark .contact-details svg {
+  color: #8da4c2 !important;
+}
+html.dark .dialog-close {
+  background: #1e324f !important;
+}
+html.dark .icon-box {
+  background: #132742 !important;
+  color: #8da4c2 !important;
+}
+html.dark .text-link {
+  color: #8da4c2 !important;
+}
+html.dark .hover\:bg-\[\#f4f7fb\]:hover {
+  background-color: #132742 !important;
+}
+html.dark .group-hover\:text-\[\#e50924\]:hover {
+  color: #e50924 !important;
+}
+html.dark .text-\[\#0b2f6b\] {
+  color: #e2e8f0 !important;
+}
+
+/* Fix SVG Waves and Curves for Dark Mode */
+html.dark svg.text-white[preserveAspectRatio="none"] {
+  color: #030b14 !important;
+}
+html.dark svg.text-\[\#f4f7fb\][preserveAspectRatio="none"] {
+  color: #06111f !important;
+}
+html.dark svg path[fill="#f4f7fb"] {
+  fill: #06111f !important;
+}
+
+/* Additional overrides for missed backgrounds */
+html.dark .bg-\[\#fafcfd\], html.dark .bg-gray-50, html.dark .bg-\[\#f2f6fb\], html.dark .bg-\[\#f0f4f9\] {
+  background-color: #0b1a2e !important;
+}
+html.dark .bg-\[\#fff1f2\] {
+  background-color: #1e090d !important;
+  border-color: #3f1118 !important;
+}
+html.dark .text-\[\#a10e1f\] {
+  color: #fca5a5 !important;
+}
+
+html.dark .bg-gray-50\/\/50, html.dark .bg-gray-50\/50 {
+  background-color: #0b1a2e !important;
+}
+
+/* Fixes for dark Navy curves and translucent badges */
+html.dark svg.text-\[\#0b2f6b\][preserveAspectRatio="none"] {
+  color: #0b2f6b !important;
+}
+html.dark svg.text-\[\#092650\][preserveAspectRatio="none"] {
+  color: #092650 !important;
+}
+html.dark .bg-white\/90, html.dark .bg-white\/95 {
+  background-color: rgba(11, 26, 46, 0.9) !important;
+  border-color: rgba(30, 50, 79, 0.5) !important;
+}
+
+/* Fixes for inline text colors in Destination.jsx */
+html.dark .text-\[\#17375e\] {
+  color: #f1f5f9 !important;
+}
+html.dark .text-\[\#5b718c\], html.dark .text-\[\#67778a\] {
+  color: #94a3b8 !important;
+}
+
+/* Fix for form alert and missing text-gray overrides */
+html.dark .bg-blue-50 {
+  background-color: rgba(14, 38, 77, 0.8) !important;
+}
+html.dark .border-blue-100 {
+  border-color: rgba(30, 64, 114, 0.8) !important;
+}
+html.dark .text-blue-800 {
+  color: #93c5fd !important;
+}
+html.dark .text-gray-600, html.dark .text-gray-700, html.dark .text-gray-800 {
+  color: #94a3b8 !important;
+}
+
+/* Application Process Page Dark Mode */
+html.dark .process-page { background-color: #030b14 !important; color: #f1f5f9 !important; }
+html.dark .process-hero-bg, html.dark .process-desk-section { background-color: #06111f !important; border-color: #1e324f !important; }
+html.dark .process-hero-bg-mask { background-color: #06111f !important; }
+html.dark .process-floating-card { background-color: #0b1a2e !important; border-color: #1e324f !important; }
+html.dark .process-journey-section, html.dark .process-journey-content-bg { background-color: #030b14 !important; }
+html.dark .process-prep-box { background-color: #0b1a2e !important; border-color: #1e324f !important; }
+html.dark .process-support-box { background-color: #061730 !important; border-color: #1e3a63 !important; }
+html.dark .process-note-box { background-color: rgba(234, 179, 8, 0.1) !important; border-color: rgba(234, 179, 8, 0.2) !important; color: #fde047 !important; }
+html.dark .process-visual-container { background-color: #06111f !important; border-color: #1e324f !important; }
+html.dark .process-document { background-color: #0b1a2e !important; border-color: #1e324f !important; }
+html.dark .process-tab-inactive:hover { background-color: rgba(255, 255, 255, 0.05) !important; }
+html.dark .process-tab-active { background-color: #0b1a2e !important; border-color: #1e324f !important; }
+html.dark .process-faq-section { background-color: #030b14 !important; }
+html.dark .process-faq-item { border-color: #1e324f !important; }
+html.dark .process-mobile-marker { --tw-ring-color: #030b14 !important; box-shadow: 0 0 0 4px #030b14 !important; }
+html.dark .process-btn-secondary { background-color: #0b1a2e !important; color: #f1f5f9 !important; border-color: #1e324f !important; }
+html.dark .process-btn-secondary:hover { background-color: #112240 !important; }
+
+html.dark .process-timeline-line { background-color: rgba(255,255,255,0.1) !important; }
+
+html.dark .process-skeleton-solid { background-color: rgba(255, 255, 255, 0.2) !important; }
+html.dark .process-skeleton-light { background-color: rgba(255, 255, 255, 0.05) !important; }
+html.dark .process-doc-header { border-color: rgba(255, 255, 255, 0.1) !important; }
+html.dark .process-doc-icon { background-color: #0b1a2e !important; border-color: #1e324f !important; }
+html.dark .process-icon-color { color: #93c5fd !important; }
+html.dark .process-tab-active { background-color: #0d213f !important; border-color: rgba(255,255,255,0.15) !important; }
+
+/* Process Bright Mode Fixes mapped to Dark Mode */
+html.dark .process-faq-title, html.dark .process-faq-q { color: #f1f5f9 !important; }
+html.dark .process-faq-a { color: #94a3b8 !important; }
+html.dark .process-faq-icon-box { border-color: #1e324f !important; }
+html.dark .process-faq-img-container { border-color: rgba(255, 255, 255, 0.1) !important; }
+html.dark .process-hero-tag { background-color: rgba(11, 26, 46, 0.8) !important; border-color: #1e324f !important; }
+html.dark .process-hero-desc { color: #94a3b8 !important; }
+html.dark .process-floating-icon-bg { background-color: #0d213f !important; }
+html.dark .process-floating-text { color: #f1f5f9 !important; }
+html.dark .process-doc-title { color: #f1f5f9 !important; }
+html.dark .process-doc-desc { color: #94a3b8 !important; }
+html.dark .process-req-box { background-color: #06111f !important; }
+html.dark .process-req-label { color: #64748b !important; }
+
+/* Header Theme Toggle */
+html.dark .theme-toggle-btn { border-color: #1e324f !important; color: #f1f5f9 !important; }
+html.dark .theme-toggle-btn:hover { background-color: #0f2440 !important; }

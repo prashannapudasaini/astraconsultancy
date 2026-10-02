@@ -177,7 +177,7 @@ export default function Home() {
         <div className="wrap">
           <span>EXPLORE YOUR POSSIBILITIES</span>
           <div>
-            {countries.map(c => <Link key={c.code} to={`/destinations/${c.id}`}>{c.name}</Link>)}
+            {countries.map(c => <Link key={c.code} to={`/destinations/${c.id}`} onClick={() => window.scrollTo(0, 0)}>{c.name}</Link>)}
           </div>
         </div>
       </div>
@@ -344,7 +344,7 @@ export default function Home() {
                      
                      {/* Expanded Details */}
                      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${selectedDestination === c.id ? 'max-h-[200px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
-                        <Link to={`/destinations/${c.id}`} onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center gap-3 bg-[#e50924] text-white px-6 py-3 rounded-xl font-bold w-full hover:bg-[#c7051e] transition-colors shadow-md">
+                        <Link to={`/destinations/${c.id}`} onClick={(e) => { e.stopPropagation(); window.scrollTo(0, 0); }} className="inline-flex items-center justify-center gap-3 bg-[#e50924] text-white px-6 py-3 rounded-xl font-bold w-full hover:bg-[#c7051e] transition-colors shadow-md">
                            Explore Requirements <ArrowRight size={16} />
                         </Link>
                      </div>

@@ -39,7 +39,7 @@ export default function Destination() {
       <section className="section wrap scroll-reveal" style={{paddingTop: '60px'}}>
         <div style={{display: 'grid', gridTemplateColumns: '1fr 350px', gap: '60px'}} className="about-grid">
           <div>
-            <p className="lead" style={{fontSize: '22px', color: '#17375e', marginBottom: '30px'}}>{country.overview}</p>
+            <p className="lead text-[22px] text-[#17375e] mb-[30px]">{country.overview}</p>
             
             <h3 style={{fontSize: '20px', marginBottom: '15px'}}>Why consider {country.name}?</h3>
             <p style={{marginBottom: '30px'}}>{country.whyConsider}</p>
@@ -54,7 +54,7 @@ export default function Destination() {
             <h3 style={{fontSize: '20px', marginBottom: '15px'}}>Popular Subject Areas</h3>
             <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '30px'}}>
               {country.popularStudyAreas.map((area, i) => (
-                <span key={i} style={{background: '#f0f4f9', padding: '6px 12px', borderRadius: '4px', fontSize: '13px', fontWeight: 500, color: '#17375e'}}>
+                <span key={i} className="bg-[#f0f4f9] px-3 py-1.5 rounded text-[13px] font-medium text-[#17375e]">
                   {area}
                 </span>
               ))}
@@ -81,9 +81,9 @@ export default function Destination() {
           </div>
 
           <div>
-            <div style={{background: '#f2f6fb', padding: '30px', borderRadius: '8px', position: 'sticky', top: '120px'}}>
+            <div className="bg-[#f2f6fb] p-[30px] rounded-lg sticky top-[120px]">
               <h3 style={{fontSize: '18px', marginBottom: '15px'}}>Questions to bring to counselling</h3>
-              <ul style={{marginBottom: '25px', paddingLeft: '20px', listStyle: 'disc', fontSize: '14px', color: '#5b718c'}}>
+              <ul className="mb-[25px] pl-[20px] list-disc text-[14px] text-[#5b718c]">
                 {country.questionsToAsk.map((q, i) => (
                   <li key={i} style={{marginBottom: '10px'}}>{q}</li>
                 ))}
@@ -95,7 +95,7 @@ export default function Destination() {
               
               <div style={{marginTop: '30px'}}>
                 <SourceLinks ids={legacyInfo?.ids || []} dated />
-                <p style={{fontSize: '12px', color: '#67778a', marginTop: '15px', lineHeight: 1.6}}>
+                <p className="text-[12px] text-[#67778a] mt-[15px] leading-[1.6]">
                   General planning information. Requirements can change and depend on your circumstances. Check the linked official guidance before applying; ASTRA does not make admission or visa decisions. Last reviewed: {reviewed}.
                 </p>
               </div>
