@@ -6,6 +6,7 @@ export default function Header() {
   const [menu, setMenu] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
 
@@ -15,38 +16,27 @@ export default function Header() {
     setIsVisible(true);
   }, [location]);
 
-  const lastScrollY = useRef(0);
-
   useEffect(() => {
-    lastScrollY.current = Math.max(0, window.scrollY);
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      const currentY = Math.max(0, window.scrollY);
-      const previousY = lastScrollY.current;
+      const currentScrollY = window.scrollY;
 
-      lastScrollY.current = currentY;
+      setIsScrolled(currentScrollY > 50);
 
-      // Always show at the top.
-      if (currentY === 0) {
-        setIsVisible(true);
-        return;
-      }
-
-      // Ignore events where the scroll position hasn't changed.
-      if (currentY === previousY) return;
-
-      const scrollingUp = currentY < previousY;
-      setIsVisible(scrollingUp);
-
-      // Close menus so they don't remain visible below a hidden header.
-      if (!scrollingUp) {
-        setServicesOpen(false);
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        setIsVisible(false);
+        setServicesOpen(false); // Close menus so they don't remain visible
         setMenu(false);
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
       }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -96,17 +86,9 @@ export default function Header() {
       <div style={{ height: `${headerHeight}px` }} />
       <header
         ref={headerRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          transform: isVisible
-            ? 'translateY(0)'
-            : 'translateY(-100%)',
-          transition: 'transform 300ms ease-in-out',
-        }}
+        className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ease-in-out bg-white ${
+          isScrolled ? 'shadow-md border-b border-[#e5eaf1]' : 'border-b border-transparent'
+        } ${!isVisible ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="wrap nav">
         <Link to="/" aria-label="ASTRA home" className="brand">
