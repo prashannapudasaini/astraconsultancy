@@ -304,7 +304,7 @@ export default function Destinations() {
                   <a 
                     href="#enquiry" 
                     onClick={() => setFormDestination(dest.id)}
-                    className="inline-flex justify-center items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none shadow-sm"
+                    className="inline-flex justify-center items-center gap-2 bg-[#0b2f6b] hover:bg-[#07204b] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none shadow-sm"
                   >
                     Ask about this destination
                   </a>
