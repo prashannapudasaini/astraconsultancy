@@ -224,7 +224,7 @@ export const useHomeAnimations = (containerRef) => {
         scrollTrigger: { trigger: destSection, start: "top 75%", once: true }
       });
 
-      tl.from(headerElements, { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" })
+      tl.from(headerElements, { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out", clearProps: "all" })
         .from(locationCards, { 
           x: -40,
           opacity: 0, 
@@ -252,7 +252,7 @@ export const useHomeAnimations = (containerRef) => {
         scrollTrigger: { trigger: servSection, start: "top 80%", once: true }
       });
 
-      tl.from(header, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" });
+      tl.from(header, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out", clearProps: "all" });
       
       cards.forEach((card, i) => {
         const icon = card.querySelector('.w-16');
@@ -284,7 +284,7 @@ export const useHomeAnimations = (containerRef) => {
         scrollTrigger: { trigger: resSection, start: "top 80%", once: true }
       });
 
-      tl.from(header, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
+      tl.from(header, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out", clearProps: "all" })
         .from(cards, { 
           rotationZ: (i) => i % 2 === 0 ? 2 : -2,
           y: 40, 
@@ -312,7 +312,7 @@ export const useHomeAnimations = (containerRef) => {
         scrollTrigger: { trigger: contactSection, start: "top 75%", once: true }
       });
 
-      tl.from(leftCol.children, { x: -40, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" })
+      tl.from(leftCol.children, { x: -40, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out", clearProps: "all" })
         .from(rightCol, { rotationY: -10, transformPerspective: 1000, x: 40, opacity: 0, duration: 1, ease: "power3.out", clearProps: "all" }, "-=0.6");
     }
 

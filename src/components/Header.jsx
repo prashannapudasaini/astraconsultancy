@@ -23,7 +23,7 @@ export default function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
+
   // Close on Escape key
   useEffect(() => {
     function handleEsc(event) {
@@ -40,28 +40,28 @@ export default function Header() {
       <div className="wrap nav">
         <Link to="/" aria-label="ASTRA home" className="brand">
           <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
-          <span>GLOBAL EDUCATION<br /><b>AND SERVICES</b></span>
+          <span>GLOBAL EDUCATION<br /><b> & SERVICES</b></span>
         </Link>
         <nav aria-label="Main navigation" className={menu ? 'links mobile-open' : 'links'}>
           <NavLink to="/" className={({ isActive }) => (isActive && location.pathname === '/' ? 'active-link' : '')}>Home</NavLink>
           <NavLink to="/about" className={({ isActive }) => (isActive ? 'active-link' : '')}>About ASTRA</NavLink>
           <NavLink to="/destinations" className={({ isActive }) => (isActive ? 'active-link' : '')}>Destinations</NavLink>
-          
+
           {/* Services Dropdown */}
-          <div 
+          <div
             className="relative flex items-center"
             ref={dropdownRef}
             onMouseEnter={() => { if (window.innerWidth >= 760) setServicesOpen(true); }}
             onMouseLeave={() => { if (window.innerWidth >= 760) setServicesOpen(false); }}
           >
-            <NavLink 
-              to="/services" 
+            <NavLink
+              to="/services"
               className={({ isActive }) => `font-medium ${isActive || isServicesActive ? 'active-link text-[#e50924]' : ''}`}
               onClick={() => { if (window.innerWidth < 760) setMenu(false); }}
             >
               Services
             </NavLink>
-            <button 
+            <button
               className={`bg-transparent border-0 p-1 flex items-center justify-center cursor-pointer lg:pointer-events-none ${isServicesActive ? 'text-[#e50924]' : 'text-[#142a47] hover:text-[#e50924]'}`}
               onClick={(e) => {
                 e.preventDefault();
@@ -72,8 +72,8 @@ export default function Header() {
             >
               <ChevronDown size={14} className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
-            
-            <div 
+
+            <div
               className={`
                 lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:w-[650px] lg:bg-white lg:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] lg:border lg:border-gray-100 lg:rounded-2xl lg:mt-6 lg:p-6 lg:z-50
                 lg:before:content-[''] lg:before:absolute lg:before:-top-8 lg:before:left-0 lg:before:w-full lg:before:h-8 lg:before:bg-transparent
@@ -88,7 +88,7 @@ export default function Header() {
                 <div className="lg:col-span-2 mb-2 hidden lg:block">
                   <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 px-2 border-b border-gray-100 pb-2">ASTRA Services</h3>
                 </div>
-                
+
                 <Link to="/services" className="block px-4 py-4 hover:bg-[#f4f7fb] rounded-xl transition-colors group">
                   <div className="font-semibold text-[#0b2f6b] group-hover:text-[#e50924] flex items-center gap-3 mb-1">
                     <div className="bg-[#eff4fb] p-2 rounded-lg text-[#0b2f6b] group-hover:bg-[#ffced3] group-hover:text-[#e50924] transition-colors"><Globe size={18} /></div>
@@ -96,7 +96,7 @@ export default function Header() {
                   </div>
                   <div className="text-xs text-gray-500 pl-[42px]">Overview of our counselling support</div>
                 </Link>
-                
+
                 <Link to="/services/study-abroad" className="block px-4 py-4 hover:bg-[#f4f7fb] rounded-xl transition-colors group">
                   <div className="font-semibold text-[#0b2f6b] group-hover:text-[#e50924] flex items-center gap-3 mb-1">
                     <div className="bg-[#eff4fb] p-2 rounded-lg text-[#0b2f6b] group-hover:bg-[#ffced3] group-hover:text-[#e50924] transition-colors"><GraduationCap size={18} /></div>
@@ -104,7 +104,7 @@ export default function Header() {
                   </div>
                   <div className="text-xs text-gray-500 pl-[42px]">Explore the right academic direction</div>
                 </Link>
-                
+
                 <Link to="/services/visa-guidance" className="block px-4 py-4 hover:bg-[#f4f7fb] rounded-xl transition-colors group">
                   <div className="font-semibold text-[#0b2f6b] group-hover:text-[#e50924] flex items-center gap-3 mb-1">
                     <div className="bg-[#eff4fb] p-2 rounded-lg text-[#0b2f6b] group-hover:bg-[#ffced3] group-hover:text-[#e50924] transition-colors"><MapPin size={18} /></div>
@@ -112,7 +112,7 @@ export default function Header() {
                   </div>
                   <div className="text-xs text-gray-500 pl-[42px]">Prepare requirements carefully</div>
                 </Link>
-                
+
                 <Link to="/services/language-preparation" className="block px-4 py-4 hover:bg-[#f4f7fb] rounded-xl transition-colors group">
                   <div className="font-semibold text-[#0b2f6b] group-hover:text-[#e50924] flex items-center gap-3 mb-1">
                     <div className="bg-[#eff4fb] p-2 rounded-lg text-[#0b2f6b] group-hover:bg-[#ffced3] group-hover:text-[#e50924] transition-colors"><Globe size={18} /></div>
