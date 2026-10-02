@@ -35,17 +35,20 @@ export const usePageEntrance = (containerRef, selectors = ['.eyebrow', 'h1', 'h2
   useGSAP(() => {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // Find elements that exist in the container
-      const elements = containerRef.current.querySelectorAll(selectors.join(', '));
-      if (elements.length > 0) {
-        gsap.from(elements, {
-          y: 24,
-          opacity: 0,
-          stagger: 0.08,
-          duration: 0.9,
-          ease: "power3.out",
-          clearProps: "all"
-        });
+      // Find elements that exist in the container, but only in the first section to avoid conflicting with scroll reveals
+      const firstSection = containerRef.current.querySelector('section');
+      if (firstSection) {
+        const elements = firstSection.querySelectorAll(selectors.join(', '));
+        if (elements.length > 0) {
+          gsap.from(elements, {
+            y: 24,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 0.9,
+            ease: "power3.out",
+            clearProps: "all"
+          });
+        }
       }
     });
   }, { scope: containerRef });
