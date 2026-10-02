@@ -344,7 +344,7 @@ export default function Home() {
                      
                      {/* Expanded Details */}
                      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${selectedDestination === c.id ? 'max-h-[200px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
-                        <Link to={`/destinations/${c.id}`} onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center gap-3 bg-white text-[#0b2f6b] px-6 py-3 rounded-xl font-bold w-full hover:bg-gray-100 transition-colors shadow-md">
+                        <Link to={`/destinations/${c.id}`} onClick={(e) => e.stopPropagation()} className="inline-flex items-center justify-center gap-3 bg-[#e50924] text-white px-6 py-3 rounded-xl font-bold w-full hover:bg-[#c7051e] transition-colors shadow-md">
                            Explore Requirements <ArrowRight size={16} />
                         </Link>
                      </div>
@@ -654,8 +654,8 @@ export default function Home() {
         <CurvedDividerTop color="text-[#f4f7fb]" />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20 mt-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <div className="lg:col-span-7 lg:pr-8">
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-0.5 bg-[#e50924]"></span>
                 <span className="text-[11px] font-bold tracking-widest text-[#526982] uppercase">GET IN TOUCH</span>
@@ -667,83 +667,98 @@ export default function Home() {
                 Tell us your education level, preferred destination and main question. ASTRA will help you understand the next information to explore.
               </p>
               
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
-                    <Phone size={20} />
+              <div className="flex flex-col gap-10">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
+                      <Phone size={20} />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">CALL US</span>
+                      <a href="tel:+9779768567647" className="text-[#0b2f6b] font-semibold text-lg">+977 9768567647</a>
+                    </div>
                   </div>
-                  <div>
-                    <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">CALL US</span>
-                    <a href="tel:+9779768567647" className="text-[#0b2f6b] font-semibold text-lg">+977 9768567647</a>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
+                      <Mail size={20} />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">EMAIL US</span>
+                      <a href={`mailto:${email}`} className="text-[#0b2f6b] font-semibold">{email}</a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
+                      <MapPin size={20} />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">VISIT OUR OFFICE</span>
+                      <span className="text-[#0b2f6b] font-semibold">Bagbazar–28, Kathmandu, Nepal</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">EMAIL US</span>
-                    <a href={`mailto:${email}`} className="text-[#0b2f6b] font-semibold">{email}</a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#0b2f6b] shadow-sm">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <span className="block text-xs font-bold tracking-wider text-gray-500 mb-1">VISIT OUR OFFICE</span>
-                    <span className="text-[#0b2f6b] font-semibold">Bagbazar–28, Kathmandu, Nepal</span>
-                  </div>
+
+                <div className="rounded-2xl overflow-hidden h-[250px] shadow-sm border border-gray-200">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14130.857353934944!2d85.3148154!3d27.7032731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a0a0307b27%3A0xc3c517208470bc5e!2sBagbazar%2C%20Kathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2sus!4v1714578193859!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="ASTRA Office Location"
+                  ></iframe>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-xl border border-gray-100">
-              <h3 className="text-2xl font-bold text-[#0b2f6b] mb-2">Book a Counselling Session</h3>
-              <p className="text-sm text-gray-500 mb-8">
-                Prepare an email to our team. Do not request or attach sensitive documents like passports or bank statements.
+            <div className="lg:col-span-5 bg-white rounded-2xl p-6 lg:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100">
+              <h3 className="text-xl lg:text-2xl font-bold text-[#0b2f6b] mb-2">Book a Session</h3>
+              <p className="text-xs text-gray-500 mb-6">
+                Prepare an email to our team. Do not request or attach sensitive documents like passports.
               </p>
 
-              <form onSubmit={handleEnquiry} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
+              <form onSubmit={handleEnquiry} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-gray-700">Full name <span className="text-[#e50924]">*</span></label>
-                    <input required name="name" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="Your full name" />
+                    <input required name="name" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="Your full name" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold text-gray-700">Phone number <span className="text-[#e50924]">*</span></label>
-                    <input required name="phone" type="tel" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="Your contact number" />
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-gray-700">Phone <span className="text-[#e50924]">*</span></label>
+                    <input required name="phone" type="tel" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="Contact number" />
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-700">Email address <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <input name="email" type="email" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="you@example.com" />
+                  <input name="email" type="email" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none" placeholder="you@example.com" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold text-gray-700">Preferred destination <span className="text-[#e50924]">*</span></label>
-                    <select name="destination" required value={selectedDestination} onChange={e => setSelectedDestination(e.target.value)} className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-gray-700">Destination <span className="text-[#e50924]">*</span></label>
+                    <select name="destination" required value={selectedDestination} onChange={e => setSelectedDestination(e.target.value)} className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
                       <option value="" disabled>Select destination</option>
                       {countries.map(c => <option key={c.code} value={c.name}>{c.name}</option>)}
                       <option value="Still exploring">Still exploring</option>
                     </select>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold text-gray-700">Preferred service <span className="text-[#e50924]">*</span></label>
-                    <select name="service" required defaultValue="" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-gray-700">Service <span className="text-[#e50924]">*</span></label>
+                    <select name="service" required defaultValue="" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
                       <option value="" disabled>Select service</option>
                       <option value="Study Abroad">Study Abroad</option>
                       <option value="Visa Guidance">Visa Guidance</option>
-                      <option value="Language Preparation">Language Preparation</option>
+                      <option value="Language Prep">Language Prep</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-700">Education level <span className="text-[#e50924]">*</span></label>
-                  <select name="education" required defaultValue="" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
+                  <select name="education" required defaultValue="" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none bg-white">
                     <option value="" disabled>Select level</option>
                     <option>Secondary / SEE</option>
                     <option>Higher secondary / +2</option>
@@ -753,24 +768,24 @@ export default function Home() {
                   </select>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-700">Main question <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <textarea name="message" rows="3" className="w-full border border-gray-300 rounded-md p-3 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none resize-y" placeholder="What would you like to discuss?" />
+                  <textarea name="message" rows="2" className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] outline-none resize-y" placeholder="What would you like to discuss?" />
                 </div>
 
-                <div className="flex items-start gap-3 py-2">
-                  <input type="checkbox" required className="mt-1 w-4 h-4 text-[#0b2f6b] rounded" />
-                  <span className="text-xs text-gray-600 leading-relaxed">
-                    I agree to be contacted by ASTRA about this enquiry. <Link to="/privacy" className="underline hover:text-[#0b2f6b]">Privacy notice</Link>
+                <div className="flex items-start gap-3 py-1">
+                  <input type="checkbox" required className="mt-1 w-3.5 h-3.5 text-[#0b2f6b] rounded" />
+                  <span className="text-[11px] text-gray-600 leading-relaxed">
+                    I agree to be contacted by ASTRA. <Link to="/privacy" className="underline hover:text-[#0b2f6b]">Privacy notice</Link>
                   </span>
                 </div>
 
-                <button type="submit" className="w-full flex items-center justify-between bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-4 font-semibold rounded-md transition-all">
-                  Book a Counselling Session <ArrowUpRight size={18} />
+                <button type="submit" className="w-full flex items-center justify-between bg-[#e50924] hover:bg-[#c7051e] text-white px-5 py-3 font-semibold rounded-md transition-all text-sm mt-2">
+                  Book a Session <ArrowUpRight size={16} />
                 </button>
                 
                 {notice && (
-                  <p className="text-xs bg-blue-50 text-blue-800 p-3 rounded mt-4">
+                  <p className="text-xs bg-blue-50 text-blue-800 p-3 rounded mt-3">
                     {notice}
                   </p>
                 )}
