@@ -6,7 +6,6 @@ export default function Header() {
   const [menu, setMenu] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const dropdownRef = useRef(null);
 
@@ -16,22 +15,24 @@ export default function Header() {
   }, [location]);
 
   // Handle scroll to hide/show navbar
+  const lastScrollY = useRef(0);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
       // Hide if scrolling down and scrolled past 100px. Show if scrolling up.
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Close dropdown on click outside
   useEffect(() => {
