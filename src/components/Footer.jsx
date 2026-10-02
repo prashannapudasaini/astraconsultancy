@@ -42,6 +42,9 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© {currentYear} ASTRA Global Education and Services</span>
+          <span className="text-[#96aac6] text-left lg:text-center">
+            Designed and Developed by <a href="https://motionage.com" target="_blank" rel="noopener noreferrer" className="text-[#c3d0e2] hover:text-[#e50924] transition-colors" style={{ textDecoration: 'none' }}>MotionAge</a>
+          </span>
           <div style={{display: 'flex', gap: '20px'}}>
             <Link to="/privacy">Privacy Notice</Link>
             <span>Kathmandu, Nepal</span>
