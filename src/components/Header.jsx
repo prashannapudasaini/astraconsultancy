@@ -72,16 +72,43 @@ export default function Header() {
 
   const isServicesActive = location.pathname.startsWith('/services');
 
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        setHeaderHeight(entries[0].contentRect.height);
+      }
+    });
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header
-      style={{
-        transform: isVisible
-          ? 'translateY(0)'
-          : 'translateY(-100%)',
-        transition: 'transform 300ms ease-in-out',
-      }}
-    >
-      <div className="wrap nav">
+    <>
+      {/* Placeholder to prevent layout jump */}
+      <div style={{ height: `${headerHeight}px` }} />
+      <header
+        ref={headerRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          transform: isVisible
+            ? 'translateY(0)'
+            : 'translateY(-100%)',
+          transition: 'transform 300ms ease-in-out',
+        }}
+      >
+        <div className="wrap nav">
         <Link to="/" aria-label="ASTRA home" className="brand">
           <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
           <span>GLOBAL EDUCATION<br /><b> & SERVICES</b></span>
