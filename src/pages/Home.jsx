@@ -27,24 +27,24 @@ export default function Home() {
 
   const heroSlides = [
     {
-      src: '/images/hero_sk.jpg',
+      src: '/images/koreahero.png',
       alt: 'Study in South Korea - Traditional architecture and modern Seoul skyline',
       eyebrow: 'YOUR FUTURE IN SOUTH KOREA',
-      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Seoul.</span>',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">South Korea.</span>',
       desc: 'Explore cutting-edge degree programmes and comprehensive Korean-language pathways. Immerse yourself in a dynamic culture while advancing your global education.'
     },
     {
-      src: '/images/hero_uk.jpg',
+      src: '/images/ukhero.png',
       alt: 'Study in the United Kingdom - Historic university campus in Oxford',
       eyebrow: 'YOUR FUTURE IN THE UK',
-      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">London.</span>',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">the UK.</span>',
       desc: 'Experience world-class education with historic prestige. We provide complete guidance on course suitability, CAS requirements, and the Student visa route.'
     },
     {
-      src: '/images/auck.png',
+      src: '/images/newzeahero.png',
       alt: 'Study in New Zealand - Majestic mountains and crystal clear lakes',
       eyebrow: 'YOUR FUTURE IN NEW ZEALAND',
-      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Auckland.</span>',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">New Zealand.</span>',
       desc: 'Discover a world-class education surrounded by breathtaking nature. Get expert support for approved providers, tuition, and student visa preparation.'
     },
     {
@@ -55,10 +55,10 @@ export default function Home() {
       desc: 'Access diverse cultures and top-tier universities across the continent. We help you navigate admission, tuition, and residence rules across European countries.'
     },
     {
-      src: '/images/japan.png',
+      src: '/images/japanhero.png',
       alt: 'Study in Japan - Mount Fuji with beautiful pink cherry blossoms',
       eyebrow: 'YOUR FUTURE IN JAPAN',
-      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Tokyo.</span>',
+      title: 'From dream<br />to <span class="text-[#e50924] italic font-serif">Japan.</span>',
       desc: 'Blend high-tech innovation with rich traditions. Understand school-specific admissions, Japanese-language expectations, and EJU requirements with our experts.'
     }
   ];
@@ -184,7 +184,7 @@ export default function Home() {
 
       {/* SECTION 2: ASTRA Introduction & Trust */}
       {/* SECTION 2: ASTRA Introduction & Trust */}
-      <section id="home-intro" className="py-20 lg:py-32 px-6 lg:px-12 max-w-[1440px] mx-auto scroll-reveal">
+      <section id="home-intro" className="py-10 lg:py-16 px-6 lg:px-12 max-w-[1440px] mx-auto scroll-reveal">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column (Images & Visuals) */}
@@ -301,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: Study Destinations Interactive Globe */}
-      <section id="home-destinations" className="py-20 lg:py-32 px-6 lg:px-12 bg-[#0b2f6b] relative overflow-hidden scroll-reveal">
+      <section id="home-destinations" className="py-10 lg:py-16 px-6 lg:px-12 bg-[#0b2f6b] relative overflow-hidden scroll-reveal">
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#e50924]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
@@ -329,6 +329,7 @@ export default function Home() {
             <div className="lg:col-span-5 flex flex-col gap-4 destination-list relative z-20 pointer-events-auto">
                {countries.map(c => (
                   <div key={c.id} 
+                       id={`dest-card-${c.id}`}
                        onClick={() => setSelectedDestination(selectedDestination === c.id ? '' : c.id)}
                        className={`group p-5 md:p-6 rounded-2xl border transition-all flex flex-col gap-4 cursor-pointer backdrop-blur-sm ${selectedDestination === c.id ? 'bg-white/10 border-white/30 shadow-lg scale-[1.02]' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'}`}>
                      <div className="flex items-center justify-between">
@@ -530,7 +531,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 7: Animated Global Network Services */}
-      <section id="home-network" className="relative py-24 bg-[#0b2f6b] overflow-hidden scroll-reveal">
+      <section id="home-network" className="relative py-12 bg-[#0b2f6b] overflow-hidden scroll-reveal">
          <style>{`
             @keyframes orbit-spin { 
                from { transform: rotate(0deg); } 
@@ -593,8 +594,8 @@ export default function Home() {
                   <div className="relative w-[350px] h-[350px] sm:w-[500px] sm:h-[500px]">
                      
                      {/* Center Pill */}
-                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/10 px-6 py-2.5 rounded-full z-10 whitespace-nowrap backdrop-blur-sm">
-                        <span className="text-white font-medium text-sm tracking-wide">ASTRA Network</span>
+                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/10 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full z-10 whitespace-nowrap backdrop-blur-sm">
+                        <span className="text-white font-medium text-[10px] sm:text-xs tracking-wide">ASTRA Network</span>
                      </div>
 
                      {/* Outer Ring */}
@@ -605,15 +606,17 @@ export default function Home() {
                               <img src="https://flagcdn.com/w320/gb.png" className="w-full h-full object-cover" alt="UK" />
                            </div>
                            {/* NZ */}
-                           <div className="absolute bottom-10 left-0 -translate-x-1/2 translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
                               <img src="https://flagcdn.com/w320/nz.png" className="w-full h-full object-cover" alt="New Zealand" />
                            </div>
                            {/* Japan */}
-                           <div className="absolute top-1/2 -right-10 sm:-right-12 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                           <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
                               <img src="https://flagcdn.com/w320/jp.png" className="w-full h-full object-cover" alt="Japan" />
                            </div>
-                           {/* Decorative generic flag / abstract color */}
-                           <div className="absolute bottom-0 right-10 translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full bg-[#ffcc00] animate-counter-orbit shadow-xl" style={{ animationDuration: '40s' }}></div>
+                           {/* Germany */}
+                           <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-24 sm:h-24 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '40s' }}>
+                              <img src="https://flagcdn.com/w320/de.png" className="w-full h-full object-cover" alt="Germany" />
+                           </div>
                         </div>
                      </div>
 
@@ -621,16 +624,20 @@ export default function Home() {
                      <div className="absolute inset-20 sm:inset-28 rounded-full border border-white/20">
                         <div className="absolute inset-0 animate-orbit" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
                            {/* US (Large) */}
-                           <div className="absolute bottom-4 left-0 -translate-x-1/2 translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
                               <img src="https://flagcdn.com/w320/us.png" className="w-full h-full object-cover" alt="USA" />
                            </div>
                            {/* South Korea */}
-                           <div className="absolute top-0 right-4 translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
                               <img src="https://flagcdn.com/w320/kr.png" className="w-full h-full object-cover" alt="South Korea" />
                            </div>
                            {/* Europe (EU Flag) */}
-                           <div className="absolute top-1/2 -left-6 sm:-left-8 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden animate-counter-orbit shadow-xl bg-[#03399e]" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                           <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden animate-counter-orbit shadow-xl bg-[#03399e]" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
                               <img src="https://flagcdn.com/w320/eu.png" className="w-full h-full object-cover p-2" alt="Europe" />
+                           </div>
+                           {/* Canada */}
+                           <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden animate-counter-orbit shadow-2xl bg-white" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
+                              <img src="https://flagcdn.com/w320/ca.png" className="w-full h-full object-cover" alt="Canada" />
                            </div>
                         </div>
                      </div>

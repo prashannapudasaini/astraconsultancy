@@ -5,6 +5,7 @@ export default function GlobeComponent({ onSelectDestination, selectedDestinatio
   const globeEl = useRef();
   const containerRef = useRef();
   const [globeReady, setGlobeReady] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
   const places = [
@@ -29,7 +30,7 @@ export default function GlobeComponent({ onSelectDestination, selectedDestinatio
   }, []);
 
   useEffect(() => {
-    if (globeEl.current && globeReady && !selectedDestination) {
+    if (globeEl.current && globeReady && !selectedDestination && !isHovered) {
       globeEl.current.controls().autoRotate = true;
       globeEl.current.controls().autoRotateSpeed = 1.0;
       globeEl.current.controls().enableZoom = true;
@@ -37,7 +38,7 @@ export default function GlobeComponent({ onSelectDestination, selectedDestinatio
       globeEl.current.controls().autoRotate = false;
       globeEl.current.controls().enableZoom = true;
     }
-  }, [globeReady, selectedDestination]);
+  }, [globeReady, selectedDestination, isHovered]);
 
   useEffect(() => {
      if (selectedDestination && globeEl.current && globeReady) {
@@ -51,28 +52,45 @@ export default function GlobeComponent({ onSelectDestination, selectedDestinatio
   }, [selectedDestination, globeReady]);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative flex items-center justify-center overflow-hidden">
+    <div 
+      ref={containerRef} 
+      className="w-full h-full relative flex items-center justify-center overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
+    >
       <Globe
         ref={globeEl}
         width={dimensions.width}
         height={dimensions.height}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+        globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+        bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="rgba(0,0,0,0)"
         htmlElementsData={places}
         htmlElement={d => {
-          const el = document.createElement('div');
+          const wrapper = document.createElement('div');
+          wrapper.style.width = '48px';
+          wrapper.style.height = '48px';
+          wrapper.style.display = 'flex';
+          wrapper.style.alignItems = 'center';
+          wrapper.style.justifyContent = 'center';
+          wrapper.style.cursor = 'pointer';
+          wrapper.style.position = 'relative';
+          wrapper.style.pointerEvents = 'auto';
+          wrapper.style.transform = selectedDestination === d.id ? 'translate(-50%, -50%) scale(1.5)' : 'translate(-50%, -50%)';
+          wrapper.style.transition = 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
+
+          const dot = document.createElement('div');
+          dot.style.width = '20px';
+          dot.style.height = '20px';
+          dot.style.borderRadius = '50%';
+          dot.style.backgroundColor = '#e50924';
+          dot.style.position = 'relative';
+          dot.style.boxShadow = '0 0 20px rgba(229, 9, 36, 0.8)';
+          dot.style.border = selectedDestination === d.id ? '3px solid white' : 'none';
           
-          el.style.width = '20px';
-          el.style.height = '20px';
-          el.style.borderRadius = '50%';
-          el.style.backgroundColor = '#e50924';
-          el.style.cursor = 'pointer';
-          el.style.position = 'relative';
-          el.style.pointerEvents = 'auto';
-          el.style.transform = selectedDestination === d.id ? 'translate(-50%, -50%) scale(1.5)' : 'translate(-50%, -50%)';
-          el.style.boxShadow = '0 0 20px rgba(229, 9, 36, 0.8)';
-          el.style.transition = 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
-          el.style.border = selectedDestination === d.id ? '3px solid white' : 'none';
+          wrapper.appendChild(dot);
 
           // Pulse animation
           const pulse = document.createElement('div');
@@ -83,27 +101,37 @@ export default function GlobeComponent({ onSelectDestination, selectedDestinatio
           pulse.style.opacity = '0.5';
           pulse.style.animation = 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite';
           
-          el.appendChild(pulse);
+          dot.appendChild(pulse);
 
           // Click handler
-          el.onclick = (e) => {
+          wrapper.onclick = (e) => {
              e.stopPropagation();
              onSelectDestination(selectedDestination === d.id ? '' : d.id);
+             
+             // Scroll up to the specific destination card on mobile so they can see the change
+             if (window.innerWidth < 1024 && selectedDestination !== d.id) {
+                setTimeout(() => {
+                   const destCard = document.getElementById(`dest-card-${d.id}`);
+                   if (destCard) {
+                      destCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                   }
+                }, 50);
+             }
           };
           
           // Hover effect
-          el.onmouseenter = () => {
+          wrapper.onmouseenter = () => {
              if (selectedDestination !== d.id) {
-                el.style.transform = 'translate(-50%, -50%) scale(1.3)';
+                wrapper.style.transform = 'translate(-50%, -50%) scale(1.3)';
              }
           };
-          el.onmouseleave = () => {
+          wrapper.onmouseleave = () => {
              if (selectedDestination !== d.id) {
-                el.style.transform = 'translate(-50%, -50%) scale(1)';
+                wrapper.style.transform = 'translate(-50%, -50%) scale(1)';
              }
           };
 
-          return el;
+          return wrapper;
         }}
         onGlobeReady={() => setGlobeReady(true)}
       />

@@ -16,15 +16,15 @@ function ScrollToTop() {
 
 export default function Layout() {
   return (
-    <>
+    <div className="overflow-x-hidden w-full flex flex-col min-h-screen">
       <ScrollToTop />
       <Header />
-      <main>
+      <main className="flex-grow w-full overflow-x-hidden">
         <PageTransition>
           <Outlet />
         </PageTransition>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
