@@ -99,7 +99,7 @@ export default function Process() {
   return (
     <div ref={containerRef} className="bg-[#f4f7fb] min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-48 px-6 bg-[#0b2f6b] overflow-hidden">
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-6 bg-[#0b2f6b] overflow-hidden">
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
            <img src="/images/process_hero_bg.jpg" alt="Application Process" className="w-full h-full object-cover opacity-60" />
@@ -121,7 +121,7 @@ export default function Process() {
           <h1 className="hero-elem text-4xl lg:text-6xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
             Big plans begin with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] to-[#e50924]">small steps.</span>
           </h1>
-          <p className="hero-elem text-lg lg:text-xl text-[#becee3] mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="hero-elem text-lg lg:text-xl text-[#becee3] mb-8 max-w-2xl mx-auto leading-relaxed">
             You don't need every answer today. Start with the questions that matter. We provide structured guidance at every stage of your journey.
           </p>
           <div className="hero-elem flex flex-wrap justify-center gap-4">
@@ -140,7 +140,7 @@ export default function Process() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 lg:py-32 px-6">
+      <section className="py-16 lg:py-20 px-6">
         <div className="max-w-6xl mx-auto">
           
           <div className="timeline-container relative">
@@ -154,7 +154,7 @@ export default function Process() {
                <div className="timeline-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#e50924] to-[#0b2f6b] rounded-full"></div>
             </div>
 
-            <div className="flex flex-col gap-12 md:gap-24 relative z-10">
+            <div className="flex flex-col gap-8 md:gap-12 relative z-10">
               {steps.map((step, i) => {
                 const Icon = step.icon;
                 const isEven = i % 2 === 0;
