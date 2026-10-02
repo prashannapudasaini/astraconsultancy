@@ -35,27 +35,13 @@ export default function Destinations() {
   // Destination Data strictly matching user request
   const destinationDetails = [
     {
-      id: 'south-korea',
-      name: 'South Korea',
-      region: 'Asia',
-      image: '/images/south_korea.jpg',
-      flag: '🇰🇷',
-      positioning: 'Explore technology, business, design, language and degree-study pathways in a country known for advanced education and innovation.',
-      planning: [
-        'Degree study and non-degree language training have different visa categories',
-        'The Korean Government Study in Korea portal identifies D-2 for degree study and D-4 for training routes',
-        'Korean-language requirements depend on the course and institution',
-        'Confirm admission letters, financial evidence, education records and embassy requirements before applying'
-      ],
-      studyAreas: ['Information technology', 'Engineering', 'Business', 'Design', 'Korean language and culture']
-    },
-    {
       id: 'united-kingdom',
       name: 'United Kingdom',
       region: 'Europe',
       image: '/images/united_kingdom.jpg',
       flag: '🇬🇧',
       positioning: 'Understand course selection, admission conditions, CAS requirements and Student visa preparation for study in the UK.',
+      description: 'The United Kingdom is home to some of the world’s oldest and most prestigious universities. Known for its academic rigor and rich cultural heritage, studying in the UK provides an intensive, fast-paced educational experience. From historic campuses in England to vibrant student cities in Scotland, the UK offers unparalleled opportunities for networking and research, ensuring you graduate with a globally recognized degree.',
       planning: [
         'Choose the institution and course before reviewing visa requirements',
         'A Student visa application requires a Confirmation of Acceptance for Studies from a licensed student sponsor',
@@ -72,6 +58,7 @@ export default function Destinations() {
       image: '/images/new_zealand.jpg',
       flag: '🇳🇿',
       positioning: 'Plan full-time study with a clear understanding of your provider, offer of place, funding, insurance and visa responsibilities.',
+      description: 'New Zealand offers a progressive education system set against the backdrop of breathtaking natural landscapes. Renowned for its safe, welcoming communities, it is the perfect destination for students seeking an excellent work-life balance and high-quality education. The universities are heavily research-focused and provide strong post-study work rights, making it an ideal choice for long-term career growth.',
       planning: [
         'The Fee Paying Student Visa requires an offer from an approved education provider',
         'Students must show tuition and living-cost funding or an accepted scholarship or sponsor',
@@ -88,6 +75,7 @@ export default function Destinations() {
       image: '/images/europe.jpg',
       flag: '🇪🇺',
       positioning: 'Explore a wide range of higher-education systems, languages, fees and student-life environments across Europe.',
+      description: 'Europe presents a diverse array of academic opportunities across multiple distinct cultures and educational systems. Many European nations offer tuition-free or highly subsidized education, even for international students, particularly in countries like Germany and Norway. With borderless travel across the Schengen Area, studying in Europe means access to a continent of innovation, history, and incredible cultural exchange.',
       planning: [
         'Europe is a region, not one unified admissions or visa system',
         'Requirements vary by country, institution, course and nationality',
@@ -104,6 +92,7 @@ export default function Destinations() {
       image: '/images/japan.jpg',
       flag: '🇯🇵',
       positioning: 'Understand Japanese-language pathways, school-specific admission rules, entrance examinations and the full cost of study.',
+      description: 'Japan blends deep-rooted traditional culture with cutting-edge technological advancement. Japanese universities are at the forefront of robotics, engineering, and business, offering a highly disciplined and innovative academic environment. As the country opens its doors wider to international talent, there are growing opportunities for scholarships and seamless transitions into the dynamic Japanese workforce post-graduation.',
       planning: [
         'Each institution sets its own admissions requirements',
         'Some universities require or consider the Examination for Japanese University Admission for International Students',
@@ -244,11 +233,86 @@ export default function Destinations() {
         </div>
       </section>
 
+      {/* SECTION 2.5: Featured Destination - South Korea */}
+      {(!search || 'south korea'.includes(search.toLowerCase())) && (!regionFilter || regionFilter === 'Asia') && (
+        <section className="py-8 lg:py-12 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
+          <div className="bg-[#0b2f6b] rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-[#164580]">
+            
+            {/* Image Side */}
+            <div className="w-full lg:w-1/2 relative h-[400px] lg:h-auto group">
+              <img src="/images/south_korea.jpg" alt="South Korea" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b2f6b] via-[#0b2f6b]/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-[#0b2f6b]/50 lg:to-[#0b2f6b]"></div>
+              
+              <div className="absolute bottom-6 left-6 right-6 lg:hidden">
+                <div className="inline-block bg-[#e50924] text-white text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-md border border-red-400/50">FEATURED DESTINATION</div>
+                <h2 className="text-4xl font-extrabold text-white mb-2">South Korea 🇰🇷</h2>
+              </div>
+            </div>
+            
+            {/* Content Side */}
+            <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center relative">
+              <div className="hidden lg:inline-block bg-[#e50924] text-white text-xs font-bold px-3 py-1 rounded-full mb-6 w-fit shadow-md border border-red-400/50">FEATURED DESTINATION</div>
+              <h2 className="hidden lg:block text-4xl lg:text-5xl font-extrabold text-white mb-6">South Korea 🇰🇷</h2>
+              
+              <p className="text-blue-100 text-lg leading-relaxed mb-8 font-light">
+                Experience the perfect blend of ancient traditions and ultra-modern technology. South Korea offers world-class universities, innovative research facilities, and dynamic post-study work opportunities. From bustling Seoul to high-tech campuses, it is the ultimate destination for ambitious students.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 hover:bg-white/15 transition-colors">
+                  <div className="text-[#ffced3] font-bold text-xl mb-1 flex items-center gap-2"><GraduationCap size={20}/> D-2 Visa</div>
+                  <div className="text-white text-sm font-bold mb-2">Degree Program Study</div>
+                  <p className="text-blue-200 text-xs leading-relaxed">For students enrolling directly into Bachelors, Masters, or PhD degree programs at accredited Korean universities.</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 hover:bg-white/15 transition-colors">
+                  <div className="text-[#ffced3] font-bold text-xl mb-1 flex items-center gap-2"><BookOpen size={20}/> D-4 Visa</div>
+                  <div className="text-white text-sm font-bold mb-2">Language Training</div>
+                  <p className="text-blue-200 text-xs leading-relaxed">For students enrolling in Korean language programs (KLTC) before transitioning fully to degree study.</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-4">
+                <Link to="/destinations/south-korea" className="bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors flex items-center gap-2 shadow-lg shadow-red-500/20">
+                  Explore South Korea <ArrowUpRight size={16} />
+                </Link>
+                <a href="#enquiry" onClick={() => setFormDestination('south-korea')} className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors border border-white/20">
+                  Check Eligibility
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          {/* Dynamic Gallery for South Korea */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div className="relative h-40 rounded-2xl overflow-hidden group">
+              <img src="/images/seoul_nightscape.jpg" alt="Seoul Nightscape" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                <span className="text-white font-bold text-sm">Dynamic City Life</span>
+              </div>
+            </div>
+            <div className="relative h-40 rounded-2xl overflow-hidden group">
+              <img src="/images/korean_university.jpg" alt="Korean University" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                <span className="text-white font-bold text-sm">World-Class Campuses</span>
+              </div>
+            </div>
+            <div className="relative h-40 rounded-2xl overflow-hidden group bg-[#0b2f6b] flex flex-col justify-center items-center text-center p-6 border border-gray-100">
+              <h4 className="text-white font-bold mb-2">Intakes Available</h4>
+              <p className="text-blue-200 text-xs mb-3">Spring (March) & Fall (September)</p>
+              <div className="flex gap-2">
+                <span className="bg-[#e50924] text-white text-[10px] font-bold px-2 py-1 rounded">TOPIK</span>
+                <span className="bg-[#e50924] text-white text-[10px] font-bold px-2 py-1 rounded">IELTS</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* SECTION 3: Featured destination cards */}
       <section className="py-8 lg:py-10 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-[#0b2f6b]">Explore Destinations</h2>
-          <p className="text-sm text-gray-500 mt-1">Found {filteredDestinations.length} destination{filteredDestinations.length !== 1 && 's'}</p>
+          <h2 className="text-2xl font-bold text-[#0b2f6b]">Explore More Destinations</h2>
+          <p className="text-sm text-gray-500 mt-1">Showing {filteredDestinations.length} additional destination{filteredDestinations.length !== 1 && 's'}</p>
         </div>
 
         <div className="space-y-12">
@@ -269,8 +333,11 @@ export default function Destinations() {
               {/* Content Section */}
               <div className="w-full lg:w-3/5 p-6 lg:p-10 flex flex-col">
                 <h3 className="text-3xl font-bold text-[#0b2f6b] mb-3">{dest.name}</h3>
-                <p className="text-gray-600 text-sm md:text-base font-medium mb-6 leading-relaxed">
+                <p className="text-gray-600 text-sm md:text-base font-medium mb-3 leading-relaxed">
                   {dest.positioning}
+                </p>
+                <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                  {dest.description}
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 flex-1">

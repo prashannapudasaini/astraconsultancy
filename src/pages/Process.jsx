@@ -17,47 +17,40 @@ export default function Process() {
 
   const journeyStages = [
     {
-      title: "Start with your goals",
-      desc: "Discuss your academic background, interests, preferred destinations, budget, and language readiness. A useful study plan begins with understanding your circumstances.",
-      prep: "Academic history, interests, and questions.",
-      support: "An initial discussion to clarify priorities and possible next steps.",
+      title: "Counseling",
+      desc: "Begin your journey with an open conversation about your goals. We discuss your interests, preferred locations, budget, and language readiness. This clear foundation helps us understand your unique academic circumstances.",
+      prep: "Compile your academic history, personal interests, and important initial questions.",
+      support: "We provide an initial discussion to clarify your priorities effectively.",
       cta: null
     },
     {
-      title: "Explore suitable study options",
-      desc: "Compare courses, institutions, destinations, entry requirements, and costs. Consider how each option fits your academic interests and longer-term plans.",
-      prep: "Preferred subjects, destinations, and budget considerations.",
-      support: "Guidance in comparing options and checking official information.",
+      title: "Profile Assessment",
+      desc: "Bring your past transcripts and test scores for expert review. We evaluate your academic background against international university entry requirements. This rigorous assessment helps identify realistic opportunities for your future.",
+      prep: "Provide your past academic transcripts, identification documents, and test scores.",
+      support: "We evaluate your eligibility against specific international university admission guidelines.",
+      cta: null
+    },
+    {
+      title: "Country/Course Selection",
+      desc: "Compare the best courses, premier institutions, and top global destinations. We outline the specific pros, cons, and costs for each. This targeted research ensures you choose the perfect academic fit.",
+      prep: "Consider your location preferences, subject interests, and overall financial budget.",
+      support: "We provide objective comparisons and verify all official institutional information.",
       cta: "Explore Destinations",
       ctaLink: "/destinations"
     },
     {
-      title: "Organise your documents and readiness",
-      desc: "Prepare the documents required for your chosen institution and programme. Check academic records, identification, language evidence, and any additional requirements before submission.",
-      prep: "Relevant documents and accurate personal information.",
-      support: "Checklist guidance and identification of missing items.",
-      cta: null
-    },
-    {
-      title: "Prepare and submit your application",
-      desc: "Review the application requirements, complete the necessary information, and submit through the appropriate institutional channel. Monitor requests for additional information and decisions.",
-      prep: "Review your details and respond to requests.",
-      support: "Application organisation and guidance on the next steps.",
-      cta: null
-    },
-    {
-      title: "Review your offer and official next steps",
-      desc: "If you receive an offer, review its conditions and the requirements that follow. Prepare for the relevant visa process using current official guidance.",
-      prep: "Understand conditions, deadlines, and requested evidence.",
-      support: "Visa-document preparation guidance and organisation.",
+      title: "Application/Visa",
+      desc: "Gather your essential documents and submit your official university applications. We review all your paperwork to ensure absolute technical accuracy. Once admitted, we guide you through complex visa preparation processes.",
+      prep: "Gather required documentation and submit your applications before strict deadlines.",
+      support: "We carefully review all application files and visa preparation documentation.",
       note: "Admission and visa decisions are made by the relevant institutions and authorities.",
       cta: null
     },
     {
-      title: "Prepare for your next chapter",
-      desc: "Once the necessary approvals are in place, organise practical arrangements such as accommodation, travel, enrolment, and arrival requirements.",
-      prep: "Confirm arrangements and keep important documents accessible.",
-      support: "Guidance on preparation questions and official sources.",
+      title: "Pre-Departure",
+      desc: "Your incredible journey continues long after you receive your visa. We help you organise practical arrangements like travel and accommodation. This thorough preparation ensures a smooth transition to campus life.",
+      prep: "Confirm all travel arrangements and keep important personal documents accessible.",
+      support: "We provide comprehensive guidance on preparation questions and official sources.",
       cta: "Discuss Your Next Steps",
       ctaLink: "/contact"
     }
@@ -245,15 +238,15 @@ export default function Process() {
             </div>
             
             {journeyStages.map((stage, idx) => (
-              <div key={idx} className="min-w-[85vw] sm:min-w-[380px] md:min-w-[450px] flex-shrink-0 relative group">
+              <div key={idx} className="min-w-[85vw] sm:min-w-[320px] md:min-w-[380px] lg:min-w-[400px] flex-shrink-0 relative group pr-8">
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-[#0b2f6b]/20 mb-8 process-timeline-line" />
                 <div className="w-4 h-4 rounded-full bg-[#e50924] absolute -top-[7.5px] left-0 group-hover:scale-150 transition-transform duration-300" />
                 <div className="pt-12">
                   <span className="font-mono text-[#e50924] text-xl mb-4 block tracking-widest font-semibold uppercase">Stage 0{idx + 1}</span>
-                  <h3 className="text-3xl font-bold mb-4 text-[#0b2f6b] leading-tight process-stage-title">{stage.title}</h3>
-                  <p className="font-light text-gray-600 leading-relaxed text-lg mb-8 process-stage-desc">{stage.desc}</p>
+                  <h3 className="text-3xl font-bold mb-4 text-[#0b2f6b] leading-tight process-stage-title pr-4">{stage.title}</h3>
+                  <p className="font-light text-gray-600 leading-relaxed text-lg mb-8 process-stage-desc max-w-[340px]">{stage.desc}</p>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-4 max-w-[320px]">
                     <div>
                       <span className="font-bold text-sm text-[#0b2f6b] block mb-1 uppercase tracking-wider process-stage-subtitle">Your Preparation</span>
                       <p className="font-light text-gray-600 text-sm leading-relaxed process-stage-subdesc">{stage.prep}</p>
@@ -265,7 +258,7 @@ export default function Process() {
                   </div>
 
                   {stage.note && (
-                    <div className="mt-6 flex items-start gap-2 p-3 bg-yellow-50 rounded-lg border border-yellow-100 text-yellow-800 text-xs font-medium process-note-box">
+                    <div className="mt-6 flex items-start gap-2 p-3 bg-yellow-50 rounded-lg border border-yellow-100 text-yellow-800 text-xs font-medium process-note-box max-w-[320px]">
                        <span className="shrink-0 mt-0.5">ℹ️</span> {stage.note}
                     </div>
                   )}

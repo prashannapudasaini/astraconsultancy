@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2, ShieldCheck, MessageCircle } from 'lucide-react';
 import { countries } from '../data';
 import { usePageEntrance, useHeroAnimation, useHomeAnimations, useJourneyAnimation } from '../motion';
 import GlobeComponent from '../components/GlobeComponent';
@@ -133,12 +133,12 @@ export default function Home() {
                         <ArrowUpRight size={18} />
                       </div>
                     </Link>
-                    <Link to="/destinations" className="button red inline-flex items-center gap-4 !rounded-full !py-2 !pl-6 !pr-2 shadow-lg shadow-red-500/20 group">
-                      <span className="font-bold text-sm tracking-wider uppercase">Explore destinations</span>
-                      <div className="w-10 h-10 bg-white/20 group-hover:bg-white/30 rounded-full flex items-center justify-center transform group-hover:translate-x-1 transition-transform">
-                        <ArrowRight size={18} />
+                    <a href="https://wa.me/9779768567647" target="_blank" rel="noopener noreferrer" className="button inline-flex items-center gap-4 !rounded-full !py-2 !pl-6 !pr-2 shadow-lg shadow-[#128c7e]/30 group !bg-[#128c7e] hover:!bg-[#075e54] !text-white border-none transition-colors">
+                      <span className="font-bold text-sm tracking-wider uppercase">Chat on WhatsApp</span>
+                      <div className="w-10 h-10 bg-white/20 group-hover:bg-white/30 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                        <MessageCircle size={18} />
                       </div>
-                    </Link>
+                    </a>
                   </div>
                   
                   <div className="hero-meta flex flex-col sm:flex-row gap-6 sm:gap-12 text-sm text-blue-100/70 border-t border-white/20 pt-6">

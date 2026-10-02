@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight, BookOpen, MapPin, Phone, Mail, FileText, CheckCircle2,
-  MessageCircle, ExternalLink, ShieldCheck, GraduationCap, Clock, Banknote
+  MessageCircle, ExternalLink, ShieldCheck, GraduationCap, Clock, Banknote,
+  Globe2, Plane
 } from 'lucide-react';
 
 const CurvedDividerBottom = () => (
@@ -213,9 +214,42 @@ export default function Services() {
         </div>
       </section>
 
+      {/* SECTION 3.5: Comprehensive Services Grid */}
+      <section className="py-12 lg:py-16 px-6 lg:px-12 bg-[#f4f7fb]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0b2f6b] mb-4">Comprehensive Support.</h2>
+            <p className="text-gray-600 text-sm max-w-2xl mx-auto">
+              From your first consultation to your final departure, we provide end-to-end support tailored to your unique academic journey.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: <MessageCircle size={24} />, title: 'Counseling', desc: 'We start by listening to your academic goals and personal aspirations. Every student receives tailored, unbiased advice designed to match their unique career trajectory. We help you explore various pathways to ensure your long-term success.' },
+              { icon: <GraduationCap size={24} />, title: 'Course/University Selection', desc: 'Navigate thousands of global institutions with our expert insights. We align your academic background and interests with the best universities worldwide. Our team breaks down entry requirements and program strengths to help you make informed decisions.' },
+              { icon: <FileText size={24} />, title: 'Application & Documentation', desc: 'A strong application requires meticulous preparation and attention to detail. We assist you in drafting compelling statements of purpose and organizing necessary academic transcripts. Our thorough review process ensures your submissions meet the strictest university guidelines.' },
+              { icon: <ShieldCheck size={24} />, title: 'Visa Guidance', desc: 'Immigration processes can be complex, but we simplify every step. We provide up-to-date checklists for financial evidence and required official documentation. Our team prepares you thoroughly so you can submit your visa application with complete confidence.' },
+              { icon: <Banknote size={24} />, title: 'Scholarship', desc: 'Financing your international education is a critical part of your journey. We identify prominent scholarships, grants, and funding opportunities that fit your academic profile. Our guidance helps you craft outstanding applications to maximize your chances of financial support.' },
+              { icon: <BookOpen size={24} />, title: 'IELTS', desc: 'Achieving your target language score is essential for global university admissions. We offer structured preparation focusing on reading, writing, listening, and speaking skills. Our expert feedback and practice materials ensure you walk into the test fully prepared.' },
+              { icon: <Globe2 size={24} />, title: 'Korean/Japanese/German Language', desc: 'Studying in non-English speaking countries opens unique academic and career doors. We guide you toward the right language preparation pathways for Korea, Japan, and Germany. Mastering these languages enhances both your cultural integration and university acceptance chances.' },
+              { icon: <Plane size={24} />, title: 'Pre-Departure Support', desc: 'Securing your visa is just the beginning of your international adventure. We help you organize travel itineraries, book student accommodation, and understand campus culture. Our comprehensive briefing ensures you are fully ready to start your new life abroad.' }
+            ].map((srv, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all group flex flex-col">
+                <div className="w-12 h-12 bg-[#eff4fb] text-[#e50924] rounded-lg flex items-center justify-center mb-5 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors shrink-0">
+                  {srv.icon}
+                </div>
+                <h3 className="font-bold text-[#0b2f6b] mb-3 text-lg leading-tight">{srv.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1">{srv.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 4: Detailed service process */}
       <section className="relative py-8 lg:py-10 px-6 lg:px-12 bg-[#0b2f6b] text-white">
-        <CurvedDividerTop color="text-white" />
+        <CurvedDividerTop color="text-[#f4f7fb]" />
         <div className="max-w-7xl mx-auto pt-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl lg:text-3xl font-bold mb-4">How our guidance fits together.</h2>

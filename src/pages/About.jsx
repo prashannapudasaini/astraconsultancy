@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Ear, BookOpen, ShieldCheck, UserCheck, ArrowUpRight, Phone, Mail, MapPin, CheckCircle2 } from 'lucide-react';
+import { Ear, BookOpen, ShieldCheck, UserCheck, ArrowUpRight, Phone, Mail, MapPin, CheckCircle2, Users, Globe, FileText, Plane } from 'lucide-react';
 import { countries } from '../data';
 import { usePageEntrance, useScrollReveal } from '../motion';
 
@@ -297,9 +297,62 @@ export default function About() {
         </div>
       </section>
 
+      {/* SECTION 6.5: Why ASTRA */}
+      <section className="relative py-12 lg:py-20 px-6 lg:px-12 bg-white scroll-reveal">
+        <CurvedDividerTop color="text-[#0b2f6b]" />
+        <div className="max-w-7xl mx-auto relative z-10 pt-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0b2f6b] mb-4 tracking-tight">Why choose ASTRA?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">We are committed to your success through expert guidance, honest advice, and comprehensive support at every step of your journey.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="bg-[#f4f7fb] p-8 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#e50924] shadow-sm mb-6 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors">
+                <Users size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#0b2f6b] mb-3">Personalized Counseling</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">We listen to your ambitions and evaluate your unique academic background. Every student receives tailored advice designed to match their specific career goals and personal circumstances.</p>
+            </div>
+            
+            <div className="bg-[#f4f7fb] p-8 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#e50924] shadow-sm mb-6 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors">
+                <Globe size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#0b2f6b] mb-3">Multi-Destination</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Explore a world of opportunities rather than being limited to a single country. We guide you through the pros, cons, and specific requirements of top education destinations globally.</p>
+            </div>
+            
+            <div className="bg-[#f4f7fb] p-8 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 group">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#e50924] shadow-sm mb-6 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors">
+                <ShieldCheck size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#0b2f6b] mb-3">Transparent Process</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">No hidden fees and no false promises. We provide clear, honest information about costs, admission chances, and visa requirements straight from official institutional sources.</p>
+            </div>
+            
+            <div className="bg-[#f4f7fb] p-8 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 group lg:col-start-1 lg:col-span-1 md:col-span-1">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#e50924] shadow-sm mb-6 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors">
+                <FileText size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#0b2f6b] mb-3">Documentation Support</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Navigate complex applications with confidence. Our team helps you organise, review, and prepare your transcripts, financial evidence, and visa paperwork to meet strict guidelines.</p>
+            </div>
+            
+            <div className="bg-[#f4f7fb] p-8 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 group md:col-span-2 lg:col-span-1">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#e50924] shadow-sm mb-6 group-hover:bg-[#0b2f6b] group-hover:text-white transition-colors">
+                <Plane size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#0b2f6b] mb-3">Pre-Departure Support</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">Your journey doesn't end with a visa. We prepare you for the transition with guidance on accommodation, travel arrangements, and what to expect when you finally arrive.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 7: Contact and responsible guidance */}
       <section className="relative py-8 lg:py-10 bg-[#f4f7fb] scroll-reveal">
-        <CurvedDividerTop color="text-[#0b2f6b]" />
+        <CurvedDividerTop color="text-white" />
         <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-20 pt-12 text-center">
           <h2 className="text-3xl lg:text-5xl font-bold text-[#0b2f6b] mb-6 tracking-tight">Have questions about your next step?</h2>
           <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
