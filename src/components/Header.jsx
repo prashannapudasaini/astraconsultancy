@@ -12,25 +12,41 @@ export default function Header() {
   useEffect(() => {
     setMenu(false);
     setServicesOpen(false);
+    setIsVisible(true);
   }, [location]);
 
-  // Handle scroll to hide/show navbar
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    lastScrollY.current = Math.max(0, window.scrollY);
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Hide if scrolling down and scrolled past 100px. Show if scrolling up.
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
+      const currentY = Math.max(0, window.scrollY);
+      const previousY = lastScrollY.current;
+
+      lastScrollY.current = currentY;
+
+      // Always show at the top.
+      if (currentY === 0) {
         setIsVisible(true);
+        return;
       }
-      lastScrollY.current = currentScrollY;
+
+      // Ignore events where the scroll position hasn't changed.
+      if (currentY === previousY) return;
+
+      const scrollingUp = currentY < previousY;
+      setIsVisible(scrollingUp);
+
+      // Close menus so they don't remain visible below a hidden header.
+      if (!scrollingUp) {
+        setServicesOpen(false);
+        setMenu(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -57,7 +73,14 @@ export default function Header() {
   const isServicesActive = location.pathname.startsWith('/services');
 
   return (
-    <header className={`transition-transform duration-300 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header
+      style={{
+        transform: isVisible
+          ? 'translateY(0)'
+          : 'translateY(-100%)',
+        transition: 'transform 300ms ease-in-out',
+      }}
+    >
       <div className="wrap nav">
         <Link to="/" aria-label="ASTRA home" className="brand">
           <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
