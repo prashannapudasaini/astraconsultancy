@@ -167,10 +167,10 @@ export default function Destinations() {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <a href="#enquiry" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
+              <a href="#enquiry" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
                 Book Destination Counselling <ArrowUpRight size={16} />
               </a>
-              <a href="#compare" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
+              <a href="#compare" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
                 Compare Your Options
               </a>
             </div>
@@ -298,13 +298,13 @@ export default function Destinations() {
                 </div>
                 
                 <div className="flex flex-wrap gap-3 mt-auto pt-6 border-t border-gray-100">
-                  <Link to={`/destinations/${dest.id}`} className="inline-flex justify-center items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none">
+                  <Link to={`/destinations/${dest.id}`} className="inline-flex justify-center items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none">
                     Explore {dest.name}
                   </Link>
                   <a 
                     href="#enquiry" 
                     onClick={() => setFormDestination(dest.id)}
-                    className="inline-flex justify-center items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none shadow-sm"
+                    className="inline-flex justify-center items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm flex-1 md:flex-none shadow-sm"
                   >
                     Ask about this destination
                   </a>
@@ -355,7 +355,7 @@ export default function Destinations() {
           </div>
           
           <div className="text-center mt-8">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
               Discuss your shortlist with ASTRA
             </Link>
           </div>
@@ -506,7 +506,7 @@ export default function Destinations() {
                 </div>
 
                 <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-4 items-center justify-between">
-                  <button type="button" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-8 py-3.5 font-semibold rounded-md transition-all text-sm">
+                  <button type="button" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-8 py-3.5 font-semibold rounded-md transition-all text-sm">
                     Book a Counselling Session <ArrowUpRight size={16} />
                   </button>
                   <div className="flex flex-col sm:flex-row items-center gap-4 text-xs font-medium text-gray-600">
