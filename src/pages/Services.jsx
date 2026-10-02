@@ -48,10 +48,10 @@ export default function Services() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-[#0b2f6b] hover:bg-gray-100 px-6 py-3 font-semibold rounded-md transition-all text-sm shadow-sm">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm shadow-sm border-none">
                 Book a Counselling Session <ArrowUpRight size={16} />
               </Link>
-              <a href="tel:+9779768567647" className="inline-flex items-center gap-2 bg-transparent border border-white/30 hover:bg-white/10 text-white px-6 py-3 font-semibold rounded-md transition-all text-sm">
+              <a href="tel:+9779768567647" className="inline-flex items-center gap-2 bg-[#0b2f6b] hover:bg-[#07204b] !text-white px-6 py-3 font-semibold rounded-md transition-all text-sm border-none shadow-sm">
                 <Phone size={16} /> Call +977 9768567647
               </a>
             </div>
