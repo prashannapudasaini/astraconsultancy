@@ -213,7 +213,7 @@ export default function Header() {
               aria-label="Toggle dark mode"
               style={{ width: '40px', height: '40px', background: 'transparent' }}
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}+
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <Link to="/contact" className="button nav-cta" style={{ margin: 0 }}>
               Book counselling <ArrowUpRight size={16} />
