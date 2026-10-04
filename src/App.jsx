@@ -14,6 +14,7 @@ import Resources from './pages/Resources';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
+import BookCounselling from './pages/BookCounselling';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="resources" element={<Resources />} />
         <Route path="faq" element={<FAQ />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="book-counselling" element={<BookCounselling />} />
         <Route path="privacy" element={<Privacy />} />
       </Route>
     </Routes>

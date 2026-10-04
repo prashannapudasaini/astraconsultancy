@@ -195,7 +195,7 @@ export default function Header() {
                     <h4 className="text-sm font-bold text-[#0b2f6b]">Ready to begin?</h4>
                     <p className="text-xs text-gray-500 mt-1">Speak with our expert counsellors about your goals.</p>
                   </div>
-                  <Link to="/contact" className="flex items-center justify-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-5 py-2.5 rounded-md font-semibold text-xs transition-colors shrink-0 w-full sm:w-auto">
+                  <Link to="/book-counselling" className="flex items-center justify-center gap-2 bg-[#e50924] hover:bg-[#c7051e] text-white px-5 py-2.5 rounded-md font-semibold text-xs transition-colors shrink-0 w-full sm:w-auto">
                     Book Session <ArrowUpRight size={14} />
                   </Link>
                 </div>
@@ -215,7 +215,7 @@ export default function Header() {
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <Link to="/contact" className="button nav-cta" style={{ margin: 0 }}>
+            <Link to="/book-counselling" className="button nav-cta" style={{ margin: 0 }}>
               Book counselling <ArrowUpRight size={16} />
             </Link>
           </div>
