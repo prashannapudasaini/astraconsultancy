@@ -235,6 +235,324 @@ export default function Destination() {
 
             </div>
           </div>
+        ) : country.id === 'united-kingdom' ? (
+          /* =========================================
+             UNITED KINGDOM SPECIFIC HIGH-IMPACT LAYOUT
+             ========================================= */
+          <div className="flex flex-col gap-12 relative w-full">
+            <div className="w-full">
+              <h2 className="text-4xl font-bold text-[#0b2f6b] mb-6">Study in the United Kingdom: An Extensive Guide to Academic Excellence</h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                The United Kingdom is universally recognized as a powerhouse of higher education, home to some of the world's most ancient, prestigious, and highest-ranking universities. For centuries, the UK has been the destination of choice for global leaders, Nobel laureates, and innovative thinkers. Whether you are aiming to study at a historic institution in England, a vibrant modern campus in Scotland, or specialized research centers in Wales and Northern Ireland, studying in the UK guarantees a globally respected qualification. A UK degree is not just an academic achievement; it is a passport to global career opportunities.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed mb-10">
+                The UK higher education system is uniquely intensive and fast-paced. Unlike many other countries, you can often complete a Bachelor's degree in just three years and a Master's degree in a single year, saving both time and tuition fees. This guide provides a comprehensive breakdown of everything you need to know about studying in the UK, from choosing the right course and understanding the UK university admissions process, to navigating the Student Visa UK requirements and estimating the cost of living for international students.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/uk_city_1791093146123.jpg" alt="London City Life" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#0b2f6b] text-white">
+                    <h4 className="font-bold">Vibrant UK Cities</h4>
+                    <p className="text-xs text-blue-200">Experience a blend of historic architecture and modern culture.</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/uk_campus_1791093133646.jpg" alt="Historic UK University Campus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#e50924] text-white">
+                    <h4 className="font-bold">Historic Campuses</h4>
+                    <p className="text-xs text-red-100">Study in halls where history was written.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Widgets Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {/* Box 1: Quick Facts */}
+                <div className="bg-[#f4f7fb] p-6 rounded-2xl shadow-sm border border-blue-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-blue-200 pb-2">Quick Facts</h3>
+                  <ul className="space-y-3 text-sm text-gray-700 flex-1">
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Capital:</span> London</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Currency:</span> GBP (£)</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Primary Intakes:</span> Sept & Jan</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Avg. Tuition:</span> £12k - £30k/yr</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Work Rights:</span> Up to 20 hrs/wk</li>
+                  </ul>
+                </div>
+
+                {/* Box 2: Prestigious Institutions */}
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-gray-100 pb-2">Top Institutions</h3>
+                  <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                    <li><span className="font-bold text-[#e50924]">R</span>ussell Group Universities</li>
+                    <li>University of Oxford</li>
+                    <li>University of Cambridge</li>
+                    <li>Imperial College London</li>
+                    <li>UCL (University College London)</li>
+                  </ul>
+                </div>
+
+                {/* Box 3: Most Searched Keywords */}
+                <div className="bg-[#fff1f2] p-6 rounded-2xl shadow-sm border border-red-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-red-200 pb-2">Top SEO Searches</h3>
+                  <div className="flex flex-wrap gap-2 flex-1 items-start content-start">
+                    {['Study in UK', 'UK Universities', 'Student Visa UK', 'Scholarships in UK', 'Cost of living in UK', 'Post-study work visa UK', 'Best courses in UK', 'Study abroad UK'].map((keyword, i) => (
+                      <span key={i} className="bg-white text-[#17375e] text-xs font-semibold px-2 py-1 rounded-md border border-red-100 shadow-sm">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">The UK Higher Education System & Best Courses</h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                The UK academic calendar traditionally starts in <strong>September or October</strong>, which is the main intake for almost all university courses. There is also a secondary, smaller intake in <strong>January or February</strong>, primarily for postgraduate courses or specific foundational degrees. To secure your place, you must apply well in advance, often through UCAS (Universities and Colleges Admissions Service) for undergraduate degrees, or directly to the universities for postgraduate studies.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-8">
+                Among the <strong>best courses in the UK</strong> are Business and Management, Engineering, Computer Science, Law, Medicine, and the Creative Arts. British institutions emphasize independent study, critical thinking, and research-led teaching. The prestigious Russell Group, comprising 24 leading research universities, represents the pinnacle of UK academic excellence, though many modern universities offer incredible industry connections, practical training, and high employability rates.
+              </p>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Deep Dive: Student Visa UK (Tier 4) & Admissions</h3>
+              
+              <div className="space-y-8 mb-12">
+                <div className="bg-[#fff1f2] rounded-2xl p-8 border border-red-100 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-[#e50924] text-white font-black text-4xl px-4 py-2 rounded-bl-2xl opacity-10">CAS</div>
+                  <h4 className="text-2xl font-bold text-[#0b2f6b] mb-2">The UK Student Visa Process</h4>
+                  <p className="text-[#e50924] font-bold text-sm mb-4 uppercase tracking-wider">Securing your place in the UK</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    To <strong>study in the UK</strong>, international students require a Student Visa (formerly the Tier 4 General Student Visa). The most critical component of your visa application is the Confirmation of Acceptance for Studies (CAS). This is an electronic document issued by your chosen university once you have met all conditions of your offer (including language requirements like IELTS) and paid your tuition fee deposit.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Key Requirements</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li><strong>CAS Letter:</strong> Issued by a licensed student sponsor.</li>
+                        <li><strong>Proof of Funds:</strong> You must prove you have enough money to pay for your first year of tuition fees, plus living costs (approx. £1,334/month for London, £1,023/month outside London for up to 9 months).</li>
+                        <li><strong>English Proficiency:</strong> Usually demonstrated through an IELTS for UKVI or PTE Academic UKVI test.</li>
+                        <li><strong>ATAS Certificate & TB Test:</strong> Required for specific technical subjects and students from certain countries, including Nepal.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Work Rights & Restrictions</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li><strong>During Term Time:</strong> International students enrolled in degree-level programs can typically work up to 20 hours per week.</li>
+                        <li><strong>During Vacations:</strong> You can work full-time during official university holidays.</li>
+                        <li>Work rights offer a great way to gain local experience and help manage the <strong>cost of living in the UK for international students</strong>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Cost of Living & Scholarships in UK</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    The <strong>cost of living in the UK for international students</strong> varies greatly depending on the location. London and the South East of England are significantly more expensive than cities in the North of England, Scotland, Wales, or Northern Ireland.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Accommodation:</strong> University halls of residence range from £400 to £800+ per month. Private renting can cost similar amounts but may require setting up utility bills separately.</li>
+                    <li><strong>Daily Expenses:</strong> Budget for groceries, transport, study materials, and socializing. Student discounts (like the TOTUM card) help stretch your budget.</li>
+                    <li><strong>Scholarships in UK:</strong> Numerous funding opportunities exist, such as the Chevening Scholarships, Commonwealth Scholarships, and university-specific merit awards which can range from £1,000 discounts to fully-funded tuition.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Post-Study Work Visa UK (Graduate Route)</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    One of the most attractive aspects of a UK education is the Graduate Route visa, commonly known as the <strong>Post-study work visa UK</strong>. This incredible opportunity allows you to launch your global career directly after graduation.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Duration:</strong> International students successfully completing an undergraduate or master’s degree can stay and work, or look for work, in the UK for <strong>two years</strong>. PhD graduates can stay for <strong>three years</strong>.</li>
+                    <li><strong>Flexibility:</strong> The Graduate Route is unsponsored, meaning you do not need a job offer to apply, and you can work in almost any role or skill level.</li>
+                    <li><strong>Pathway to Settlement:</strong> While the Graduate Route doesn't directly lead to settlement, it provides the time to secure a skilled job, after which you can transition to a Skilled Worker Visa, which does count towards permanent residency.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* End of article Counselling CTA block */}
+              <div className="bg-[#0b2f6b] p-10 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 mt-12 mb-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#e50924] rounded-full filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
+                <div className="relative z-10 w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold text-white mb-4">Ready to embark on your UK study adventure?</h3>
+                  <ul className="mb-0 pl-5 list-disc text-blue-100 space-y-2">
+                    <li>Get clarity on university selection and UCAS applications.</li>
+                    <li>Understand the exact financial proof required for your Student Visa.</li>
+                    <li>Explore scholarship opportunities to maximize your budget.</li>
+                  </ul>
+                </div>
+                <div className="relative z-10 w-full md:w-1/3 flex flex-col gap-4">
+                  <Link to={`/contact?destination=${country.id}`} className="bg-[#e50924] hover:bg-white hover:text-[#e50924] text-white flex items-center justify-center gap-2 font-bold rounded-xl p-4 transition-all shadow-lg text-lg text-center w-full">
+                    <span>Book UK Counselling</span> <ArrowUpRight size={20} />
+                  </Link>
+                  <div className="text-center">
+                    <SourceLinks ids={['cas', 'uk']} dated />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        ) : country.id === 'new-zealand' ? (
+          /* =========================================
+             NEW ZEALAND SPECIFIC HIGH-IMPACT LAYOUT
+             ========================================= */
+          <div className="flex flex-col gap-12 relative w-full">
+            <div className="w-full">
+              <h2 className="text-4xl font-bold text-[#0b2f6b] mb-6">Study in New Zealand: A Gateway to Innovation and Nature</h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                When you choose to <strong>study in New Zealand</strong>, you are opting for an educational experience that seamlessly blends world-class academics with breathtaking natural landscapes and an unbeatable quality of life. Renowned for its safe, welcoming communities, and progressive society, New Zealand has rapidly emerged as a top-tier destination for international students. The New Zealand education system is heavily research-focused and highly practical, ensuring that graduates are well-equipped with the critical thinking skills demanded by the modern global workforce.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed mb-10">
+                All <strong>New Zealand universities</strong> are ranked in the top 3% globally, guaranteeing a high standard of education regardless of which institution you choose. From vibrant urban hubs like Auckland and Wellington to the stunning alpine environments of the South Island, studying here offers a perfect work-life balance. Furthermore, the country provides incredibly strong post-study work rights and clear pathways to <strong>PR in New Zealand</strong> for skilled graduates, making it the ultimate destination for long-term career growth.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/nz_city_1791093194604.jpg" alt="Auckland City Skyline" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#0b2f6b] text-white">
+                    <h4 className="font-bold">Vibrant Urban Hubs</h4>
+                    <p className="text-xs text-blue-200">Study in safe, diverse, and fast-growing cities.</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/nz_campus_1791093181231.jpg" alt="Scenic New Zealand Campus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#e50924] text-white">
+                    <h4 className="font-bold">Breathtaking Campuses</h4>
+                    <p className="text-xs text-red-100">Experience an unmatched connection with nature.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Widgets Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {/* Box 1: Quick Facts */}
+                <div className="bg-[#f4f7fb] p-6 rounded-2xl shadow-sm border border-blue-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-blue-200 pb-2">Quick Facts</h3>
+                  <ul className="space-y-3 text-sm text-gray-700 flex-1">
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Capital:</span> Wellington</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Currency:</span> NZD ($)</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Primary Intakes:</span> Feb & July</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Avg. Tuition:</span> $25k - $40k/yr</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Work Rights:</span> Up to 20 hrs/wk</li>
+                  </ul>
+                </div>
+
+                {/* Box 2: Prestigious Institutions */}
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-gray-100 pb-2">Top Universities</h3>
+                  <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                    <li><span className="font-bold text-[#e50924]">U</span>niversity of Auckland</li>
+                    <li>University of Otago</li>
+                    <li>Victoria University of Wellington</li>
+                    <li>University of Canterbury</li>
+                    <li>Massey University</li>
+                  </ul>
+                </div>
+
+                {/* Box 3: Most Searched Keywords */}
+                <div className="bg-[#fff1f2] p-6 rounded-2xl shadow-sm border border-red-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-red-200 pb-2">Top SEO Searches</h3>
+                  <div className="flex flex-wrap gap-2 flex-1 items-start content-start">
+                    {['Study in New Zealand', 'New Zealand Universities', 'Student Visa New Zealand', 'Scholarships in New Zealand', 'Cost of living in NZ', 'Post-study work visa NZ', 'PR in New Zealand', 'Best courses in New Zealand'].map((keyword, i) => (
+                      <span key={i} className="bg-white text-[#17375e] text-xs font-semibold px-2 py-1 rounded-md border border-red-100 shadow-sm">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Education System & Best Courses in New Zealand</h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                The academic year in New Zealand is aligned with the Southern Hemisphere calendar, typically starting in <strong>February/March</strong> (Semester 1) and continuing with a second intake in <strong>July</strong> (Semester 2). The system is robust, monitored by the New Zealand Qualifications Authority (NZQA), ensuring that your degree meets the highest international standards. The pedagogical approach focuses on problem-solving, collaboration, and applied learning, rather than just rote memorization.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-8">
+                The <strong>best courses in New Zealand</strong> include Information Technology, Agriculture, Environmental Science, Engineering, Business, and Hospitality and Tourism. Universities emphasize deep integration with industry, and you will often find that your coursework involves solving real-world problems for local businesses. Additionally, the Institutes of Technology and Polytechnics (ITPs) offer highly practical, vocational training that is well-aligned with the country's skill shortage lists.
+              </p>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Deep Dive: Student Visa New Zealand</h3>
+              
+              <div className="space-y-8 mb-12">
+                <div className="bg-[#fff1f2] rounded-2xl p-8 border border-red-100 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-[#e50924] text-white font-black text-4xl px-4 py-2 rounded-bl-2xl opacity-10">VISA</div>
+                  <h4 className="text-2xl font-bold text-[#0b2f6b] mb-2">The Fee Paying Student Visa</h4>
+                  <p className="text-[#e50924] font-bold text-sm mb-4 uppercase tracking-wider">Your pathway to study</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    To <strong>study abroad New Zealand</strong>, you will need to apply for the Fee Paying Student Visa. Immigration New Zealand (INZ) has a streamlined online application process, but it requires meticulous documentation. You must first secure an unconditional Offer of Place from an approved education provider before applying for your visa.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Key Requirements</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li><strong>Offer of Place:</strong> Confirmation of acceptance into a program.</li>
+                        <li><strong>Proof of Funds:</strong> You must demonstrate you have at least NZD $20,000 per year of study to cover living expenses, plus the return airfare or funds to purchase one.</li>
+                        <li><strong>Medical & Police Certificates:</strong> Depending on how long you intend to stay, you may need a chest x-ray and police clearance.</li>
+                        <li><strong>Insurance:</strong> Full medical and travel insurance is mandatory for international students.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Work Rights & Restrictions</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li>Most international students can work up to 20 hours a week during the academic year.</li>
+                        <li>Full-time work is permitted during scheduled summer holidays.</li>
+                        <li>Masters by Research and PhD students have unlimited work rights.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Cost of Living & Scholarships in New Zealand</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Understanding the <strong>cost of living in NZ for international students</strong> is crucial. While cities like Auckland and Wellington have higher living costs, regional areas offer a more affordable lifestyle.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Accommodation:</strong> Options include Halls of Residence (great for first-years, approx. NZD $350-$500/week usually including food), Homestays, and shared flats (NZD $150-$250/week plus bills).</li>
+                    <li><strong>Everyday Costs:</strong> Factoring in groceries, transport, and utilities, most students need about NZD $1,600 to $2,000 per month.</li>
+                    <li><strong>Scholarships in New Zealand:</strong> Look out for the New Zealand Excellence Awards (NZEA), Manaaki New Zealand Scholarships, and generous university-specific bursaries to support your studies.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Post-Study Work Visa NZ & PR Pathways</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    New Zealand offers excellent career prospects for graduates. The <strong>post-study work visa NZ</strong> allows you to gain invaluable international work experience after you finish your studies.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Duration:</strong> Graduates of a Bachelor's, Master's, or PhD degree are typically eligible for a 3-year open post-study work visa.</li>
+                    <li><strong>Flexibility:</strong> This visa is open, meaning you can work for almost any employer in any job, giving you time to find a role related to your studies.</li>
+                    <li><strong>PR in New Zealand:</strong> The country operates a points-based immigration system. Earning a degree in New Zealand and gaining local skilled work experience significantly boosts your points, creating a strong pathway to Permanent Residency (PR).</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* End of article Counselling CTA block */}
+              <div className="bg-[#0b2f6b] p-10 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 mt-12 mb-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#e50924] rounded-full filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
+                <div className="relative z-10 w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold text-white mb-4">Ready to embrace the New Zealand lifestyle?</h3>
+                  <ul className="mb-0 pl-5 list-disc text-blue-100 space-y-2">
+                    <li>Determine which university and course aligns with your career goals.</li>
+                    <li>Understand the NZD $20,000 proof of funds requirement.</li>
+                    <li>Map out your potential pathway from study to Post-Study Work Visa.</li>
+                  </ul>
+                </div>
+                <div className="relative z-10 w-full md:w-1/3 flex flex-col gap-4">
+                  <Link to={`/contact?destination=${country.id}`} className="bg-[#e50924] hover:bg-white hover:text-[#e50924] text-white flex items-center justify-center gap-2 font-bold rounded-xl p-4 transition-all shadow-lg text-lg text-center w-full">
+                    <span>Book NZ Counselling</span> <ArrowUpRight size={20} />
+                  </Link>
+                  <div className="text-center">
+                    <SourceLinks ids={['nz']} dated />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         ) : (
           /* =========================================
              GENERIC LAYOUT FOR OTHER COUNTRIES

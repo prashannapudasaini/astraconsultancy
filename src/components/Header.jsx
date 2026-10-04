@@ -207,13 +207,13 @@ export default function Header() {
             <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active-link' : '')} onClick={() => { window.scrollTo(0, 0); setMenu(false); }}>Contact</NavLink>
           </nav>
           <div className="flex items-center gap-2 lg:gap-4 ml-auto lg:ml-0">
-            <button 
-              onClick={() => setIsDark(!isDark)} 
+            <button
+              onClick={() => setIsDark(!isDark)}
               className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors flex items-center justify-center text-[#142a47] theme-toggle-btn"
               aria-label="Toggle dark mode"
               style={{ width: '40px', height: '40px', background: 'transparent' }}
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}+
             </button>
             <Link to="/contact" className="button nav-cta" style={{ margin: 0 }}>
               Book counselling <ArrowUpRight size={16} />
