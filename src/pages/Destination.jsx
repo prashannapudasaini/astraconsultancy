@@ -553,6 +553,318 @@ export default function Destination() {
 
             </div>
           </div>
+        ) : country.id === 'europe' ? (
+          /* =========================================
+             EUROPE SPECIFIC HIGH-IMPACT LAYOUT
+             ========================================= */
+          <div className="flex flex-col gap-12 relative w-full">
+            <div className="w-full">
+              <h2 className="text-4xl font-bold text-[#0b2f6b] mb-6">Study in Europe: A Continent of Endless Academic Opportunity</h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                When you choose to <strong>study in Europe</strong>, you are unlocking access to some of the world's most prestigious and historic academic institutions. Europe is not a single, homogeneous education system; rather, it is a rich tapestry of diverse cultures, languages, and specialized universities. From the engineering prowess of Germany to the artistic heritage of France, the renewable energy innovations in Scandinavia, and the business hubs of the Netherlands, Europe offers an incredibly broad spectrum of academic excellence.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed mb-10">
+                The European Higher Education Area (EHEA) ensures that degrees across member countries are mutually recognized, giving you unparalleled mobility. This means that a Bachelor’s or Master’s degree earned in one European country is highly respected worldwide. Furthermore, the borderless nature of the Schengen Area allows students to travel, network, and experience a multitude of cultures seamlessly. Whether you are seeking a highly specialized English-taught master's program or an immersive language experience, <strong>Europe universities</strong> offer world-class facilities and deeply subsidized tuition models that make premium education remarkably accessible.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/eu_city_1791094556185.jpg" alt="Vibrant European City Life" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#0b2f6b] text-white">
+                    <h4 className="font-bold">Dynamic Cultural Hubs</h4>
+                    <p className="text-xs text-blue-200">Experience history and modernity side-by-side.</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/eu_campus_1791094541569.jpg" alt="Historic European University Campus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#e50924] text-white">
+                    <h4 className="font-bold">Historic Institutions</h4>
+                    <p className="text-xs text-red-100">Study where centuries of scholars have walked.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Widgets Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {/* Box 1: Quick Facts */}
+                <div className="bg-[#f4f7fb] p-6 rounded-2xl shadow-sm border border-blue-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-blue-200 pb-2">Quick Facts</h3>
+                  <ul className="space-y-3 text-sm text-gray-700 flex-1">
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Region:</span> Schengen Area</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Currency:</span> Euro (€) & Local</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Primary Intakes:</span> Sept & Feb</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Avg. Tuition:</span> €0 - €15k/yr</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Work Rights:</span> Varies by country</li>
+                  </ul>
+                </div>
+
+                {/* Box 2: Notable Hubs */}
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-gray-100 pb-2">Notable Study Hubs</h3>
+                  <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                    <li><span className="font-bold text-[#e50924]">G</span>ermany (Engineering/Tech)</li>
+                    <li>France (Business/Arts)</li>
+                    <li>Netherlands (Innovation/Agri)</li>
+                    <li>Sweden (Sustainability)</li>
+                    <li>Italy (Design/Architecture)</li>
+                  </ul>
+                </div>
+
+                {/* Box 3: Most Searched Keywords */}
+                <div className="bg-[#fff1f2] p-6 rounded-2xl shadow-sm border border-red-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-red-200 pb-2">Top SEO Searches</h3>
+                  <div className="flex flex-wrap gap-2 flex-1 items-start content-start">
+                    {['Study in Europe', 'Europe Universities', 'Student Visa Europe', 'Scholarships in Europe', 'Cost of living in Europe', 'Schengen Student Visa', 'Best courses in Europe', 'Erasmus Mundus'].map((keyword, i) => (
+                      <span key={i} className="bg-white text-[#17375e] text-xs font-semibold px-2 py-1 rounded-md border border-red-100 shadow-sm">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">European Education Systems & Best Courses</h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Because Europe consists of dozens of independent nations, there is no single, unified admission process. You must apply directly through national portals (like uni-assist in Germany or Studielink in the Netherlands) or directly to the institutions. Most programs begin in the Autumn (September/October), with deadlines often falling between January and May of the preceding year.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-8">
+                The <strong>best courses in Europe</strong> vary highly depending on the nation you choose. For instance, Germany is globally unmatched for Automotive and Mechanical Engineering; the Netherlands leads in Water Management and Logistics; Switzerland dominates in Hospitality and Finance; and France is a powerhouse for Luxury Brand Management and pure Mathematics. In recent years, there has been a massive surge in English-taught programs across the continent, meaning you no longer have to be fluent in the local language to attain a world-class degree.
+              </p>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Deep Dive: Student Visa Europe & Schengen Rules</h3>
+              
+              <div className="space-y-8 mb-12">
+                <div className="bg-[#fff1f2] rounded-2xl p-8 border border-red-100 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-[#e50924] text-white font-black text-4xl px-4 py-2 rounded-bl-2xl opacity-10">VISA</div>
+                  <h4 className="text-2xl font-bold text-[#0b2f6b] mb-2">Navigating the Schengen Student Visa</h4>
+                  <p className="text-[#e50924] font-bold text-sm mb-4 uppercase tracking-wider">National Visas vs Schengen Access</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    When applying for a <strong>Student Visa Europe</strong>, it is crucial to understand that you are technically applying for a National Visa (Type D) for the specific country where your university is located. However, because most major European study destinations are part of the Schengen Agreement, holding this national residence permit simultaneously grants you the freedom to travel visa-free across 29 European countries for up to 90 days out of every 180-day period.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Key Requirements</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li><strong>Letter of Admission:</strong> Unconditional acceptance from a recognized European higher education institution.</li>
+                        <li><strong>Financial Proof:</strong> Requirements vary by country. For example, Germany requires a "Blocked Account" (Sperrkonto) showing approx. €11,208 for the first year.</li>
+                        <li><strong>Health Insurance:</strong> Comprehensive health insurance valid in the host country is strictly mandatory.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Work Rights & Restrictions</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li>Rules vary strictly by the host nation.</li>
+                        <li>In Germany, international students can work 140 full days or 280 half days per year.</li>
+                        <li>In France, students can work up to 964 hours per year (approx. 60% of legal full-time work).</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Cost of Living & Scholarships in Europe</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    The <strong>cost of living in Europe</strong> fluctuates wildly between the North and South, and East and West. While Scandinavian countries and capital cities like Paris or Amsterdam are expensive, countries like Poland, Hungary, and Spain offer exceptional affordability.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Tuition Affordability:</strong> Many public universities in Germany, Norway, and Austria charge little to zero tuition fees, even for non-EU international students, requiring you only to cover semester administrative fees.</li>
+                    <li><strong>Scholarships in Europe:</strong> The crown jewel of European funding is the Erasmus Mundus Joint Masters program, which offers highly prestigious, fully-funded scholarships that cover tuition, travel, and a monthly living allowance while allowing you to study in at least two different European countries.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Post-Study Career Opportunities</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Europe is facing demographic shifts and significant skills shortages, meaning many nations are actively incentivizing international graduates to stay and enter the workforce.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Job Seeker Visas:</strong> Most EU countries offer post-study work rights. Germany provides an 18-month job seeker visa after graduation; the Netherlands offers an "Orientation Year" (Zoekjaar); and France provides a 12-month extension for Master's graduates.</li>
+                    <li><strong>EU Blue Card:</strong> Once you secure a skilled job offer meeting a specific salary threshold, you can apply for the EU Blue Card, a highly attractive residence permit that offers a streamlined pathway to permanent residency and enhanced mobility within the European Union.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* End of article Counselling CTA block */}
+              <div className="bg-[#0b2f6b] p-10 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 mt-12 mb-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#e50924] rounded-full filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
+                <div className="relative z-10 w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold text-white mb-4">Ready to start your European journey?</h3>
+                  <ul className="mb-0 pl-5 list-disc text-blue-100 space-y-2">
+                    <li>Narrow down the best European country for your specific subject.</li>
+                    <li>Understand the financial requirements for national student visas.</li>
+                    <li>Explore fully-funded Erasmus Mundus scholarship opportunities.</li>
+                  </ul>
+                </div>
+                <div className="relative z-10 w-full md:w-1/3 flex flex-col gap-4">
+                  <Link to={`/contact?destination=${country.id}`} className="bg-[#e50924] hover:bg-white hover:text-[#e50924] text-white flex items-center justify-center gap-2 font-bold rounded-xl p-4 transition-all shadow-lg text-lg text-center w-full">
+                    <span>Book EU Counselling</span> <ArrowUpRight size={20} />
+                  </Link>
+                  <div className="text-center">
+                    <SourceLinks ids={['eu', 'erasmus']} dated />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        ) : country.id === 'japan' ? (
+          /* =========================================
+             JAPAN SPECIFIC HIGH-IMPACT LAYOUT
+             ========================================= */
+          <div className="flex flex-col gap-12 relative w-full">
+            <div className="w-full">
+              <h2 className="text-4xl font-bold text-[#0b2f6b] mb-6">Study in Japan: Precision, Innovation, and Deep Tradition</h2>
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                To <strong>study in Japan</strong> is to immerse yourself in a society that seamlessly balances cutting-edge technological advancement with profound, ancient traditions. As the third-largest economy in the world, Japan is a global powerhouse in engineering, robotics, business, and digital arts. With the Japanese government's ambitious initiatives to internationalize its campuses and attract foreign talent, there has never been a better time to pursue your higher education in the Land of the Rising Sun.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed mb-10">
+                <strong>Japan universities</strong> are renowned for their rigorous academic standards, exceptional research facilities, and disciplined learning environments. Whether you enroll in a traditional Japanese-taught degree after completing intensive language school, or you opt for one of the rapidly growing English-taught degree programs (such as the Global 30 initiative), studying here provides a distinct competitive edge on the global stage. Beyond the classroom, you will experience an incredibly safe society, unmatched public infrastructure, and a rich cultural tapestry.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/japanhero.png" alt="Tokyo City Life" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#0b2f6b] text-white">
+                    <h4 className="font-bold">Dynamic Megacities</h4>
+                    <p className="text-xs text-blue-200">Live in the heart of global technological innovation.</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl overflow-hidden h-64 shadow-lg group">
+                  <img src="/images/japan.jpg" alt="Japanese Architecture" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="p-4 bg-[#e50924] text-white">
+                    <h4 className="font-bold">Beautiful Campuses</h4>
+                    <p className="text-xs text-red-100">Study amidst cherry blossoms and historic temples.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Widgets Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {/* Box 1: Quick Facts */}
+                <div className="bg-[#f4f7fb] p-6 rounded-2xl shadow-sm border border-blue-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-blue-200 pb-2">Quick Facts</h3>
+                  <ul className="space-y-3 text-sm text-gray-700 flex-1">
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Capital:</span> Tokyo</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Currency:</span> JPY (¥)</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Primary Intakes:</span> April & Sept</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Avg. Tuition:</span> ¥500k - ¥1.5M/yr</li>
+                    <li className="flex justify-between items-center"><span className="font-semibold text-[#0b2f6b]">Work Rights:</span> Up to 28 hrs/wk</li>
+                  </ul>
+                </div>
+
+                {/* Box 2: Top Institutions */}
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-gray-100 pb-2">Top Institutions</h3>
+                  <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                    <li><span className="font-bold text-[#e50924]">T</span>okyo University (Todai)</li>
+                    <li>Kyoto University</li>
+                    <li>Osaka University</li>
+                    <li>Tohoku University</li>
+                    <li>Waseda University (Private)</li>
+                  </ul>
+                </div>
+
+                {/* Box 3: Most Searched Keywords */}
+                <div className="bg-[#fff1f2] p-6 rounded-2xl shadow-sm border border-red-100 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-[#0b2f6b] mb-4 border-b border-red-200 pb-2">Top SEO Searches</h3>
+                  <div className="flex flex-wrap gap-2 flex-1 items-start content-start">
+                    {['Study in Japan', 'Japan Universities', 'Student Visa Japan', 'Scholarships in Japan', 'Cost of living in Japan', 'Post-study work visa Japan', 'Best courses in Japan', 'EJU Exam'].map((keyword, i) => (
+                      <span key={i} className="bg-white text-[#17375e] text-xs font-semibold px-2 py-1 rounded-md border border-red-100 shadow-sm">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">The Japanese Education System & Best Courses</h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Unlike most Western countries, the Japanese academic year traditionally begins in <strong>April</strong>, corresponding with the cherry blossom season. A secondary intake occurs in <strong>September/October</strong>, which is increasingly popular for international students and English-taught programs. The admissions process is unique; for Japanese-taught programs, students typically must take the EJU (Examination for Japanese University Admission for International Students), which evaluates Japanese language skills and basic academic abilities (Science, Japan and the World, Mathematics).
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-8">
+                The <strong>best courses in Japan</strong> naturally align with the nation's industrial strengths: Mechanical Engineering, Robotics, Artificial Intelligence, Business Administration, and Video Game Design / Animation. For students who do not yet speak Japanese, enrolling in a dedicated Japanese Language School for 1-2 years is the most common and effective pathway before transitioning into a full degree program at a university or a specialized vocational college (Senmon Gakko).
+              </p>
+
+              <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Deep Dive: Student Visa Japan & Admissions</h3>
+              
+              <div className="space-y-8 mb-12">
+                <div className="bg-[#fff1f2] rounded-2xl p-8 border border-red-100 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-[#e50924] text-white font-black text-4xl px-4 py-2 rounded-bl-2xl opacity-10">COE</div>
+                  <h4 className="text-2xl font-bold text-[#0b2f6b] mb-2">The Japan Student Visa Process</h4>
+                  <p className="text-[#e50924] font-bold text-sm mb-4 uppercase tracking-wider">Securing your Certificate of Eligibility</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    Acquiring a <strong>Student Visa Japan</strong> requires a multi-step process. The most critical document is the Certificate of Eligibility (COE). Your accepting school or university in Japan applies for the COE on your behalf at the regional immigration bureau in Japan. Once the COE is issued and mailed to you, applying for the actual student visa at the Japanese embassy in your home country is usually a swift formality.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Key Requirements</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li><strong>Financial Guarantor:</strong> You must prove you have a financial sponsor (usually a parent) or sufficient personal savings to cover tuition and living expenses. This often requires bank statements showing approx. $15,000 - $20,000 USD equivalent.</li>
+                        <li><strong>Educational Background:</strong> 12 years of formal education is strictly required for university admission.</li>
+                        <li><strong>Japanese Proficiency:</strong> For language schools, a basic certificate (like JLPT N5 or equivalent 150 hours of study) is often required by immigration for students from certain countries.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-[#0b2f6b] mb-2 text-sm">Work Rights & Restrictions</h5>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li>International students are not automatically granted work rights. You must apply for "Permission to Engage in Activity Other Than That Permitted under the Status of Residence Granted".</li>
+                        <li>Once granted, you can work up to <strong>28 hours per week</strong> during term time.</li>
+                        <li>During long school holidays, you can work up to 8 hours a day (max 40 hours per week).</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Cost of Living & Scholarships in Japan</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    While Tokyo is infamous for its high expenses, the overall <strong>cost of living in Japan</strong> can be surprisingly manageable, especially in regional cities like Fukuoka, Sendai, or Sapporo.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Tuition Fees:</strong> Japanese national universities charge a standardized tuition fee of exactly ¥535,800 per year (approx. $3,500 USD), making them incredibly competitive globally. Private universities are more expensive but still generally cheaper than US or UK equivalents.</li>
+                    <li><strong>Scholarships in Japan:</strong> The MEXT (Ministry of Education, Culture, Sports, Science and Technology) Scholarship is the most prestigious, offering fully-funded tuition and a monthly stipend. JASSO also provides generous monthly honors scholarships for privately financed international students.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-[#0b2f6b] mb-6 border-b border-gray-200 pb-4">Post-Study Work Visa Japan</h3>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Due to its rapidly aging population, Japan is highly motivated to integrate international graduates into its workforce. The transition from student to employee is supported by the government.
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-4">
+                    <li><strong>Designated Activities Visa (Job Hunting):</strong> If you haven't secured a job by graduation, you can change your student visa to a "Designated Activities" visa, which allows you to stay in Japan for up to 1 year (renewed at 6 months) solely to job hunt.</li>
+                    <li><strong>Post-study work visa Japan:</strong> Once you secure a job offer, you switch to a standard working visa (e.g., "Engineer/Specialist in Humanities/International Services"). This visa can be renewed indefinitely as long as you remain employed, paving the way for permanent residency.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* End of article Counselling CTA block */}
+              <div className="bg-[#0b2f6b] p-10 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 mt-12 mb-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#e50924] rounded-full filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
+                <div className="relative z-10 w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold text-white mb-4">Ready to embark on your Japanese study journey?</h3>
+                  <ul className="mb-0 pl-5 list-disc text-blue-100 space-y-2">
+                    <li>Determine if you need Japanese Language School first or direct university entry.</li>
+                    <li>Understand the financial guarantor requirements for the COE.</li>
+                    <li>Prepare for the EJU exam and explore MEXT scholarship deadlines.</li>
+                  </ul>
+                </div>
+                <div className="relative z-10 w-full md:w-1/3 flex flex-col gap-4">
+                  <Link to={`/contact?destination=${country.id}`} className="bg-[#e50924] hover:bg-white hover:text-[#e50924] text-white flex items-center justify-center gap-2 font-bold rounded-xl p-4 transition-all shadow-lg text-lg text-center w-full">
+                    <span>Book Japan Counselling</span> <ArrowUpRight size={20} />
+                  </Link>
+                  <div className="text-center">
+                    <SourceLinks ids={['jp', 'jpFees']} dated />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         ) : (
           /* =========================================
              GENERIC LAYOUT FOR OTHER COUNTRIES
