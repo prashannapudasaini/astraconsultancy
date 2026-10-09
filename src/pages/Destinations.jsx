@@ -28,6 +28,35 @@ export default function Destinations() {
   const [regionFilter, setRegionFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState('');
   const [formDestination, setFormDestination] = useState('');
+  const [notice, setNotice] = useState('');
+
+  const handleEnquiry = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const data = Object.fromEntries(f.entries());
+    
+    setNotice('Sending your enquiry...');
+    
+    try {
+      const response = await fetch('/backend/process_form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      if (result.status === 'success') {
+        setNotice('Thank you! Your enquiry has been sent successfully. We will get back to you soon.');
+        form.reset();
+      } else {
+        setNotice('Something went wrong. Please try calling us at +977 9768567647.');
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setNotice('Could not send form. Please call us at +977 9768567647.');
+    }
+  };
   
   usePageEntrance(containerRef);
   useScrollReveal(containerRef);
@@ -186,7 +215,7 @@ export default function Destinations() {
                 placeholder="Search a destination..." 
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm"
+                className="w-full !pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm"
               />
             </div>
             
@@ -233,75 +262,114 @@ export default function Destinations() {
         </div>
       </section>
 
-      {/* SECTION 2.5: Featured Destination - South Korea */}
+      {/* SECTION 2.5: Featured Destination - South Korea (Redesigned) */}
       {(!search || 'south korea'.includes(search.toLowerCase())) && (!regionFilter || regionFilter === 'Asia') && (
-        <section className="py-8 lg:py-12 px-6 lg:px-12 bg-white max-w-7xl mx-auto scroll-reveal">
-          <div className="bg-[#0b2f6b] rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-[#164580]">
-            
-            {/* Image Side */}
-            <div className="w-full lg:w-1/2 relative h-[400px] lg:h-auto group">
-              <img src="/images/south_korea.jpg" alt="South Korea" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b2f6b] via-[#0b2f6b]/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-[#0b2f6b]/50 lg:to-[#0b2f6b]"></div>
-              
-              <div className="absolute bottom-6 left-6 right-6 lg:hidden">
-                <div className="inline-block bg-[#e50924] text-white text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-md border border-red-400/50">FEATURED DESTINATION</div>
-                <h2 className="text-4xl font-extrabold text-white mb-2">South Korea 🇰🇷</h2>
-              </div>
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-12 bg-[#fafcfd] max-w-[1440px] mx-auto scroll-reveal">
+          
+          <div className="text-center mb-10">
+             <div className="inline-block bg-blue-50 text-[#0b2f6b] font-bold text-xs px-4 py-1.5 rounded-full mb-3 uppercase tracking-widest border border-blue-100 shadow-sm">Spotlight Destination</div>
+             <h2 className="text-4xl lg:text-5xl font-extrabold text-[#0b2f6b] tracking-tight mb-4">Experience South Korea 🇰🇷</h2>
+             <p className="text-gray-500 text-base max-w-2xl mx-auto">Where ancient traditions fuel futuristic innovations. Discover why ambitious students from Nepal are choosing Seoul over traditional Western destinations.</p>
+          </div>
+
+          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-black border border-gray-200">
+            {/* Full background image with deep gradient */}
+            <div className="absolute inset-0">
+              <img src="/images/south_korea.jpg" alt="South Korea" className="w-full h-full object-cover opacity-50 transition-transform duration-[3000ms] hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#081836] via-[#081836]/90 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081836] via-transparent to-transparent opacity-80"></div>
             </div>
-            
-            {/* Content Side */}
-            <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center relative">
-              <div className="hidden lg:inline-block bg-[#e50924] text-white text-xs font-bold px-3 py-1 rounded-full mb-6 w-fit shadow-md border border-red-400/50">FEATURED DESTINATION</div>
-              <h2 className="hidden lg:block text-4xl lg:text-5xl font-extrabold text-white mb-6">South Korea 🇰🇷</h2>
+
+            {/* Content overlay */}
+            <div className="relative z-10 flex flex-col xl:flex-row items-center p-6 sm:p-10 lg:p-16 gap-12">
               
-              <p className="text-blue-100 text-lg leading-relaxed mb-8 font-light">
-                Experience the perfect blend of ancient traditions and ultra-modern technology. South Korea offers world-class universities, innovative research facilities, and dynamic post-study work opportunities. From bustling Seoul to high-tech campuses, it is the ultimate destination for ambitious students.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 hover:bg-white/15 transition-colors">
-                  <div className="text-[#ffced3] font-bold text-xl mb-1 flex items-center gap-2"><GraduationCap size={20}/> D-2 Visa</div>
-                  <div className="text-white text-sm font-bold mb-2">Degree Program Study</div>
-                  <p className="text-blue-200 text-xs leading-relaxed">For students enrolling directly into Bachelors, Masters, or PhD degree programs at accredited Korean universities.</p>
+              {/* Left text content */}
+              <div className="w-full xl:w-[55%]">
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="bg-[#e50924] text-white text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-lg shadow-red-500/30">Most Affordable</span>
+                  <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider border border-white/20">High Visa Success</span>
+                  <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider border border-white/20 hidden sm:inline-block">Part-Time Jobs</span>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 hover:bg-white/15 transition-colors">
-                  <div className="text-[#ffced3] font-bold text-xl mb-1 flex items-center gap-2"><BookOpen size={20}/> D-4 Visa</div>
-                  <div className="text-white text-sm font-bold mb-2">Language Training</div>
-                  <p className="text-blue-200 text-xs leading-relaxed">For students enrolling in Korean language programs (KLTC) before transitioning fully to degree study.</p>
+                
+                <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                  Study in the World's <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffced3] to-white">Tech Capital.</span>
+                </h3>
+                
+                <p className="text-blue-100/90 text-base sm:text-lg font-light leading-relaxed mb-8 max-w-xl">
+                  Immerse yourself in a country that houses global titans like Samsung and Hyundai. Achieve a globally recognized degree at a fraction of the cost, while enjoying guaranteed legal part-time work rights.
+                </p>
+                
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/destinations/south-korea" className="bg-white hover:bg-gray-100 text-[#0b2f6b] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-xl hover:-translate-y-1 duration-300">
+                    Explore South Korea <ArrowUpRight size={18} />
+                  </Link>
+                  <a href="#enquiry" onClick={() => setFormDestination('south-korea')} className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm transition-all border border-white/20 flex items-center gap-2 hover:-translate-y-1 duration-300">
+                    <MapPin size={18}/> Check Eligibility
+                  </a>
                 </div>
               </div>
-              
-              <div className="flex flex-wrap gap-4">
-                <Link to="/destinations/south-korea" className="bg-[#e50924] hover:bg-[#c7051e] text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors flex items-center gap-2 shadow-lg shadow-red-500/20">
-                  Explore South Korea <ArrowUpRight size={16} />
-                </Link>
-                <a href="#enquiry" onClick={() => setFormDestination('south-korea')} className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors border border-white/20">
-                  Check Eligibility
-                </a>
+
+              {/* Right glass panel */}
+              <div className="w-full xl:w-[45%]">
+                <div className="bg-white/10 backdrop-blur-2xl rounded-[2rem] p-6 sm:p-8 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] relative overflow-hidden">
+                  {/* Decorative glow */}
+                  <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#e50924] rounded-full blur-[80px] opacity-40 pointer-events-none"></div>
+                  <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-500 rounded-full blur-[80px] opacity-30 pointer-events-none"></div>
+                  
+                  <h4 className="text-xl font-bold text-white mb-6 relative z-10 border-b border-white/10 pb-4">Top Study Pathways</h4>
+                  
+                  <div className="space-y-4 relative z-10">
+                    <div className="bg-black/30 hover:bg-black/50 transition-colors rounded-2xl p-5 border border-white/10 flex items-start gap-5 group">
+                      <div className="bg-gradient-to-br from-[#e50924] to-red-700 p-3.5 rounded-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <GraduationCap size={24}/>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold text-lg">D-2 Degree Visa</div>
+                        <p className="text-blue-100/70 text-xs sm:text-sm mt-1.5 leading-relaxed">Direct entry into English-taught Bachelors, Masters, or PhD programs at top-ranked SKY universities.</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-black/30 hover:bg-black/50 transition-colors rounded-2xl p-5 border border-white/10 flex items-start gap-5 group">
+                      <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-3.5 rounded-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                        <BookOpen size={24}/>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold text-lg">D-4 Language Visa</div>
+                        <p className="text-blue-100/70 text-xs sm:text-sm mt-1.5 leading-relaxed">1-year intense Korean language immersion. Unlock up to 100% tuition waivers via the TOPIK exam.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
           
-          {/* Dynamic Gallery for South Korea */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            <div className="relative h-40 rounded-2xl overflow-hidden group">
-              <img src="/images/seoul_nightscape.jpg" alt="Seoul Nightscape" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                <span className="text-white font-bold text-sm">Dynamic City Life</span>
+          {/* Creative Interactive Gallery */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+            <div className="sm:col-span-2 relative h-56 lg:h-72 rounded-[2rem] overflow-hidden group shadow-lg">
+              <img src="/images/seoul_nightscape.jpg" alt="Seoul Nightscape" className="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081836] via-[#081836]/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <span className="text-xs font-bold text-[#ffced3] uppercase tracking-widest mb-1 block">Vibrant Lifestyle</span>
+                <span className="text-white font-bold text-2xl">Seoul Nightscape</span>
               </div>
             </div>
-            <div className="relative h-40 rounded-2xl overflow-hidden group">
-              <img src="/images/korean_university.jpg" alt="Korean University" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                <span className="text-white font-bold text-sm">World-Class Campuses</span>
+            <div className="relative h-56 lg:h-72 rounded-[2rem] overflow-hidden group shadow-lg">
+              <img src="/images/korean_university.jpg" alt="Korean University" className="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081836] via-[#081836]/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <span className="text-xs font-bold text-[#ffced3] uppercase tracking-widest mb-1 block">Academics</span>
+                <span className="text-white font-bold text-xl">Top Universities</span>
               </div>
             </div>
-            <div className="relative h-40 rounded-2xl overflow-hidden group bg-[#0b2f6b] flex flex-col justify-center items-center text-center p-6 border border-gray-100">
-              <h4 className="text-white font-bold mb-2">Intakes Available</h4>
-              <p className="text-blue-200 text-xs mb-3">Spring (March) & Fall (September)</p>
-              <div className="flex gap-2">
-                <span className="bg-[#e50924] text-white text-[10px] font-bold px-2 py-1 rounded">TOPIK</span>
-                <span className="bg-[#e50924] text-white text-[10px] font-bold px-2 py-1 rounded">IELTS</span>
+            <div className="relative h-56 lg:h-72 rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#0b2f6b] to-[#06193b] flex flex-col justify-center p-8 border border-[#164580] shadow-lg group">
+              <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-5 group-hover:-translate-y-2 transition-transform duration-300 shadow-inner border border-white/5"><Clock size={28}/></div>
+              <h4 className="text-white font-bold text-xl mb-1">Intakes</h4>
+              <p className="text-blue-200 text-sm mb-5">Spring (March) <br/> Fall (September)</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-[#e50924] text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-md">TOPIK</span>
+                <span className="bg-white/20 text-white text-[10px] font-bold px-2.5 py-1 rounded border border-white/20">IELTS</span>
               </div>
             </div>
           </div>
@@ -507,80 +575,94 @@ export default function Destinations() {
           
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
             <div className="p-8 lg:p-10">
-              <form className="space-y-6">
+              <form onSubmit={handleEnquiry} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Full Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your name" />
+                    <input name="name" required type="text" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your name" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Phone Number</label>
-                    <input type="tel" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your phone" />
+                    <input name="phone" required type="tel" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your phone" />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Email Address</label>
-                  <input type="email" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your email" />
+                  <input name="email" type="email" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm" placeholder="Your email" />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Education Level</label>
-                    <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm text-gray-700">
+                    <select name="education" required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm text-gray-700">
                       <option value="">Select Level</option>
-                      <option value="high-school">High School / +2</option>
-                      <option value="bachelors">Bachelors Degree</option>
-                      <option value="masters">Masters Degree</option>
+                      <option value="High School / +2">High School / +2</option>
+                      <option value="Bachelors Degree">Bachelors Degree</option>
+                      <option value="Masters Degree">Masters Degree</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Preferred Destination</label>
                     <select 
+                      name="destination"
+                      required
                       value={formDestination}
                       onChange={(e) => setFormDestination(e.target.value)}
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm text-gray-700"
                     >
                       <option value="">Select Destination</option>
-                      <option value="south-korea">South Korea</option>
-                      <option value="united-kingdom">United Kingdom</option>
-                      <option value="new-zealand">New Zealand</option>
-                      <option value="europe">Europe</option>
-                      <option value="japan">Japan</option>
+                      <option value="South Korea">South Korea</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="New Zealand">New Zealand</option>
+                      <option value="Europe">Europe</option>
+                      <option value="Japan">Japan</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Preferred Study Level</label>
-                    <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm text-gray-700">
+                    <select name="studyLevel" required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm text-gray-700">
                       <option value="">Select Level</option>
-                      <option value="undergrad">Undergraduate</option>
-                      <option value="postgrad">Postgraduate</option>
-                      <option value="language">Language Program</option>
+                      <option value="Undergraduate">Undergraduate</option>
+                      <option value="Postgraduate">Postgraduate</option>
+                      <option value="Language Program">Language Program</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Main Question</label>
-                  <textarea rows="3" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm resize-none" placeholder="What would you like to discuss?"></textarea>
+                  <textarea name="message" rows="3" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0b2f6b] focus:ring-1 focus:ring-[#0b2f6b] text-sm resize-none" placeholder="What would you like to discuss?"></textarea>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <input type="checkbox" id="consent" className="mt-1 w-4 h-4 text-[#e50924] border-gray-300 rounded focus:ring-[#e50924]" />
+                  <input type="checkbox" id="consent" required className="mt-1 w-4 h-4 text-[#e50924] border-gray-300 rounded focus:ring-[#e50924]" />
                   <label htmlFor="consent" className="text-xs text-gray-500 leading-tight">
                     I consent to ASTRA Global Education contacting me regarding my study abroad enquiry. I understand I am not required to provide sensitive documents (like passports or bank statements) at this stage.
                   </label>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-4 items-center justify-between">
-                  <button type="button" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-8 py-3.5 font-semibold rounded-md transition-all text-sm">
-                    Book a Counselling Session <ArrowUpRight size={16} />
-                  </button>
-                  <div className="flex flex-col sm:flex-row items-center gap-4 text-xs font-medium text-gray-600">
-                    <a href="tel:+9779768567647" className="flex items-center gap-1 hover:text-[#e50924]"><Phone size={14} /> +977 9768567647</a>
-                    <a href="mailto:info@astraglobaleducationservices.com" className="flex items-center gap-1 hover:text-[#e50924]"><Mail size={14} /> Email Us</a>
-                    <span className="flex items-center gap-1"><MapPin size={14} /> Bagbazar–28, Kathmandu</span>
+                <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
+                  <div className="flex flex-wrap gap-4 items-center justify-between">
+                    <button type="submit" className="inline-flex items-center gap-2 bg-[#e50924] hover:bg-[#c7051e] !text-white px-8 py-3.5 font-semibold rounded-md transition-all text-sm">
+                      Book a Counselling Session <ArrowUpRight size={16} />
+                    </button>
+                    <div className="flex flex-col sm:flex-row items-center gap-4 text-xs font-medium text-gray-600">
+                      <a href="tel:+9779768567647" className="flex items-center gap-1 hover:text-[#e50924]"><Phone size={14} /> +977 9768567647</a>
+                      <a href="mailto:info@astraglobaleducationservices.com" className="flex items-center gap-1 hover:text-[#e50924]"><Mail size={14} /> Email Us</a>
+                      <span className="flex items-center gap-1"><MapPin size={14} /> Bagbazar–28, Kathmandu</span>
+                    </div>
                   </div>
+                  {notice && (
+                    <div className={`text-xs p-3 rounded mt-2 w-full ${notice.includes('successfully') ? 'bg-green-50 text-green-800' : 'bg-blue-50 text-blue-800'}`}>
+                      <p>{notice}</p>
+                      {notice.includes('successfully') && (
+                        <p className="mt-2 font-medium">
+                          Ready for the next step? <Link to="/book-counselling" className="underline font-bold text-[#0b2f6b]">Please fill out our full Book Counselling form</Link>.
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

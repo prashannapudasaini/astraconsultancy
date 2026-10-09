@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { 
-  CheckCircle2, 
-  MapPin, 
-  GraduationCap, 
-  Award, 
-  Clock, 
+import {
+  CheckCircle2,
+  MapPin,
+  GraduationCap,
+  Award,
+  Clock,
   Globe,
   Smartphone,
   ArrowRight,
@@ -63,11 +63,13 @@ export default function BookCounselling() {
 
   // GSAP Animations
   useGSAP(() => {
+    window.scrollTo(0, 0); // Scroll to top behavior
+
     gsap.fromTo('.hero-anim',
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
     );
-    
+
     gsap.fromTo('.card-anim',
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, delay: 0.2, stagger: 0.1, ease: 'power2.out' }
@@ -88,7 +90,7 @@ export default function BookCounselling() {
     });
     if (formData.destinations.length > 0) filled++;
     if (formData.counselingRequirements.length > 0) filled++;
-    
+
     setFormProgress(Math.round((filled / (requiredFields.length + 2)) * 100));
   }, [formData]);
 
@@ -108,18 +110,32 @@ export default function BookCounselling() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitted(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 800);
+
+    try {
+      const response = await fetch('/backend/process_form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        setIsSubmitted(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('Could not submit form: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Network error. Please try again or contact us directly.');
+    }
   };
 
   return (
     <div className="bg-[#f4f7fb] min-h-screen pb-16 overflow-hidden" ref={containerRef}>
-      
+
       {/* Hero Section */}
       <section className="relative w-full bg-[#f4f7fb] process-hero-bg pt-16 lg:pt-24 pb-8 lg:pb-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -138,7 +154,7 @@ export default function BookCounselling() {
       </section>
 
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
-        
+
         {/* Success Message */}
         {isSubmitted && (
           <div className="bg-white rounded-3xl p-10 text-center shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] border border-gray-100 card-anim mb-12">
@@ -152,7 +168,7 @@ export default function BookCounselling() {
             <div className="bg-gray-50 rounded-xl p-5 mb-8 border border-gray-100 max-w-md mx-auto">
               <p className="font-medium text-gray-700 italic">"ASTRA – From Dream to Destination"</p>
             </div>
-            <button 
+            <button
               onClick={() => {
                 setIsSubmitted(false);
                 setIsFormOpen(true);
@@ -181,9 +197,9 @@ export default function BookCounselling() {
             </p>
 
             <div className="bg-white p-4 rounded-2xl shadow-md border border-gray-100 mb-8 inline-block">
-              <img 
+              <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(window.location.href)}&color=0b2f6b`}
-                alt="QR Code for Form" 
+                alt="QR Code for Form"
                 className="w-48 h-48 object-contain rounded-xl"
               />
             </div>
@@ -191,7 +207,7 @@ export default function BookCounselling() {
             <div className="w-full h-px bg-gray-100 my-8"></div>
 
             <p className="text-gray-600 mb-4">Prefer to fill it out here?</p>
-            <button 
+            <button
               onClick={() => setIsFormOpen(true)}
               className="bg-[#e50924] hover:bg-[#c7051e] text-white font-bold py-3.5 px-8 rounded-xl shadow-md flex items-center gap-3 transition-colors text-base"
             >
@@ -203,17 +219,17 @@ export default function BookCounselling() {
         {/* Full Form */}
         {isFormOpen && !isSubmitted && (
           <div className="bg-white rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden card-anim mb-12 relative">
-            
+
             {/* Header with Progress */}
             <div className="bg-white border-b border-gray-100 p-6 md:px-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h3 className="text-xl font-bold text-[#0b2f6b]">Student Counseling & Profile Form</h3>
                 <p className="text-xs text-gray-500 mt-1">विद्यार्थी परामर्श तथा प्रोफाइल फारम</p>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row items-end sm:items-center gap-6">
                 {/* Hide Form Button */}
-                <button 
+                <button
                   onClick={() => setIsFormOpen(false)}
                   className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-[#0b2f6b] transition-colors bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-lg border border-gray-200"
                 >
@@ -223,7 +239,7 @@ export default function BookCounselling() {
                 <div className="flex flex-col items-end w-full sm:w-auto">
                   <span className="text-xs font-semibold text-gray-500 mb-2">{formProgress}% Completed</span>
                   <div className="w-full sm:w-32 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
+                    <div
                       className="h-full bg-[#e50924] transition-all duration-300 rounded-full"
                       style={{ width: `${formProgress}%` }}
                     ></div>
@@ -233,14 +249,14 @@ export default function BookCounselling() {
             </div>
 
             <form onSubmit={handleSubmit} className="p-6 md:p-10 space-y-10">
-              
+
               {/* Section 1: Personal Info */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-gray-100 pb-3 mb-6">
                   <div className="w-7 h-7 rounded-md bg-[#eff4fb] text-[#0b2f6b] flex items-center justify-center font-bold text-sm">1</div>
                   <h4 className="text-lg font-bold text-gray-800">Personal Information</h4>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">1. Full Name / पूरा नाम *</label>
@@ -267,7 +283,7 @@ export default function BookCounselling() {
                   <div className="w-7 h-7 rounded-md bg-[#eff4fb] text-[#0b2f6b] flex items-center justify-center font-bold text-sm">2</div>
                   <h4 className="text-lg font-bold text-gray-800">Academic Background</h4>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-semibold text-gray-700 mb-3">5. Highest Qualification / उच्चतम शैक्षिक योग्यता *</label>
@@ -301,7 +317,7 @@ export default function BookCounselling() {
                   <div className="w-7 h-7 rounded-md bg-[#eff4fb] text-[#0b2f6b] flex items-center justify-center font-bold text-sm">3</div>
                   <h4 className="text-lg font-bold text-gray-800">Study Abroad Plans</h4>
                 </div>
-                
+
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-3">9. Which destination are you interested in? *</label>
@@ -353,7 +369,7 @@ export default function BookCounselling() {
                   <div className="w-7 h-7 rounded-md bg-[#eff4fb] text-[#0b2f6b] flex items-center justify-center font-bold text-sm">4</div>
                   <h4 className="text-lg font-bold text-gray-800">Language & Counseling Needs</h4>
                 </div>
-                
+
                 <div className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -388,7 +404,7 @@ export default function BookCounselling() {
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-3">16. How did you hear about ASTRA? *</label>
                     <div className="flex flex-wrap gap-3">
-                      {['TikTok', 'Facebook', 'Instagram', 'Google', 'Friend / Family / साथी वा परिवार', 'Walk-in / कार्यालयमा आएर', 'Other / অফিসে'].map(opt => (
+                      {['TikTok', 'Facebook', 'Instagram', 'Google', 'Friend / Family / साथी वा परिवार', 'Walk-in / कार्यालयमा आएर', 'Other / अन्य'].map(opt => (
                         <label key={opt} className="flex items-center gap-2 bg-gray-50 px-4 py-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100">
                           <input type="radio" name="howDidYouHear" required value={opt} checked={formData.howDidYouHear === opt} onChange={handleInputChange} className="w-4 h-4 text-[#0b2f6b]" />
                           <span className="text-sm">{opt}</span>

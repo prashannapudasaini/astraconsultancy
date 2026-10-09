@@ -61,19 +61,40 @@ export default function Contact() {
     }
   }, [location]);
 
-  function enquiry(e) {
+  async function enquiry(e) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const body = `Hello ASTRA,\n\nI would like to enquire about counselling.\n\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email') || 'Not provided'}\nPreferred destination: ${f.get('destination')}\nEducation level: ${f.get('education')}\nPreferred Service: ${f.get('service')}\n\nMain question/goals:\n${f.get('message') || ''}\n\nI agree to be contacted about this enquiry.`;
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const data = Object.fromEntries(f.entries());
     
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent('Counselling enquiry — ASTRA')}&body=${encodeURIComponent(body)}`;
-    setNotice('Your email app will open with a draft. Please send it to complete your enquiry. If it does not open, call +977 9768567647.');
+    setNotice('Sending your enquiry...');
+    
+    try {
+      // NOTE: In production, change this URL to the actual absolute path (e.g. 'https://yourdomain.com/backend/process_form.php')
+      // If hosting both in same place, '/backend/process_form.php' usually works.
+      const response = await fetch('/backend/process_form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      if (result.status === 'success') {
+        setNotice('Thank you! Your enquiry has been sent successfully. We will get back to you soon.');
+        form.reset();
+      } else {
+        setNotice('Something went wrong. Please try calling us at +977 9768567647.');
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setNotice('Could not send form. Please call us at +977 9768567647.');
+    }
   }
 
   return (
     <section className="contact-section" ref={containerRef}>
       <div className="wrap contact-grid">
-        <div>
+        <div className="flex flex-col h-full">
           <div className="eyebrow">LET’S BEGIN WITH A CONVERSATION</div>
           <h2>Your next chapter<br />starts <em>here.</em></h2>
           <p>Tell us what you’re working towards.<br />Let’s explore the possibilities together.</p>
@@ -98,11 +119,24 @@ export default function Contact() {
               <span><small>VISIT OUR OFFICE</small>Bagbazar–28, Kathmandu, Nepal</span>
             </div>
           </div>
+          
+          <div className="rounded-2xl overflow-hidden flex-1 min-h-[250px] shadow-sm border border-gray-200 mt-8">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5516089334057!2d85.3164838!3d27.7052169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb193b9348ef31%3A0x9d7fb8b16ebaea8c!2sAstra%20global%20education%20and%20services!5e0!3m2!1sen!2snp!4v1714578193859!5m2!1sen!2snp" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="ASTRA Office Location"
+            ></iframe>
+          </div>
         </div>
 
-        <form ref={formRef} onSubmit={enquiry} className="scroll-reveal">
+        <form ref={formRef} onSubmit={enquiry} className="scroll-reveal flex flex-col h-full">
           <h3>Enquire about counselling</h3>
-          <p>Prepare an email to our team. Your email app opens so you can review and send it. Do not request or attach sensitive documents.</p>
+          <p>Fill out the form below to book a session. Do not request or attach sensitive documents.</p>
           
           <div className="form-grid">
             <label>Full name <span>*</span>
@@ -136,28 +170,40 @@ export default function Contact() {
             <label className="full">Education level <span>*</span>
               <select name="education" required defaultValue="">
                 <option value="" disabled>Select level</option>
-                <option>Secondary / SEE</option>
                 <option>Higher secondary / +2</option>
                 <option>Bachelor’s</option>
                 <option>Master’s</option>
                 <option>Other</option>
               </select>
             </label>
-
-            <label className="full">Main question or goals <small>(optional)</small>
-              <textarea name="message" rows="3" placeholder="What would you like to discuss?" />
-            </label>
           </div>
+
+          <label className="flex flex-col flex-1 mt-5 text-[12px] font-medium gap-2">
+            <span>Main question or goals <small className="font-normal text-[#778598]">(optional)</small></span>
+            <textarea name="message" className="flex-1 min-h-[120px]" placeholder="What would you like to discuss?" style={{ width: '100%', minWidth: 0, border: '1px solid #dce3ec', borderRadius: '3px', padding: '12px', color: '#243c5b', background: '#fff', fontSize: '14px', outline: 'none' }} />
+          </label>
           
           <label className="consent">
             <input type="checkbox" required /> 
             <span>I agree to be contacted by ASTRA about this enquiry. <Link to="/privacy">Privacy notice</Link></span>
           </label>
           
-          <button type="submit" className="button red" style={{width: '100%', justifyContent: 'space-between'}}>
-            Prepare email enquiry <ArrowUpRight size={18} />
-          </button>
-          <p role="status" className="form-status">{notice}</p>
+          
+          <div>
+            <button type="submit" className="button red" style={{width: '100%', justifyContent: 'space-between'}}>
+              Submit Enquiry <ArrowUpRight size={18} />
+            </button>
+            {notice && (
+              <div role="status" className="form-status" style={{ color: notice.includes('successfully') ? 'green' : 'inherit', marginTop: '10px' }}>
+                <p>{notice}</p>
+                {notice.includes('successfully') && (
+                  <p style={{ marginTop: '8px', color: '#333' }}>
+                    Ready for the next step? <Link to="/book-counselling" style={{textDecoration: 'underline', fontWeight: 'bold', color: '#0b2f6b'}}>Please fill out our full Book Counselling form</Link>.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
         </form>
       </div>
     </section>

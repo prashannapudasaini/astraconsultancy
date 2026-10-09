@@ -5,10 +5,18 @@ export default function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Ensure the scroll happens after the new route component is rendered
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
+    // Temporarily disable smooth scrolling to instantly jump to top
+    const originalScrollBehavior = window.getComputedStyle(document.documentElement).scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    
+    window.scrollTo(0, 0);
+    
+    // Restore original scroll behavior after jumping
+    const timeout = setTimeout(() => {
+      document.documentElement.style.scrollBehavior = '';
+    }, 50);
+
+    return () => clearTimeout(timeout);
   }, [pathname]);
 
   return null;

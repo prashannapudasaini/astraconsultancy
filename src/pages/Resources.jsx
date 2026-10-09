@@ -1,9 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ArrowUpRight, FileCheck } from 'lucide-react';
 import { SourceLinks, reviewed } from '../content';
 
 export default function Resources() {
   const containerRef = useRef();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const resources = [
     { category: 'NEPAL · NOC', title: 'Nepal NOC guidance', desc: 'Nepal\'s official NOC portal is the starting point for the government\'s certificate for Nepali students studying abroad. Review the instructions for your course and circumstances.', ids: ['noc'] },
     { category: 'TEST FORMAT', title: 'IELTS official format', desc: 'Assesses listening, reading, writing and speaking. Academic and General Training share listening and speaking formats; reading and writing differ.', ids: ['ielts'] },

@@ -111,7 +111,7 @@ html.dark .bg-\[\#eff4fb\], html.dark .bg-\[\#eef4fc\], html.dark .bg-\[\#edf3fc
 }
 
 html.dark .footer-brand {
-  background-color: #0f2440 !important;
+  background-color: transparent !important;
 }
 html.dark .hero-seal {
   background-color: rgba(11, 26, 46, 0.9) !important;

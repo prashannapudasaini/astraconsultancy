@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight, BookOpen, MapPin, Phone, Mail, FileText, CheckCircle2,
@@ -19,6 +19,35 @@ const CurvedDividerTop = ({ color = "text-[#f4f7fb]" }) => (
 );
 
 export default function Services() {
+  const [notice, setNotice] = useState('');
+
+  const handleEnquiry = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const data = Object.fromEntries(f.entries());
+    
+    setNotice('Sending your enquiry...');
+    
+    try {
+      const response = await fetch('/backend/process_form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      if (result.status === 'success') {
+        setNotice('Thank you! Your enquiry has been sent successfully. We will get back to you soon.');
+        form.reset();
+      } else {
+        setNotice('Something went wrong. Please try calling us at +977 9768567647.');
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setNotice('Could not send form. Please call us at +977 9768567647.');
+    }
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -423,54 +452,54 @@ export default function Services() {
           <div className="bg-white text-gray-800 rounded-2xl shadow-xl overflow-hidden p-6 lg:p-8">
             <div className="bg-blue-50 text-blue-800 text-xs p-3 rounded-lg border border-blue-100 mb-6 flex items-start gap-2">
               <Mail size={16} className="shrink-0 mt-0.5" />
-              <p>Since we do not currently have a backend system, submitting this form will prepare an email draft for you to send manually. <strong>Please send the email manually to info@astraglobaleducationservices.com</strong></p>
+              <p>Fill out the form below to connect with us about our services. We will get back to you soon.</p>
             </div>
-            <form className="space-y-5">
+            <form onSubmit={handleEnquiry} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Full Name</label>
-                  <input type="text" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" placeholder="Your name" />
+                  <input name="name" required type="text" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" placeholder="Your name" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Phone Number</label>
-                  <input type="tel" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" placeholder="Your phone" />
+                  <input name="phone" required type="tel" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" placeholder="Your phone" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Preferred Service</label>
-                  <select className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                  <select name="service" required className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
                     <option value="">Not Sure</option>
-                    <option value="study">Study Abroad</option>
-                    <option value="visa">Visa Guidance</option>
-                    <option value="language">Language Prep</option>
+                    <option value="Study Abroad">Study Abroad</option>
+                    <option value="Visa Guidance">Visa Guidance</option>
+                    <option value="Language Prep">Language Prep</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Preferred Destination</label>
-                  <select className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                  <select name="destination" required className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
                     <option value="">Select Destination</option>
-                    <option value="korea">South Korea</option>
-                    <option value="uk">United Kingdom</option>
-                    <option value="nz">New Zealand</option>
-                    <option value="europe">Europe</option>
-                    <option value="japan">Japan</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Japan">Japan</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Study Level</label>
-                  <select className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                  <select name="education" required className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
                     <option value="">Select Level</option>
-                    <option value="undergrad">Undergraduate</option>
-                    <option value="postgrad">Postgraduate</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Postgraduate">Postgraduate</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Main Question</label>
-                <textarea rows="2" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm resize-none" placeholder="What would you like to discuss?"></textarea>
+                <textarea name="message" rows="2" className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm resize-none" placeholder="What would you like to discuss?"></textarea>
               </div>
 
               <div className="flex items-start gap-3">
@@ -481,9 +510,19 @@ export default function Services() {
               </div>
 
               <div className="pt-2">
-                <button type="button" className="w-full bg-[#0b2f6b] text-white py-3 rounded-lg font-bold text-sm hover:bg-[#07204b] transition-colors">
-                  Prepare Email Enquiry
+                <button type="submit" className="w-full bg-[#0b2f6b] text-white py-3 rounded-lg font-bold text-sm hover:bg-[#07204b] transition-colors">
+                  Submit Enquiry
                 </button>
+                {notice && (
+                  <div className={`text-xs p-3 rounded mt-3 ${notice.includes('successfully') ? 'bg-green-50 text-green-800' : 'bg-blue-50 text-blue-800'}`}>
+                    <p>{notice}</p>
+                    {notice.includes('successfully') && (
+                      <p className="mt-2 font-medium">
+                        Ready for the next step? <Link to="/book-counselling" className="underline font-bold text-[#0b2f6b]">Please fill out our full Book Counselling form</Link>.
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             </form>
           </div>

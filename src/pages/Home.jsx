@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2, ShieldCheck, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, MapPin, Phone, Mail, GraduationCap, FileCheck, BookOpen, ExternalLink, Globe2, ShieldCheck, MessageCircle, Clock } from 'lucide-react';
 import { countries } from '../data';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { usePageEntrance, useHeroAnimation, useHomeAnimations, useJourneyAnimation } from '../motion';
 import GlobeComponent from '../components/GlobeComponent';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const email = 'info@astraglobaleducationservices.com';
 
@@ -18,6 +23,164 @@ const CurvedDividerTop = ({ color = "text-white" }) => (
     <path d="M0,60 C480,120 960,0 1440,60 L1440,0 L0,0 Z"></path>
   </svg>
 );
+
+const KoreaShowcase = () => {
+  const container = useRef();
+  const img1 = useRef();
+  const img2 = useRef();
+  
+  useGSAP(() => {
+    // Scroll reveal animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    tl.from('.k-elem', { 
+      y: 30, 
+      opacity: 0, 
+      duration: 0.6, 
+      stagger: 0.1,
+      ease: 'power2.out'
+    });
+      
+    // Continuous float
+    gsap.to('.k-float', {
+      y: -10,
+      duration: 2,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut'
+    });
+
+    // Mouse movement interactivity (Parallax)
+    const handleMouseMove = (e) => {
+      if (!container.current) return;
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 30;
+      const yPos = (clientY / window.innerHeight - 0.5) * 30;
+
+      gsap.to(img1.current, {
+        x: xPos,
+        y: yPos,
+        duration: 1,
+        ease: 'power2.out'
+      });
+      
+      gsap.to(img2.current, {
+        x: -xPos * 1.5,
+        y: -yPos * 1.5,
+        duration: 1.5,
+        ease: 'power2.out'
+      });
+    };
+
+    const section = container.current;
+    section.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      section.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, { scope: container });
+
+  const handleCardHover = (e, isEnter) => {
+    gsap.to(e.currentTarget, {
+      y: isEnter ? -5 : 0,
+      scale: isEnter ? 1.02 : 1,
+      duration: 0.3,
+      ease: 'power2.out'
+    });
+  };
+
+  return (
+    <section ref={container} className="py-10 lg:py-16 !bg-white dark:!bg-[#050b14] relative overflow-hidden transition-colors duration-500 border-y !border-gray-100 dark:!border-white/5">
+      {/* Decorative Gradients (Subtle) */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] !bg-red-100 dark:!bg-[#e50924] rounded-full blur-[100px] !opacity-30 dark:!opacity-10 pointer-events-none transition-colors duration-500"></div>
+      
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        {/* Content Area (Left Side) */}
+        <div className="lg:col-span-5 order-2 lg:order-1">
+           <div className="k-elem inline-flex items-center gap-2 !bg-gray-50 dark:!bg-white/5 border !border-gray-200 dark:!border-white/10 px-4 py-2 rounded-full mb-6 shadow-sm transition-colors duration-500">
+             <span className="w-2 h-2 !bg-[#e50924] rounded-full animate-pulse"></span>
+             <span className="text-xs font-bold tracking-widest uppercase !text-[#0b2f6b] dark:!text-gray-300 transition-colors duration-500">Trend Alert</span>
+           </div>
+           
+           <h2 className="k-elem text-4xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight mb-5 !text-[#0b2f6b] dark:!text-white transition-colors duration-500">
+             South Korea.<br/>
+             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e50924] to-red-500 dark:to-red-400 font-black">Reimagined.</span>
+           </h2>
+           
+           <p className="k-elem !text-gray-600 dark:!text-gray-400 text-base lg:text-lg leading-relaxed mb-8 transition-colors duration-500">
+             Step away from traditional study destinations. South Korea offers Nepalese students a hyper-modern education, unmatched affordability, and thriving post-study career opportunities in the world's fastest-evolving tech hub.
+           </p>
+           
+           <div className="k-elem flex flex-col sm:flex-row gap-4 mb-8 w-full">
+             <div 
+                className="flex-1 !bg-white dark:!bg-white/5 border !border-gray-200 dark:!border-white/10 rounded-2xl p-4 shadow-sm hover:!bg-gray-50 dark:hover:!bg-white/10 hover:shadow-md transition-all duration-500 cursor-pointer"
+                onMouseEnter={(e) => handleCardHover(e, true)}
+                onMouseLeave={(e) => handleCardHover(e, false)}
+             >
+               <div className="flex items-center gap-3 mb-2">
+                 <div className="!bg-red-50 dark:!bg-[#e50924]/20 p-2 rounded-lg !text-[#e50924]"><GraduationCap size={18}/></div>
+                 <div className="!text-[#0b2f6b] dark:!text-white font-black text-lg transition-colors duration-500">D-2 Visa</div>
+               </div>
+               <div className="text-xs font-bold !text-gray-800 dark:!text-gray-200 mb-1 transition-colors duration-500">Degree Program</div>
+               <div className="!text-gray-500 dark:!text-gray-400 text-[10px] leading-relaxed transition-colors duration-500">Direct entry into English-taught Bachelors, Masters, or PhD.</div>
+             </div>
+
+             <div 
+                className="flex-1 !bg-white dark:!bg-white/5 border !border-gray-200 dark:!border-white/10 rounded-2xl p-4 shadow-sm hover:!bg-gray-50 dark:hover:!bg-white/10 hover:shadow-md transition-all duration-500 cursor-pointer"
+                onMouseEnter={(e) => handleCardHover(e, true)}
+                onMouseLeave={(e) => handleCardHover(e, false)}
+             >
+               <div className="flex items-center gap-3 mb-2">
+                 <div className="!bg-blue-50 dark:!bg-blue-500/20 p-2 rounded-lg !text-blue-600 dark:!text-blue-400"><BookOpen size={18}/></div>
+                 <div className="!text-[#0b2f6b] dark:!text-white font-black text-lg transition-colors duration-500">D-4 Visa</div>
+               </div>
+               <div className="text-xs font-bold !text-gray-800 dark:!text-gray-200 mb-1 transition-colors duration-500">Language Training</div>
+               <div className="!text-gray-500 dark:!text-gray-400 text-[10px] leading-relaxed transition-colors duration-500">1-year intense Korean immersion. Unlock TOPIK waivers.</div>
+             </div>
+           </div>
+           
+           <div className="k-elem">
+             <Link to="/destinations/south-korea" className="group inline-flex items-center gap-3 !bg-[#0b2f6b] dark:!bg-[#e50924] hover:!bg-[#07204b] dark:hover:!bg-[#c7051e] !text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl w-full sm:w-auto justify-center">
+               <span className="!text-white">Explore Pathways</span>
+               <div className="!bg-white/20 p-1.5 rounded-full !text-white transition-colors"><ArrowRight size={16}/></div>
+             </Link>
+           </div>
+        </div>
+
+        {/* Images Area (Interactive Parallax - Right Side) */}
+        <div className="lg:col-span-7 relative h-[400px] sm:h-[550px] lg:h-[600px] w-full order-1 lg:order-2">
+           <div ref={img1} className="k-elem absolute top-0 right-0 w-[85%] h-[80%] rounded-[2rem] overflow-hidden shadow-2xl !bg-gray-100 dark:!bg-black transition-colors duration-500 z-10 !border-none dark:border dark:!border-white/5">
+             <img src="/images/seoul_nightscape.jpg" className="w-full h-full object-cover" alt="Seoul Nightscape" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+             <div className="absolute bottom-6 right-6 font-bold tracking-widest uppercase !text-white/90 text-xs flex items-center gap-2"><MapPin size={14}/> Seoul, KR</div>
+           </div>
+           
+           <div ref={img2} className="k-elem absolute bottom-0 left-0 w-[55%] h-[55%] rounded-[2rem] overflow-hidden border-4 !border-white dark:!border-[#050b14] shadow-xl z-20 !bg-gray-100 dark:!bg-black transition-colors duration-500">
+             <img src="/images/korean_university.jpg" className="w-full h-full object-cover" alt="Korean University" />
+             <div className="absolute bottom-4 left-4 !bg-white/90 dark:!bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-bold !text-[#0b2f6b] dark:!text-white border !border-gray-100 dark:!border-white/10 transition-colors duration-500 flex items-center gap-1.5">SKY Universities</div>
+           </div>
+           
+           <div className="k-float absolute top-[15%] left-[0%] z-30 !bg-white/95 dark:!bg-white/10 backdrop-blur-xl border !border-gray-100 dark:!border-white/10 p-3 sm:p-4 rounded-2xl shadow-xl flex items-center gap-3 sm:gap-4 transition-colors duration-500">
+             <div className="w-10 h-10 sm:w-12 sm:h-12 !bg-[#e50924] rounded-full flex items-center justify-center !text-white shadow-md"><Globe2 size={20}/></div>
+             <div>
+               <div className="text-[9px] sm:text-[10px] !text-gray-500 dark:!text-gray-400 font-bold uppercase tracking-widest transition-colors duration-500">Intake</div>
+               <div className="!text-[#0b2f6b] dark:!text-white font-bold text-xs sm:text-sm transition-colors duration-500">Spring & Fall</div>
+             </div>
+           </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
 
 export default function Home() {
   const navigate = useNavigate();
@@ -85,13 +248,32 @@ export default function Home() {
     'japan': 'Understand school-specific admissions, Japanese-language expectations, EJU requirements and total study costs.'
   };
 
-  const handleEnquiry = (e) => {
+  const handleEnquiry = async (e) => {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const body = `Hello ASTRA,\n\nI would like to enquire about counselling.\n\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email') || 'Not provided'}\nPreferred destination: ${f.get('destination')}\nEducation level: ${f.get('education')}\nPreferred service: ${f.get('service')}\n\nMain question/goals:\n${f.get('message') || ''}\n\nI agree to be contacted about this enquiry.`;
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const data = Object.fromEntries(f.entries());
     
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent('Counselling enquiry — ASTRA')}&body=${encodeURIComponent(body)}`;
-    setNotice('Your email app will open with a draft. Please send it to complete your enquiry. If it does not open, call +977 9768567647.');
+    setNotice('Sending your enquiry...');
+    
+    try {
+      const response = await fetch('/backend/process_form.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      if (result.status === 'success') {
+        setNotice('Thank you! Your enquiry has been sent successfully. We will get back to you soon.');
+        form.reset();
+      } else {
+        setNotice('Something went wrong. Please try calling us at +977 9768567647.');
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setNotice('Could not send form. Please call us at +977 9768567647.');
+    }
   };
 
   return (
@@ -299,6 +481,9 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* SECTION 2.5: Spotlight Destination - South Korea (GSAP Interactive Variant) */}
+      <KoreaShowcase />
 
       {/* SECTION 3: Study Destinations Interactive Globe */}
       <section id="home-destinations" className="py-10 lg:py-16 px-6 lg:px-12 bg-[#0b2f6b] relative overflow-hidden scroll-reveal">
@@ -700,7 +885,7 @@ export default function Home() {
 
                 <div className="rounded-2xl overflow-hidden h-[250px] shadow-sm border border-gray-200">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14130.857353934944!2d85.3148154!3d27.7032731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a0a0307b27%3A0xc3c517208470bc5e!2sBagbazar%2C%20Kathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2sus!4v1714578193859!5m2!1sen!2sus" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5516089334057!2d85.3164838!3d27.7052169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb193b9348ef31%3A0x9d7fb8b16ebaea8c!2sAstra%20global%20education%20and%20services!5e0!3m2!1sen!2snp!4v1714578193859!5m2!1sen!2snp" 
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
@@ -716,7 +901,7 @@ export default function Home() {
             <div className="lg:col-span-5 bg-white rounded-2xl p-6 lg:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100">
               <h3 className="text-xl lg:text-2xl font-bold text-[#0b2f6b] mb-2">Book a Session</h3>
               <p className="text-xs text-gray-500 mb-6">
-                Prepare an email to our team. Do not request or attach sensitive documents like passports.
+                Fill out the form below to book a session. Do not request or attach sensitive documents like passports.
               </p>
 
               <form onSubmit={handleEnquiry} className="space-y-4">
@@ -785,9 +970,14 @@ export default function Home() {
                 </button>
                 
                 {notice && (
-                  <p className="text-xs bg-blue-50 text-blue-800 p-3 rounded mt-3">
-                    {notice}
-                  </p>
+                  <div className={`text-xs p-3 rounded mt-3 ${notice.includes('successfully') ? 'bg-green-50 text-green-800' : 'bg-blue-50 text-blue-800'}`}>
+                    <p>{notice}</p>
+                    {notice.includes('successfully') && (
+                      <p className="mt-2 font-medium">
+                        Ready for the next step? <Link to="/book-counselling" className="underline font-bold text-[#0b2f6b]">Please fill out our full Book Counselling form</Link>.
+                      </p>
+                    )}
+                  </div>
                 )}
               </form>
             </div>

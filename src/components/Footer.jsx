@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <div className="footer-brand">
-              <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
+              <img src="/logo_darkmode.png" alt="ASTRA Global Education and Services" />
             </div>
             <p>From Dream to Destination</p>
             <p className="footer-small">

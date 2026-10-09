@@ -107,9 +107,14 @@ export default function Header() {
       >
         <div className="wrap nav">
           <Link to="/" aria-label="ASTRA home" className="brand" onClick={() => window.scrollTo(0, 0)}>
-            <img src="/astra-logo.png" alt="ASTRA Global Education and Services" />
+            <img src={isDark ? "/logo_darkmode.png" : "/astra-logo.png"} alt="ASTRA Global Education and Services" />
             <span style={{ fontSize: '13px', fontWeight: '700' }}>GLOBAL EDUCATION<br /> & SERVICES</span>
           </Link>
+          {/* Mobile Menu Backdrop */}
+          <div 
+            className={`fixed inset-0 z-[40] bg-black/40 backdrop-blur-sm transition-opacity duration-500 lg:hidden ${menu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+            onClick={() => setMenu(false)}
+          />
           <nav aria-label="Main navigation" className={menu ? 'links mobile-open' : 'links'}>
             <NavLink to="/" className={({ isActive }) => (isActive && location.pathname === '/' ? 'active-link' : '')} onClick={() => { window.scrollTo(0, 0); setMenu(false); }}>Home</NavLink>
             <NavLink to="/about" className={({ isActive }) => (isActive ? 'active-link' : '')} onClick={() => { window.scrollTo(0, 0); setMenu(false); }}>About</NavLink>
@@ -145,11 +150,10 @@ export default function Header() {
                 className={`
                 lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:w-[650px] lg:bg-white lg:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] lg:border lg:border-gray-100 lg:rounded-2xl lg:mt-6 lg:p-6 lg:z-50
                 lg:before:content-[''] lg:before:absolute lg:before:-top-8 lg:before:left-0 lg:before:w-full lg:before:h-8 lg:before:bg-transparent
-                ${servicesOpen ? 'block' : 'hidden'}
-                block lg:block lg:transition-all lg:duration-200 
-                ${!servicesOpen && 'lg:opacity-0 lg:invisible lg:translate-y-2'}
-                ${servicesOpen && 'lg:opacity-100 lg:visible lg:translate-y-0'}
-                mt-4 lg:!mt-6 ml-4 lg:ml-0 flex flex-col gap-1
+                ${servicesOpen ? 'flex' : 'hidden'}
+                lg:flex lg:transition-all lg:duration-200 
+                ${!servicesOpen ? 'lg:opacity-0 lg:invisible lg:translate-y-2' : 'lg:opacity-100 lg:visible lg:translate-y-0'}
+                mt-4 lg:!mt-6 ml-4 lg:ml-0 flex-col gap-1
               `}
               >
                 <div className="lg:grid lg:grid-cols-2 lg:gap-4 flex flex-col gap-1">
@@ -216,11 +220,11 @@ export default function Header() {
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <Link to="/book-counselling" className="button nav-cta" style={{ margin: 0 }}>
-              Book counselling <ArrowUpRight size={16} />
+              <span className="hidden sm:inline">Book counselling</span><span className="sm:hidden">Book</span> <ArrowUpRight size={16} />
             </Link>
           </div>
           <button
-            className="menu-btn"
+            className="menu-btn relative z-[60]"
             aria-label={menu ? 'Close menu' : 'Open menu'}
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
